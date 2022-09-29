@@ -1,4 +1,4 @@
-package com.acl.game;
+package com.acl;
 
 import java.util.Iterator;
 
