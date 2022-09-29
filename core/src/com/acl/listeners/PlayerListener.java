@@ -1,8 +1,11 @@
 package com.acl.listeners;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+
+import java.util.Scanner;
 
 public class PlayerListener implements InputProcessor {
 
@@ -16,8 +19,28 @@ public class PlayerListener implements InputProcessor {
     public boolean keyDown(int keycode) {
         // When pressing the escape key, the menu opens
         if (keycode == Input.Keys.ESCAPE) {
-            //TODO menu display.
-            return true;
+            Scanner input = new Scanner(System.in);
+
+            int choice = -1;
+            while(choice == -1) {
+                System.out.println("********* MENU PAUSE *********\n");
+                System.out.print("1.) Exit \n");
+                System.out.print("2.) Resume\n");
+                System.out.print("\nEnter Your Menu Choice: ");
+
+                choice = input.nextInt();
+
+                switch(choice) {
+
+                    case 1:
+                        Gdx.app.exit();
+                        break;
+
+                    case 2:
+                        break;
+                }
+            }
+
         }
         // When pressing the UP, Z or W keys, the character goes up.
         if (keycode == Input.Keys.UP || keycode == Input.Keys.Z || keycode == Input.Keys.W) {
