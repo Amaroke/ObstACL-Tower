@@ -52,8 +52,6 @@ public class Player extends Element {
     }
 
     public void setMotion(Vector2 v) {
-        if (this.getBody().getLinearVelocity().y == 0f) {
-            this.getBody().applyForceToCenter(v, true);
-        }
+        this.getBody().setLinearVelocity(v);
     }
 }
