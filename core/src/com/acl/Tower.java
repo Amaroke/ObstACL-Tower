@@ -1,8 +1,8 @@
 package com.acl;
 
-import com.acl.datas.Element;
-import com.acl.datas.Player;
-import com.acl.datas.Wall;
+import com.acl.datas.elements.Element;
+import com.acl.datas.elements.Player;
+import com.acl.datas.elements.Wall;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;

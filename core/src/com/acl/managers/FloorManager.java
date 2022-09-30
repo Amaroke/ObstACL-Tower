@@ -15,13 +15,21 @@ public class FloorManager {
         width = 3;
         height = 3;
 
-        //We retrieve the content of the floor, in the form of a character matrix
+        // We retrieve the content of the floor, in the form of a character matrix
         table = new char[width][height];
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
                 table[j][i] = tabString[i].charAt(j);
             }
         }
+    }
+
+    public void createLevel() {
+        // TODO : Déplacer le truc du constructeur ici ?
+    }
+
+    public void saveLevel() {
+        // TODO : À implémenter
     }
 
     public char[][] getTable() {
