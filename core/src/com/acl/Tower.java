@@ -39,6 +39,8 @@ public class Tower {
                 createElement(table[i][j], i, j);
             }
         }
+
+        //floorManager.saveLevel();
     }
 
     public Player getPlayer() {
