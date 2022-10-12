@@ -46,7 +46,15 @@ après la mort et peuvent être utilisées pour obtenir des améliorations perma
 
 ## Comment compiler et exécuter le projet
 
-???
+Premièrement, il faut avoir installer java : <br>
+https://www.java.com/fr/download/ <br>
+Pour compiler le projet il vous faut un jdk java disponible ici : <br>
+https://www.oracle.com/java/technologies/downloads/#jdk17 <br>
+Il faut ensuite exécuter cette commande à la racine du projet :
+> ./gradlew desktop:dist
+
+Puis pour lancer le jeu il faut exécuter la commande suivante toujours à la racine du projet :
+> java -XstartOnFirstThread -jar "./desktop/build/libs/desktop-1.0.jar"
 
 -----
 
@@ -63,12 +71,12 @@ après la mort et peuvent être utilisées pour obtenir des améliorations perma
 
 ### <p id="liste0">Liste des tâches</p>
 
-| Responsable            | Tâches                                                                                                                                                                                                                                                     | Temps estimé                                         | Temps réel |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|------------|
-| IOPETI Hugo            | Récupération du projet GitHub et mise en place de l'environnement.<br/><br/>Lecture d'un fichier texte pour créer des étages.<br/><br/>Écriture dans un fichier texte pour sauvegarder des étages.<br/><br/>Tests des tâches des autres membres du groupe. | 30min<br/><br/>1h<br/><br/>45min<br/><br/>30min<br/> |            |
-| MATHIEU STEINBACH Hugo | Création du projet (LibGDX) et mise en place du GitHub.<br/><br/>Mise en place de la boucle de jeu.<br/><br/>Affichage des coordonnées du joueur suite aux déplacements.<br/><br/>Tests des tâches des autres membres du groupe.                           | 30min<br/><br/>1h30<br/><br/>30min<br/><br/>30min    |            |
-| YVOZ Ludovic           | Récupération du projet GitHub et mise en place de l'environnement.<br/><br/>Création du personnage.<br/><br/>Création de l'écouteur clavier.<br/><br/>Tests des tâches des autres membres du groupe.                                                       | 30min<br/><br/>1h<br/><br/>1h<br/><br/>30min<br/>    |            |
-| ZIMOL Guillaume        | Récupération du projet GitHub et mise en place de l'environnement.<br/><br/>Gestion d'un menu.<br/><br/>Tests des tâches des autres membres du groupe.                                                                                                     | 30min<br/><br/>45min<br/><br/>30min                  |            |
+| Responsable            | Tâches                                                                                                                                                                                                                                                     | Temps estimé                                         | Temps réel                                             |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|--------------------------------------------------------|
+| IOPETI Hugo            | Récupération du projet GitHub et mise en place de l'environnement.<br/><br/>Lecture d'un fichier texte pour créer des étages.<br/><br/>Écriture dans un fichier texte pour sauvegarder des étages.<br/><br/>Tests des tâches des autres membres du groupe. | 30min<br/><br/>1h<br/><br/>45min<br/><br/>30min<br/> | 30min<br/><br/>1h30<br/><br/>45min<br/><br/>30min<br/> |
+| MATHIEU STEINBACH Hugo | Création du projet (LibGDX) et mise en place du GitHub.<br/><br/>Mise en place de la boucle de jeu.<br/><br/>Affichage des coordonnées du joueur suite aux déplacements.<br/><br/>Tests des tâches des autres membres du groupe.                           | 30min<br/><br/>1h30<br/><br/>30min<br/><br/>30min    | 30min<br/><br/>1h30<br/><br/>45min<br/><br/>30min      |
+| YVOZ Ludovic           | Récupération du projet GitHub et mise en place de l'environnement.<br/><br/>Création du personnage.<br/><br/>Création de l'écouteur clavier.<br/><br/>Tests des tâches des autres membres du groupe.                                                       | 30min<br/><br/>1h<br/><br/>1h<br/><br/>30min<br/>    | 30min<br/><br/>1h30<br/><br/>1h<br/><br/>30min<br/>    |
+| ZIMOL Guillaume        | Récupération du projet GitHub et mise en place de l'environnement.<br/><br/>Gestion d'un menu.<br/><br/>Tests des tâches des autres membres du groupe.                                                                                                     | 30min<br/><br/>45min<br/><br/>30min                  | 30min<br/><br/>45min<br/><br/>30min                    |
 
 ### <a id="diagramme0"></a>Diagramme UML
 
@@ -76,11 +84,30 @@ après la mort et peuvent être utilisées pour obtenir des améliorations perma
 
 ### <a id="review0"></a>Review
 
-/
+Nous avons réussi à implémenter le personnage dans le monde, le personnage se déplace lorsque l'utilisateur appuie sur certaines touches du clavier. <br>
+Lors de l'implémentation du joueur, la mise en place de ces données par rapport au monde (densité, ...) et le mouvement ont été un peu plus complexes que prévu. <br>
+
+Nous avons également mis en place la boucle de jeu, sans problème, mais un peu long, bien que la documentation soit complète. <br>
+Cependant l'affichage des coordonnées à également pris plus de temps que prévu à cause de la gestion des Body de LibGDX. <br>
+
+Nous avons réussi à lire un fichier texte permettant la création d'étages.
+De cette façon, nous avons pu créer manuellement un étage dans un fichier texte (chaque caractère représentant un élément du décor, actuellement, un seul élément existe : W, correspondant au mur). <br>
+La lecture a pris plus de temps que prévu, pour cause, des problèmes dans le parsing du fichier ont persistés (problèmes de lecture de chaîne de caractères, caractère invisible). <br>
+Nous avons réussi à écrire un fichier texte permettant de sauvegarder des étages. De cette manière, le joueur pourra dans le futur interagir avec les niveaux, en les sauvegardant et en ne perdant pas la progression de celui-ci. <br>
+
+Environnement différent pour Guillaume, qui a amené à quelques problèmes sur sa machine, mais qui ont été réglé assez rapidement. <br>
+Plusieurs menus envisagés et différentes manière de les mettre en place, cependant nous avons décidé de faire le plus simplement possible pour le moment. <br>
+
+Aucun problème repéré lors des tests de nos fonctionnalités entre nous.
 
 ### <a id="retrospective0"></a>Restrospective
 
-/
+Nous avons réussi à nous organiser très efficacement, ce qui a entraîné une facilité lors de l'écriture du code. <br>
+L'ambiance au sein de l'équipe est très agréable et tous les membres de l'équipe sont ponctuels et prompts à aider s'il y a un problème. <br>
+L'entraide entre les différents membres du groupe a permis de résoudre les problèmes rencontrés. <br>
+Comme étant le premier sprint, la plupart des fonctionnalités nécessitaient d'autres fonctionnalités, nous n'avons donc pas pu tous travailler en simultané. <br>
+La charge de travail pour le premier sprint et la mise en place du projet était suffisante. <br>
+Nous prévoyons cependant d'investir plus de temps dans les prochains sprints, ainsi que de travailler en simultané sur différents aspects de l'application, ce qui n'était pas possible pour ce premier sprint. <br>
 
 -----
 
