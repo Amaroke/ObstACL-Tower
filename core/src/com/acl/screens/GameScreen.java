@@ -33,7 +33,7 @@ public class GameScreen extends ScreenAdapter {
         // World step definition
         obstACLTower.getTower().getWorld().step(Gdx.graphics.getDeltaTime(), 6, 2);
         // Print coordinate
-        // System.out.println(obstACLTower.getTower().getPlayer().getBody().getPosition());
+        System.out.println(obstACLTower.getTower().getPlayer().getBody().getPosition());
 
     }
 
