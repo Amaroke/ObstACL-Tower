@@ -1,0 +1,27 @@
+@startuml
+actor Utilisateur as u
+participant obstACL_Tower as sc
+participant Monster as m
+
+u -> sc : The player presses his spacebar or presses the left mouse button
+sc -> sc : keyDown(int keycode) == Input.Keys.BACKSPACE || Input.Buttons.LEFT
+sc -> u: Attack animation display
+
+alt the attack hits a monster
+sc -> m : bool isHit()
+m -> m : void computeMonsterStats()
+end
+
+alt player's attack hits a monster and kills it
+sc -> m : bool isHit()
+m -> m : void computeMonsterStats()
+m -> sc : void destroy()
+sc -> u : Disappearance of the monster
+end
+
+alt player's ranged attack hits a wall
+sc -> sc : void disappearanceProjectile()
+sc -> u : Display destruction of the projectile when colliding with a wall
+end
+
+@enduml
