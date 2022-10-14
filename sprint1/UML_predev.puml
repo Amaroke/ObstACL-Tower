@@ -1,0 +1,143 @@
+@startuml
+class com.acl.listeners.KeyboardListener {
+- Vector2 motion
++ Vector2 getMotion()
++ boolean keyDown(int)
++ boolean keyUp(int)
++ boolean keyTyped(char)
++ boolean touchDown(int,int,int,int)
++ boolean touchUp(int,int,int,int)
++ boolean touchDragged(int,int,int)
++ boolean mouseMoved(int,int)
++ boolean scrolled(float,float)
+}
+class com.acl.screens.MenuScreen {
++ void show()
++ void render(float)
+}
+class com.acl.screens.GameScreen {
++ void show()
++ void render(float)
++ void dispose()
++ printTheDefeatScreen()
+}
+class com.acl.datas.elements.Player {
+- PolygonShape shape
++ void configureBodyDef()
++ void setFixture()
++ void setMotion(Vector2)
+}
+class com.acl.datas.elements.Weapon {
++ void disappearanceProjectile()
+}
+class com.acl.managers.FloorManager {
+- char[][] table
+- int width
+- int height
++ void createLevel()
++ void saveLevel()
++ char[][] getTable()
++ int getWidth()
++ int getHeight()
+}
+class com.acl.managers.Text {
+}
+class com.acl.managers.TextureFactory {
+}
+class com.acl.ObstACLTower {
++ void create()
++ void dispose()
++ Tower getTower()
++ void setTower(Tower)
+}
+abstract class com.acl.datas.elements.Element {
+- Vector2 position
+- Body body
+- BodyDef bodyDef
+- float height
+- float width
++ {abstract}void configureBodyDef()
++ {abstract}void setFixture()
++ void createBody(World)
++ float getHeight()
++ void setHeight(float)
++ float getWidth()
++ void setWidth(float)
++ Vector2 getPosition()
++ void setPosition(Vector2)
++ Body getBody()
++ void setBody(Body)
++ BodyDef getBodyDef()
++ void setBodyDef(BodyDef)
+}
+abstract class com.acl.datas.elements.Monster {
+- int HP
+- int Attack
+- int AttackSpeed
+- int Speed
++ computeMonsterStats()
++ bool isHit()
++ void destroy()
++ void startMovement()
++ void changeDirection()
++ void giveLoot()
+}
+class com.acl.datas.elements.BasicMonster {
+}
+class com.acl.Tower {
+- World world
+- float height
+- void createTower()
++ Player getPlayer()
++ World getWorld()
+- void createElement(char,int,int)
+- void addElement(Element)
+- float getHeight()
++ openTheDoor()
++ goingToTheNextStage()
++ printTheNextStageScreen()
+}
+class com.acl.datas.elements.Wall {
+- PolygonShape shape
+- float density
+- float restitution
+- float friction
++ void configureBodyDef()
++ void setFixture()
+}
+class com.acl.datas.elements.Door {
+}
+class com.acl.datas.elements.Stair {
+}
+class com.acl.datas.elements.Chest {
+}
+class com.acl.datas.elements.Floor {
+}
+abstract class com.acl.datas.elements.Trap {
+}
+abstract class com.acl.datas.elements.Breakable {
+}
+
+
+com.acl.Tower -- "*" com.acl.datas.elements.Element
+com.acl.Tower -- "1" com.acl.datas.elements.Player
+com.acl.screens.GameScreen -- "1" com.acl.ObstACLTower
+com.acl.screens.GameScreen -- "1" com.acl.listeners.KeyboardListener
+com.acl.ObstACLTower -- "1" com.acl.Tower
+com.badlogic.gdx.InputProcessor <|.. com.acl.listeners.KeyboardListener
+com.badlogic.gdx.ScreenAdapter <|-- com.acl.screens.MenuScreen
+com.badlogic.gdx.ScreenAdapter <|-- com.acl.screens.GameScreen
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Player
+com.acl.datas.elements.Player -- "1" com.acl.datas.elements.Weapon
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Weapon
+com.badlogic.gdx.Game <|-- com.acl.ObstACLTower
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Wall
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Floor
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Door
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Stair
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Trap
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Chest
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Breakable
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Monster
+com.acl.datas.elements.Monster <|-- com.acl.datas.elements.BasicMonster
+@enduml

@@ -54,7 +54,7 @@ Il faut ensuite exécuter cette commande à la racine du projet :
 > ./gradlew desktop:dist
 
 Puis pour lancer le jeu il faut exécuter la commande suivante toujours à la racine du projet : <br><br>
--Sur Windows/Linux : 
+-Sur Windows/Linux :
 > java -XstartOnFirstThread -jar "./desktop/build/libs/desktop-1.0.jar"
 
 -Sur MacOS
@@ -84,7 +84,7 @@ Puis pour lancer le jeu il faut exécuter la commande suivante toujours à la ra
 
 ### <a id="diagramme0"></a>Diagramme UML
 
-<img src="sprint0/UML.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML.png à la racine du projet."/>
+<img src="sprint0/UML.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML.png"/>
 
 ### <a id="review0"></a>Review
 
@@ -143,20 +143,20 @@ différents aspects de l'application, ce qui n'était pas possible pour ce premi
 
 ### <p id="liste1">Liste des tâches</p>
 
-| Responsable            | Tâches | Temps estimé                                         | Temps réel                                             |
-|------------------------|--------|------------------------------------------------------|--------------------------------------------------------|
-| IOPETI Hugo            |        |||
-| MATHIEU STEINBACH Hugo |        |||
-| YVOZ Ludovic           |        |||
-| ZIMOL Guillaume        |        |||
+| Responsable            | Tâches                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Temps estimé                                                                                 | Temps réel                                             |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| IOPETI Hugo            | Création de l'élément Porte pour accéder aux escaliers/échelles.<br/><br/>Création de l'élément Escalier permettant de d'accéder à l'étage supérieur.<br/><br/>Création de l'élément coffre.<br/><br/>Création de la classe abstraite pièges.<br/><br/>Création de l'élément Sol.<br/><br/>Création d'éléments destructibles.<br/><br/>Gestion de la fin de niveau.<br/><br/>Affichage de fin de partie.                                                        | 2h<br/><br/>2h<br/><br/>30min<br/><br/>3h<br/><br/>30min<br/><br/>2h<br/><br/>2h<br/><br/>2h ||
+| MATHIEU STEINBACH Hugo | Créer la classe arme.<br/><br/>Gérer l'attaque à distance/mêlée (création/destruction).<br/><br/>Gérer l'attaque sur les monstres.<br/><br/>Gérer l'affichage de l'attaque.                                                                                                                                                                                                                                                                                     | 2h<br/><br/>5h<br/><br/>3h<br/><br/>3h                                                       ||
+| YVOZ Ludovic           | Création d'une classe abstraite "Monster" représentant les monstres et gestion des stats basiques des monstres.<br/><br/>Création d'un type de monstre "basique" et gestion de son déplacement.<br/><br/>Création des fonctions permettant aux monstres d'avoir un impact sur le monde (gestion mort, loots, etc...).<br/><br/>Gestion des collisions du monde (monstres, joueur, murs).<br/><br/>Implémentation de la physique à travers des tests graphiques. | 2h30<br/><br/>4h<br/><br/>3h<br/><br/>2h<br/><br/>1h30                                       ||
+| ZIMOL Guillaume        | Mise en place des textures sur tout les éléments du jeu.<br/><br/>Création d’une TextureFactory.<br/><br/>Création des sprites.<br/><br/>Listener d’un score.<br/><br/>Listener vie joueur.                                                                                                                                                                                                                                                                     | 4h<br/><br/>3h<br/><br/>2h30<br/><br/>2h<br/><br/>2h                                         ||
 
 ### <a id="diagramme1"></a>Diagramme UML
 
-<img src="sprint1/UML_predev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_predev.png à la racine du projet."/>
-<img src="sprint1/SEQ_attack.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_attack.png à la racine du projet."/>
-<img src="sprint1/SEQ_endgame.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_endgame.png à la racine du projet."/>
-<img src="sprint1/SEQ_monster.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_monster.png à la racine du projet."/>
-<img src="sprint1/UML_postdev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_postdev.png à la racine du projet."/>
+<img src="sprint1/UML_predev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_predev.png"/>
+<img src="sprint1/SEQ_attack.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_attack.png"/>
+<img src="sprint1/SEQ_endgame.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_endgame.png"/>
+<img src="sprint1/SEQ_monster.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_monster.png"/>
+<img src="sprint1/UML_postdev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_postdev.png"/>
 
 ### <a id="review1"></a>Review
 
