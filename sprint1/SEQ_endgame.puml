@@ -1,0 +1,21 @@
+@startuml
+actor User as u
+participant obstACL as o
+participant porte as p
+
+alt  user.hp = 0
+o -> o : endOfTheGame = true, userDefeat = true
+o -> u : printTheDefeatScreen()
+
+end
+
+alt isAllEnemiesAreDead()
+o -> p : openTheDoor()
+
+alt world.detectCollision(player, door) = true
+o -> o : goingToTheNextStage()
+o -> u : printTheNextStageScreen()
+end
+end
+
+@enduml
