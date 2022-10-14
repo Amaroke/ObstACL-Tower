@@ -6,10 +6,12 @@ import com.badlogic.gdx.Game;
 public class ObstACLTower extends Game {
 
     private Tower tower;
+    private int score;
 
     @Override
     public void create() {
         setScreen(new GameScreen(this));
+        score = 0;
     }
 
     @Override
@@ -23,5 +25,9 @@ public class ObstACLTower extends Game {
 
     public void setTower(Tower monde) {
         this.tower = monde;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 }
