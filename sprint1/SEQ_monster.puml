@@ -1,0 +1,28 @@
+@startuml
+participant Monster as m
+participant Player as p
+participant Wall as w
+participant World as world
+
+world -> world : world = new World()
+
+world -> m : world.add(m = new Monster())
+world -> w : world.add(w = new Wall())
+world -> p : world.add(p = new Player())
+
+m -> m : m.startMovement()
+
+alt world.detectCollision(m,w) = true
+m -> m : m.changeDirection()
+end
+
+alt world.detectCollision(m,p) = true
+p -> m : p.computeStats(m.getAtk())
+m -> m : m.changeDirection()
+end
+
+alt m.getHealth() = 0
+m -> p : m.giveLoot(p)
+world -> m : world.destroy(m)
+end
+@enduml
