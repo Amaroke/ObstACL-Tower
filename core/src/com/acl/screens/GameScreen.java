@@ -44,7 +44,6 @@ public class GameScreen extends ScreenAdapter {
         // We display score
         text.displayScore("Score = " + obstACLTower.getScore());
         // Print coordinate
-        System.out.println(obstACLTower.getTower().getPlayer().getBody().getPosition());
     }
 
 
