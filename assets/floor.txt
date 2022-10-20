@@ -1,9 +1,9 @@
-WWWWWWWSWWWWWWW
-WC            W
-W      T      W
-W             W
-W      P      W
-W             W
-W             W
-WB           BW
-WWWWWWWWWWWWWWW
+WWWWWWWSWWWWWWWW
+WC             W
+W      T       W
+W              W
+W      P       W
+W              W
+W              W
+WB            BW
+WWWWWWWWWWWWWWWW

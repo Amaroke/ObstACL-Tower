@@ -24,7 +24,7 @@ public class FloorManager {
         FileHandle file = Gdx.files.internal(floor);
         String[] tabString = file.readString().split("\\n");
 
-        width = 15;
+        width = 16;
         height = 9;
 
         // We retrieve the content of the floor, in the form of a character matrix
