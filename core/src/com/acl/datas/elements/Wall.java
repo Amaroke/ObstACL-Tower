@@ -1,5 +1,7 @@
 package com.acl.datas.elements;
 
+import com.acl.managers.TextureFactory;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -24,6 +26,7 @@ public class Wall extends Element {
                 new Vector2(100, 0)
         };
         this.shape.set(points);
+        this.setSprite();
     }
 
     @Override
@@ -47,5 +50,10 @@ public class Wall extends Element {
             getBody().createFixture(fixtureDef);
         }
         this.shape.dispose();
+    }
+
+    @Override
+    public void setSprite() {
+        this.sprite = new Sprite(TextureFactory.getWallTexture());
     }
 }

@@ -44,22 +44,22 @@ public class KeyboardListener implements InputProcessor {
         }
         // When pressing the UP, Z or W keys, the character goes up.
         if (keycode == Input.Keys.UP || keycode == Input.Keys.Z || keycode == Input.Keys.W) {
-            motion.y = 1f;
+            motion.y = 10f;
             return true;
         }
         // When pressing the LEFT, Q or A keys, the character goes left.
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.Q || keycode == Input.Keys.A) {
-            motion.x = -1f;
+            motion.x = -10f;
             return true;
         }
         // When pressing the RIGHT or D keys, the character goes right.
         if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
-            motion.x = 1f;
+            motion.x = 10f;
             return true;
         }
         // When pressing the DOWN or S keys, the character goes down.
         if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S) {
-            motion.y = -1f;
+            motion.y = -10f;
             return true;
         }
         return false;

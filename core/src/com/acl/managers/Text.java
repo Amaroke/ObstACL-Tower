@@ -40,16 +40,24 @@ public class Text {
 
     }
 
-    public void displayScore(String message){
+    public void displayScore(String message) {
         textBatch.begin();
-        float posX = (float)(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/6);
-        float posY = (float)(Gdx.graphics.getHeight() - 10);
-        font.draw(textBatch, message,posX, posY, message.length(), 1, false);
+        float posX = (float) (Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 6);
+        float posY = (float) (Gdx.graphics.getHeight() - 10);
+        font.draw(textBatch, message, posX, posY, message.length(), 1, false);
+        textBatch.end();
+    }
+
+    public void displayVie(String message) {
+        textBatch.begin();
+        float posX = (float) Gdx.graphics.getWidth() / 6;
+        float posY = (float) (Gdx.graphics.getHeight() - 10);
+        font.draw(textBatch, message, posX, posY, message.length(), 1, false);
         textBatch.end();
     }
 
 
-    public void dispose(){
+    public void dispose() {
         //font.dispose();
         //textBatch.dispose();
 

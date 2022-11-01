@@ -1,5 +1,7 @@
 package com.acl.datas.elements;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class Element {
     private Vector2 position;
     private Body body;
+    protected Sprite sprite;
     private BodyDef bodyDef;
     private float height;
     private float width;
@@ -62,5 +65,16 @@ public abstract class Element {
 
     public void setBodyDef(BodyDef bodyDef) {
         this.bodyDef = bodyDef;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public abstract void setSprite();
+
+
+    public void draw(SpriteBatch sb) {
+        sb.draw(this.getSprite(), this.getBody().getPosition().x, this.getBody().getPosition().y, this.getWidth(), this.getHeight());
     }
 }

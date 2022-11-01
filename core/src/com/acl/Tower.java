@@ -1,6 +1,5 @@
 package com.acl;
 
-import com.acl.datas.Floor;
 import com.acl.datas.elements.*;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
@@ -22,14 +21,11 @@ public class Tower {
 
     private void createTower() {
         world = new World(new Vector2(0, 0), true);
-        player = new Player(new Vector2(0, 0));
-        player.configureBodyDef();
-        player.createBody(getWorld());
-        player.setFixture();
+
 
         this.elements = new ArrayList<>(9);
 
-        this.height = 9 * 64;
+        this.height = 9 * 16;
 
         FloorManager floorManager = new FloorManager("floor.txt");
         char[][] table = floorManager.getTable();
@@ -52,13 +48,18 @@ public class Tower {
 
     private void createElement(char letter, int i, int j) {
         Element element = null;
-        switch(letter){
-            case 'P' -> element = new Player(new Vector2(i * 64, getHeight() - j * 64));
-            case 'W' -> element = new Wall(new Vector2(i * 64, getHeight() - j * 64));
-            case 'S' -> element = new Stair(new Vector2(i * 64, getHeight() - j * 64));
-            case 'C' -> element = new Chest(new Vector2(i * 64, getHeight() - j * 64));
-            case 'T' -> element = new Trap(new Vector2(i * 64, getHeight() - j * 64));
-            case 'B' -> element = new BreakableObject(new Vector2(i * 64, getHeight() - j * 64));
+        switch(letter) {
+            case 'P' -> {
+                player = new Player(new Vector2(i * 16, getHeight() - j * 16));
+                player.configureBodyDef();
+                player.createBody(getWorld());
+                player.setFixture();
+            }
+            case 'W' -> element = new Wall(new Vector2(i * 16, getHeight() - j * 16));
+            case 'S' -> element = new Stair(new Vector2(i * 16, getHeight() - j * 16));
+            case 'C' -> element = new Chest(new Vector2(i * 16, getHeight() - j * 16));
+            case 'T' -> element = new Trap(new Vector2(i * 16, getHeight() - j * 16));
+            case 'B' -> element = new BreakableObject(new Vector2(i * 16, getHeight() - j * 16));
         }
         if (element != null) {
             //We place the elements
@@ -66,12 +67,32 @@ public class Tower {
             element.createBody(getWorld());
             element.setFixture();
             this.addElement(element);
-            System.out.println(letter+ ""+element.getPosition().x + " " + element.getPosition().y);
+            System.out.println(letter + "" + element.getPosition().x + " " + element.getPosition().y);
         }
     }
 
     private void addElement(Element e) {
         this.elements.add(e);
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public ArrayList<Element> getElements() {
+        return elements;
+    }
+
+    public void setElements(ArrayList<Element> elements) {
+        this.elements = elements;
     }
 
     private float getHeight() {

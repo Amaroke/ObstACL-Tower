@@ -10,6 +10,7 @@ public class ObstACLTower extends Game {
     private Tower tower;
     public SpriteBatch batch;
     private int score;
+    private int vie;
     private OrthographicCamera camera;
 
     @Override
@@ -17,9 +18,10 @@ public class ObstACLTower extends Game {
         setScreen(new GameScreen(this));
         // Useful for display
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1600, 900);
+        camera.setToOrtho(false, 16 * 16, 16 * 11);
         batch = new SpriteBatch();
         score = 0;
+        vie = 100;
     }
 
     @Override
@@ -37,6 +39,14 @@ public class ObstACLTower extends Game {
 
     public int getScore() {
         return this.score;
+    }
+
+    public int getVie() {
+        return vie;
+    }
+
+    public void setVie(int vie) {
+        this.vie = vie;
     }
 
     public SpriteBatch getBatch() {

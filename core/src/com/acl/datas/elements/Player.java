@@ -1,5 +1,7 @@
 package com.acl.datas.elements;
 
+import com.acl.managers.TextureFactory;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -12,8 +14,8 @@ public class Player extends Element {
     public Player(Vector2 v) {
         super(v);
 
-        setHeight(64);
-        setWidth(64);
+        setHeight(16);
+        setWidth(16);
 
         //We define the shape of the player with 4 dots (vector2) as a square by height * width .
         shape = new PolygonShape();
@@ -25,6 +27,7 @@ public class Player extends Element {
         vectors[3] = new Vector2(0f, getHeight());
 
         this.shape.set(vectors);
+        this.setSprite();
     }
 
     @Override
@@ -50,6 +53,13 @@ public class Player extends Element {
         }
         this.shape.dispose();
     }
+
+
+    @Override
+    public void setSprite() {
+        this.sprite = new Sprite(TextureFactory.getChevalierTexture());
+    }
+
 
     public void setMotion(Vector2 v) {
         this.getBody().setLinearVelocity(v);
