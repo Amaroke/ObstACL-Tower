@@ -11,12 +11,16 @@ public class FireBall extends Weapon {
     public float velocity;
     private final Animation<TextureRegion> animation;
 
-
     public FireBall(Vector2 v, Direction d) {
         super(v, d);
         velocity = 50f;
         sensor = true;
         animation = new Animation<>(1f, TextureRegion.split(TextureFactory.getFireBallTexture(), 152, 152)[0]);
+    }
+
+    @Override
+    public void setSprite() {
+
     }
 
     @Override

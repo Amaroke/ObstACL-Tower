@@ -70,10 +70,6 @@ public abstract class Element {
         return body;
     }
 
-    public void setBody(Body body) {
-        this.body = body;
-    }
-
     public BodyDef getBodyDef() {
         return bodyDef;
     }
@@ -87,7 +83,6 @@ public abstract class Element {
     }
 
     public abstract void setSprite();
-
 
     public void draw(SpriteBatch sb) {
         sb.draw(this.getSprite(), this.getBody().getPosition().x, this.getBody().getPosition().y, this.getWidth(), this.getHeight());

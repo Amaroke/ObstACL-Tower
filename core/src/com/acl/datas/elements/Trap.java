@@ -7,9 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class Trap extends Element{
-
-    private int dealDamage;
+public class Trap extends Element {
+    private final int dealDamage;
 
     public Trap(Vector2 v) {
         super(v);
@@ -51,9 +50,5 @@ public class Trap extends Element{
 
     public int getDealDamage() {
         return dealDamage;
-    }
-
-    public void setDealDamage(int dealDamage) {
-        this.dealDamage = dealDamage;
     }
 }

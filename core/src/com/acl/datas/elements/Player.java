@@ -1,30 +1,28 @@
 package com.acl.datas.elements;
 
-import com.acl.enums.UserData;
 import com.acl.enums.Direction;
-import com.acl.managers.TextureFactory;
+import com.acl.enums.UserData;
 import com.acl.enums.WeaponType;
+import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-import java.util.ArrayList;
-
 public class Player extends Element {
-    private final WeaponType weaponType = WeaponType.SWORD;
+    // TODO Weapon can be swap
+    private final WeaponType weaponType = WeaponType.FIREBALL;
     private Direction direction = Direction.NORTH;
     private int score;
     private int hp;
-
 
     public Player(Vector2 v) {
         super(v);
         setHeight(16);
         setWidth(16);
 
-        //We define the shape of the player with 4 dots (vector2) as a square by height * width .
+        // We define the shape of the player with 4 dots (vector2) as a square by height * width.
         shape = new PolygonShape();
 
         Vector2[] vectors = new Vector2[4];
@@ -35,7 +33,6 @@ public class Player extends Element {
 
         score = 0;
         hp = 100;
-
 
         this.shape.set(vectors);
 
@@ -97,16 +94,8 @@ public class Player extends Element {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public int getHp() {
         return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
     }
 
     public void receiveDamage(int amount) {
@@ -117,7 +106,7 @@ public class Player extends Element {
         return direction;
     }
 
-    public void incrementScore(int amount){
+    public void incrementScore(int amount) {
         this.score += amount;
     }
 }

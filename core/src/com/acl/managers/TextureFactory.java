@@ -7,10 +7,6 @@ public class TextureFactory {
 
     private static TextureFactory instance = new TextureFactory();
 
-    private TextureFactory() {
-
-    }
-
     public static TextureFactory getInstance() {
         if (instance == null) {
             instance = new TextureFactory();
@@ -19,9 +15,8 @@ public class TextureFactory {
         return instance;
     }
 
-
     private final static Texture backTexture = new Texture(Gdx.files.internal("floor.png"));
-    private final static Texture chevalierTexture = new Texture(Gdx.files.internal("chevalier_cheri.png"));
+    private final static Texture chevalierTexture = new Texture(Gdx.files.internal("knight_cheri.png"));
     private final static Texture chestTexture = new Texture(Gdx.files.internal("chest.png"));
     private final static Texture breakableTexture = new Texture(Gdx.files.internal("barrel.png"));
     private final static Texture wallTexture = new Texture(Gdx.files.internal("wall.png"));
@@ -68,6 +63,8 @@ public class TextureFactory {
         return swordTexture;
     }
 
-    public static Texture getSlimeTexture() {return slimeTexture; }
+    public static Texture getSlimeTexture() {
+        return slimeTexture;
+    }
 
 }

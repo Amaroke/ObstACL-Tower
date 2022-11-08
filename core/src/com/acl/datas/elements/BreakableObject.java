@@ -7,9 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class BreakableObject extends Element{
-    private int scoreGiven;
-    private boolean destroyed;
+public class BreakableObject extends Element {
+    private final int givenScore;
 
     public BreakableObject(Vector2 v) {
         super(v);
@@ -17,13 +16,8 @@ public class BreakableObject extends Element{
         this.density = 1f;
         this.restitution = 0.1f;
         this.friction = 0.25f;
-        this.scoreGiven = 5;
-        Vector2[] points = {
-                new Vector2(0, 0),
-                new Vector2(0, 16),
-                new Vector2(16, 16),
-                new Vector2(16, 0)
-        };
+        this.givenScore = 5;
+        Vector2[] points = {new Vector2(0, 0), new Vector2(0, 16), new Vector2(16, 16), new Vector2(16, 0)};
         this.shape.set(points);
     }
 
@@ -44,19 +38,11 @@ public class BreakableObject extends Element{
 
     @Override
     public UserData getUserData() {
-        return UserData.BREAKABLEOBJ;
+        return UserData.BREAKABLE;
     }
 
-    public boolean isDestroyed() {
-        return destroyed;
-    }
-
-    public void setDestroyed(boolean destroyed) {
-        this.destroyed = destroyed;
-    }
-
-    public int giveLoot(){
+    public int giveLoot() {
         //TODO Soon gold & more...
-        return scoreGiven;
+        return givenScore;
     }
 }

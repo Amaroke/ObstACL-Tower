@@ -9,19 +9,13 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public abstract class Weapon extends Element {
     private final Direction direction;
 
-
     public Weapon(Vector2 v, Direction d) {
         super(v);
         this.shape = new PolygonShape();
         this.density = 0f;
         this.restitution = 0f;
         this.friction = 0f;
-        Vector2[] points = {
-                new Vector2(0, 0),
-                new Vector2(0, 16),
-                new Vector2(16, 16),
-                new Vector2(16, 0)
-        };
+        Vector2[] points = {new Vector2(0, 0), new Vector2(0, 16), new Vector2(16, 16), new Vector2(16, 0)};
         this.shape.set(points);
         direction = d;
     }
@@ -37,11 +31,9 @@ public abstract class Weapon extends Element {
     }
 
     @Override
-    public void setSprite() {
-    }
+    public abstract void setSprite();
 
-    public void update() {
-    }
+    public abstract void update();
 
     public Direction getDirection() {
         return direction;

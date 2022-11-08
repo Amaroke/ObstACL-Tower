@@ -14,12 +14,12 @@ public class Text {
     public BitmapFont font;
 
 
-    public Text(){
+    public Text() {
         font = new BitmapFont();
 
         //CAM
         OrthographicCamera textCamera = new OrthographicCamera();
-        textCamera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        textCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         textBatch = new SpriteBatch();
 
 
@@ -28,11 +28,11 @@ public class Text {
         FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
         //PARAMS
-        params.size=Gdx.graphics.getWidth()*50/1024;
-        params.color = new Color(255,255,0,0.75f);
+        params.size = Gdx.graphics.getWidth() * 50 / 1024;
+        params.color = new Color(255, 255, 0, 0.75f);
         params.borderColor = Color.BLACK;
-        params.borderWidth = (float)(Gdx.graphics.getWidth()*3)/1024;
-        params.characters = FreeTypeFontGenerator.DEFAULT_CHARS ;
+        params.borderWidth = (float) (Gdx.graphics.getWidth() * 3) / 1024;
+        params.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
 
         //CAM
         textBatch.setProjectionMatrix(textCamera.combined);
@@ -48,7 +48,7 @@ public class Text {
         textBatch.end();
     }
 
-    public void displayVie(String message) {
+    public void displayHP(String message) {
         textBatch.begin();
         float posX = (float) Gdx.graphics.getWidth() / 6;
         float posY = (float) (Gdx.graphics.getHeight() - 10);
@@ -56,7 +56,7 @@ public class Text {
         textBatch.end();
     }
 
-    public void diplayDie(String message){
+    public void displayDie(String message) {
         textBatch.begin();
         float posX = (float) (Gdx.graphics.getWidth() / 2 - 15);
         float posY = (float) (Gdx.graphics.getHeight() / 1.5 - 35);
@@ -64,7 +64,7 @@ public class Text {
         textBatch.end();
     }
 
-    public void diplayStageClear(String message){
+    public void displayStageClear(String message) {
         textBatch.begin();
         float posX = (float) Gdx.graphics.getWidth() / 2 - 15;
         float posY = (float) (Gdx.graphics.getHeight() / 1.5 - 35);
@@ -73,9 +73,6 @@ public class Text {
     }
 
     public void dispose() {
-        //font.dispose();
-        //textBatch.dispose();
-
     }
 
 }

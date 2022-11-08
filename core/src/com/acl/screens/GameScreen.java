@@ -38,9 +38,9 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         this.obstACLTower.getTower().update();
-        // We clean screen
+        // We clean screen.
         ScreenUtils.clear(0, 0, 0, 1);
-        //We display things
+        // We display things.
         obstACLTower.batch.begin();
         timeBetweenRender += 1;
         if (keyboardListener.isDebug()) {
@@ -63,11 +63,11 @@ public class GameScreen extends ScreenAdapter {
                         case NORTH ->
                                 obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
                         case SOUTH ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 180);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x + 16, w.getBody().getPosition().y + 16, 0, 0, 16f, 16f, 1f, 1f, 180);
                         case EAST ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 270);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y + 16, 0, 0, 16f, 16f, 1f, 1f, 270);
                         case WEST ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x + 16, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
 
                     }
                 }
@@ -75,13 +75,13 @@ public class GameScreen extends ScreenAdapter {
                     t = new TextureRegion(TextureFactory.getSwordTexture());
                     switch (w.getDirection()) {
                         case NORTH ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 180);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x + 16, w.getBody().getPosition().y + 16, 0, 0, 16f, 16f, 1f, 1f, 180);
                         case SOUTH ->
                                 obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
                         case EAST ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x + 16, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
                         case WEST ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 270);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y + 16, 0, 0, 16f, 16f, 1f, 1f, 270);
 
                     }
                 }
@@ -90,7 +90,7 @@ public class GameScreen extends ScreenAdapter {
 
         }
         // We get weapon use
-        if(this.keyboardListener.getUseWeapon()) {
+        if (this.keyboardListener.getUseWeapon()) {
             this.obstACLTower.getTower().createWeapon();
         }
         obstACLTower.getTower().getPlayer().draw(obstACLTower.batch);
@@ -103,19 +103,15 @@ public class GameScreen extends ScreenAdapter {
         obstACLTower.getTower().getWorld().step(Gdx.graphics.getDeltaTime(), 6, 2);
         // We display score
         text.displayScore("Score = " + obstACLTower.getTower().getPlayer().getScore());
-        text.displayVie("Health = " + obstACLTower.getTower().getPlayer().getHp());
+        text.displayHP("Health = " + obstACLTower.getTower().getPlayer().getHp());
         // Print coordinate
-        //System.out.println("La position:" + obstACLTower.getTower().getPlayer().getBody().getPosition());
-
-        if(this.obstACLTower.getTower().isVictory()){
-            text.diplayStageClear("Stage Clear");
+        if (this.obstACLTower.getTower().isVictory()) {
+            text.displayStageClear("Stage Clear");
         }
-
-        if(this.obstACLTower.getTower().isDefeat()){
-            text.diplayDie("You lose \n Your score = " + obstACLTower.getTower().getPlayer().getScore());
+        if (this.obstACLTower.getTower().isDefeat()) {
+            text.displayDie("You lose \n Your score = " + obstACLTower.getTower().getPlayer().getScore());
         }
     }
-
 
     @Override
     public void dispose() {

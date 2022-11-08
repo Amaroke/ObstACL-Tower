@@ -7,11 +7,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.Random;
 
-public class Slime extends Monster{
+public class Slime extends Monster {
 
     private int nbMovBeforeChange = 0;
-
-    private int scoreGiven;
+    private final int givenScore;
 
     public Slime(Vector2 v) {
         super(v);
@@ -19,7 +18,7 @@ public class Slime extends Monster{
         setHeight(16);
         setWidth(16);
 
-        //The base monster is represented by a square for now.
+        // The base monster is represented by a square for now.
         PolygonShape shape = new PolygonShape();
         Vector2[] vectors = new Vector2[4];
         vectors[0] = new Vector2(0f, 0f);
@@ -36,7 +35,7 @@ public class Slime extends Monster{
 
         this.setHp(10);
         this.setDmg(10);
-        this.scoreGiven = 50;
+        this.givenScore = 50;
     }
 
     @Override
@@ -46,8 +45,7 @@ public class Slime extends Monster{
 
     @Override
     public void Move() {
-        //The base monster moves randomly up, left, right or down for a period of time that is random as well.
-
+        // The base monster moves randomly up, left, right or down for a period of time that is random as well.
         if (nbMovBeforeChange == 0) {
             Random random = new Random();
             float monsterMovementForce = 10f;
@@ -57,17 +55,15 @@ public class Slime extends Monster{
                 case 1 -> setMotion(new Vector2(-monsterMovementForce, 0));
                 case 2 -> setMotion(new Vector2(monsterMovementForce, 0));
                 case 3 -> setMotion(new Vector2(0, -monsterMovementForce));
-                default -> System.out.println("apprends à faire un random stp");
             }
-            nbMovBeforeChange = random.nextInt(50,200);
+            nbMovBeforeChange = random.nextInt(50, 200);
         } else {
             nbMovBeforeChange -= 1;
         }
-
     }
 
     public int giveLoot() {
-        //The base monster gives gold coins and score
-        return scoreGiven;
+        // The base monster gives gold coins and score
+        return givenScore;
     }
 }

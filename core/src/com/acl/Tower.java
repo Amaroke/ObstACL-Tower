@@ -24,7 +24,7 @@ public class Tower {
     private boolean victory;
     private boolean defeat;
 
-    private boolean allEnemiesAreDead = false;
+    private final boolean allEnemiesAreDead = false;
     private int score = 0;
 
     private int stageNumber;
@@ -54,7 +54,6 @@ public class Tower {
 
         setCollisionListener(new CollisionListener());
         this.getWorld().setContactListener(this.getCollisionListener());
-        //floorManager.saveLevel();
     }
 
     public void createWeapon() {
@@ -96,12 +95,11 @@ public class Tower {
             }
         }
         if (element != null) {
-            //We place the elements
+            // We place the elements
             element.configureBodyDef();
             element.createBody(getWorld());
             element.setFixture();
             this.addElement(element);
-            //System.out.println(letter + "" + element.getPosition().x + " " + element.getPosition().y);
         }
     }
 
@@ -117,16 +115,17 @@ public class Tower {
                 w.setPosition(w.getBody().getPosition());
             }
 
-            if(this.getCollisionListener().isWeaponCollidesWithMonster()) {
+            if (this.getCollisionListener().isWeaponCollidesWithMonster()) {
                 Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
                 Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
                 getWeapons().remove(w);
                 deleteElem(w);
+                // TODO Adapt to damage
                 m.receiveDamage(5);
                 checkMonsterHealth(m);
             }
 
-            if(this.getCollisionListener().isWeaponCollidesWithWall()) {
+            if (this.getCollisionListener().isWeaponCollidesWithWall()) {
                 Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
                 getWeapons().remove(w);
                 deleteElem(w);
@@ -170,34 +169,32 @@ public class Tower {
             if (this.player.getHp() == 0) {
                 this.endOfTheGameLost();
             }
-            //We move all the monsters
+            // We move all the monsters
             for (Monster m : this.monsters) {
                 m.Move();
             }
         }
     }
 
-    public ArrayList<Weapon> getWeapons () {
+    public ArrayList<Weapon> getWeapons() {
         return weapons;
     }
 
-    public void endOfTheGameLost () {
-        //When the game is lost, we reset the score.
+    public void endOfTheGameLost() {
+        // When the game is lost, we reset the score.
         defeat = true;
         setScore(0);
-
-        System.out.println("C'est loose");
     }
 
-    private void checkMonsterHealth (Monster m){
+    private void checkMonsterHealth(Monster m) {
         if (m.getHp() <= 0) {
             getMonsters().remove(m);
             deleteElem(m);
         }
     }
 
-    public void endOfTheStageWon () {
-        //When the game is won, we go to the next stage.
+    public void endOfTheStageWon() {
+        // When the game is won, we go to the next stage.
         victory = true;
         this.getWorld().dispose();
 
@@ -205,75 +202,75 @@ public class Tower {
         createTower();
     }
 
-    private void addElement (Element e){
+    private void addElement(Element e) {
         this.elements.add(e);
     }
 
-    public void setWorld (World world){
+    public void setWorld(World world) {
         this.world = world;
     }
 
-    public void setPlayer (Player player){
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
-    public void setHeight ( float height){
+    public void setHeight(float height) {
         this.height = height;
     }
 
-    public ArrayList<Element> getElements () {
+    public ArrayList<Element> getElements() {
         return elements;
     }
 
-    public void setElements (ArrayList < Element > elements) {
+    public void setElements(ArrayList<Element> elements) {
         this.elements = elements;
     }
 
-    public ArrayList<Monster> getMonsters () {
+    public ArrayList<Monster> getMonsters() {
         return monsters;
     }
 
-    public void addMonster (Monster monster){
+    public void addMonster(Monster monster) {
         this.monsters.add(monster);
     }
 
-    private float getHeight () {
+    private float getHeight() {
         return this.height;
     }
 
-    public boolean isVictory () {
+    public boolean isVictory() {
         return victory;
     }
 
-    public void setVictory ( boolean victory){
+    public void setVictory(boolean victory) {
         this.victory = victory;
     }
 
-    public boolean isDefeat () {
+    public boolean isDefeat() {
         return defeat;
     }
 
-    public void setDefeat ( boolean defeat){
+    public void setDefeat(boolean defeat) {
         this.defeat = defeat;
     }
 
-    public int getScore () {
+    public int getScore() {
         return score;
     }
 
-    public CollisionListener getCollisionListener () {
+    public CollisionListener getCollisionListener() {
         return collisionListener;
     }
 
-    public void setCollisionListener (CollisionListener collisionListener){
+    public void setCollisionListener(CollisionListener collisionListener) {
         this.collisionListener = collisionListener;
     }
 
-    public void setScore ( int score){
+    public void setScore(int score) {
         this.score = score;
     }
 
-    public Monster getMonsterFromBody (Body b){
+    public Monster getMonsterFromBody(Body b) {
         for (Monster m : this.getMonsters()) {
             if (b == m.getBody()) {
                 return m;
@@ -282,7 +279,7 @@ public class Tower {
         return null;
     }
 
-    public Weapon getWeaponFromBody (Body b){
+    public Weapon getWeaponFromBody(Body b) {
         for (Weapon w : this.getWeapons()) {
             if (b == w.getBody()) {
                 return w;
@@ -290,11 +287,13 @@ public class Tower {
         }
         return null;
     }
-    public void deleteElem (Element e){
+
+    public void deleteElem(Element e) {
         getElements().remove(e);
         this.getWorld().destroyBody(e.getBody());
     }
-    public Element getElementFromBody (Body b){
+
+    public Element getElementFromBody(Body b) {
         for (Element e : this.elements) {
             if (b == e.getBody()) {
                 return e;
