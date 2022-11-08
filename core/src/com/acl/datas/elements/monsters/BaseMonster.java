@@ -32,7 +32,8 @@ public class BaseMonster extends Monster{
         this.restitution = 0.1f;
         this.friction = 0.5f;
 
-        this.setHp(100);
+        this.setHp(10);
+        this.setDmg(10);
     }
 
     @Override

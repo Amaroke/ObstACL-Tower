@@ -6,6 +6,7 @@ import com.acl.datas.elements.monsters.Monster;
 import com.acl.listeners.CollisionListener;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
@@ -122,6 +123,13 @@ public class Tower {
             if(this.getCollisionListener().isWeaponsCollidesWithBreakableObject()){
                 System.out.println("Affichage du loot de la caisse");
             }
+
+            if(this.getCollisionListener().isPlayerCollidesWithMonster()) {
+                Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
+                player.receiveDamage(m.getDmg());
+                getCollisionListener().setMonsterCollided(null);
+                getCollisionListener().setPlayerCollidesWithMonster(false);
+            }
             //We move all the monsters
             for (Monster m : this.monsters) {
                 m.Move();
@@ -212,6 +220,15 @@ public class Tower {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public Monster getMonsterFromBody(Body b) {
+        for (Monster m : this.getMonsters()) {
+            if (b == m.getBody()) {
+                return m;
+            }
+        }
+        return null;
     }
 }
 

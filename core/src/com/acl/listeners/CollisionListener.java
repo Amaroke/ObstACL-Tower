@@ -1,10 +1,7 @@
 package com.acl.listeners;
 
 import com.acl.enums.UserData;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class CollisionListener implements ContactListener {
     private boolean playerCollidesWithStairs = false;
@@ -20,6 +17,8 @@ public class CollisionListener implements ContactListener {
     private boolean weaponCollidesWithMonster = false;
 
     private boolean playerCollidesWithMonster = false;
+
+    private Body monsterCollided = null;
 
     @Override
     public void beginContact(Contact contact) {
@@ -50,8 +49,14 @@ public class CollisionListener implements ContactListener {
             this.weaponCollidesWithMonster = true;
         }
 
-        if ((A == UserData.PLAYER && B == UserData.MONSTER) || (A == UserData.MONSTER && B == UserData.PLAYER)){
+        if (A == UserData.PLAYER && B == UserData.MONSTER){
             this.playerCollidesWithMonster = true;
+            this.monsterCollided = contact.getFixtureB().getBody();
+        }
+
+        if (A == UserData.MONSTER && B == UserData.PLAYER) {
+            this.playerCollidesWithMonster = true;
+            this.monsterCollided = contact.getFixtureB().getBody();
         }
 
         if ((A == UserData.WEAPON && B == UserData.WALL) || (A == UserData.WALL && B == UserData.WEAPON)){
@@ -104,5 +109,21 @@ public class CollisionListener implements ContactListener {
 
     public void setWeaponsCollidesWithBreakableObject(boolean weaponsCollidesWithBreakableObject) {
         this.weaponsCollidesWithBreakableObject = weaponsCollidesWithBreakableObject;
+    }
+
+    public boolean isPlayerCollidesWithMonster() {
+        return playerCollidesWithMonster;
+    }
+
+    public Body getMonsterCollided() {
+        return monsterCollided;
+    }
+
+    public void setPlayerCollidesWithMonster(boolean playerCollidesWithMonster) {
+        this.playerCollidesWithMonster = playerCollidesWithMonster;
+    }
+
+    public void setMonsterCollided(Body monsterCollided) {
+        this.monsterCollided = monsterCollided;
     }
 }

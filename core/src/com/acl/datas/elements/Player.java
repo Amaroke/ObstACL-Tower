@@ -121,4 +121,8 @@ public class Player extends Element {
     public void setHp(int hp) {
         this.hp = hp;
     }
+
+    public void receiveDamage(int amount) {
+        this.hp -= amount;
+    }
 }

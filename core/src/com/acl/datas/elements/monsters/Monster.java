@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public abstract class Monster extends Element {
     private int hp;
+    private int dmg;
 
     public Monster(Vector2 v) {
         super(v);
@@ -54,7 +55,15 @@ public abstract class Monster extends Element {
         this.hp = hp;
     }
 
-    public void dealDamage(int amount) {
+    public int getDmg() {
+        return dmg;
+    }
+
+    public void setDmg(int dmg) {
+        this.dmg = dmg;
+    }
+
+    public void receiveDamage(int amount) {
         this.hp -= amount;
     }
 
