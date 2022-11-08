@@ -116,4 +116,8 @@ public class Player extends Element {
     public Direction getDirection() {
         return direction;
     }
+
+    public void incrementScore(int amount){
+        this.score += amount;
+    }
 }

@@ -8,12 +8,17 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Trap extends Element{
+
+    private int dealDamage;
+
     public Trap(Vector2 v) {
         super(v);
         this.shape = new PolygonShape();
         this.density = 1f;
         this.restitution = 0.1f;
         this.friction = 0.25f;
+        this.sensor = true;
+        this.dealDamage = 20;
         Vector2[] points = {
                 new Vector2(0, 0),
                 new Vector2(0, 16),
@@ -42,5 +47,13 @@ public class Trap extends Element{
     @Override
     public UserData getUserData() {
         return UserData.TRAP;
+    }
+
+    public int getDealDamage() {
+        return dealDamage;
+    }
+
+    public void setDealDamage(int dealDamage) {
+        this.dealDamage = dealDamage;
     }
 }

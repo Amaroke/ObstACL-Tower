@@ -24,7 +24,6 @@ public class Tower {
     private boolean victory;
     private boolean defeat;
 
-    private int trapDamage = 25;
     private boolean allEnemiesAreDead = false;
     private int score = 0;
 
@@ -125,153 +124,154 @@ public class Tower {
             }
 
             if (this.monsters.size() == 0) {
+                this.endOfTheStageWon();
+            }
 
-                if (this.player.getHp() == 0) {
-                    this.endOfTheGameLost();
-                }
+            if (this.player.getHp() <= 0) {
+                this.endOfTheGameLost();
+            }
 
-                if (this.allEnemiesAreDead) {
-                    this.endOfTheStageWon();
-                }
+            if (this.getCollisionListener().isPlayerCollidesWithStairs()) {
+                this.endOfTheStageWon();
+            }
 
+            if (this.getCollisionListener().isPlayerCollidesWithChest()) {
+                Chest c = (Chest) getElementFromBody(getCollisionListener().getChestCollided());
+                this.getPlayer().incrementScore(c.giveLoot());
+                deleteElem(c);
+            }
 
-                if (this.getCollisionListener().isPlayerCollidesWithStairs()) {
-                    this.endOfTheStageWon();
-                }
+            if (this.getCollisionListener().isPlayerCollidesWithTrap()) {
+                Trap t = (Trap) getElementFromBody(getCollisionListener().getTrapCollided());
+                player.receiveDamage(t.getDealDamage());
+            }
 
-                if (this.getCollisionListener().isPlayerCollidesWithChest()) {
-                    System.out.println("à voir");
-                }
+            if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
+                BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollided());
+                this.getPlayer().incrementScore(bo.giveLoot());
+                deleteElem(bo);
+            }
 
-                if (this.getCollisionListener().isPlayerCollidesWithTrap()) {
-                    this.getPlayer().setHp(this.getPlayer().getHp() - this.trapDamage);
-                }
-
-                if (this.getCollisionListener().isWeaponsCollidesWithBreakableObject()) {
-                    System.out.println("Affichage du loot de la caisse");
-                }
-
-                if (this.getCollisionListener().isPlayerCollidesWithMonster()) {
-                    Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
-                    player.receiveDamage(m.getDmg());
-                    getCollisionListener().setMonsterCollided(null);
-                    getCollisionListener().setPlayerCollidesWithMonster(false);
-                }
-                if (this.player.getHp() == 0) {
-                    this.endOfTheGameLost();
-                }
-                //We move all the monsters
-                for (Monster m : this.monsters) {
-                    m.Move();
-                }
+            if (this.getCollisionListener().isPlayerCollidesWithMonster()) {
+                Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
+                player.receiveDamage(m.getDmg());
+                getCollisionListener().setMonsterCollided(null);
+                getCollisionListener().setPlayerCollidesWithMonster(false);
+            }
+            if (this.player.getHp() == 0) {
+                this.endOfTheGameLost();
+            }
+            //We move all the monsters
+            for (Monster m : this.monsters) {
+                m.Move();
             }
         }
     }
 
-        public ArrayList<Weapon> getWeapons () {
-            return weapons;
+    public ArrayList<Weapon> getWeapons () {
+        return weapons;
+    }
+
+    public void endOfTheGameLost () {
+        //When the game is lost, we reset the score.
+        defeat = true;
+        setScore(0);
+
+        System.out.println("C'est loose");
+    }
+
+    private void checkMonsterHealth (Monster m){
+        if (m.getHp() <= 0) {
+            getMonsters().remove(m);
+            deleteElem(m);
         }
+    }
 
-        public void endOfTheGameLost () {
-            //When the game is lost, we reset the score.
-            defeat = true;
-            setScore(0);
+    public void endOfTheStageWon () {
+        //When the game is won, we go to the next stage.
+        victory = true;
+        this.getWorld().dispose();
 
-            System.out.println("C'est loose");
-        }
+        this.stageNumber++;
+        createTower();
+    }
 
-        private void checkMonsterHealth (Monster m){
-            if (m.getHp() <= 0) {
-                getMonsters().remove(m);
-                deleteElem(m);
+    private void addElement (Element e){
+        this.elements.add(e);
+    }
+
+    public void setWorld (World world){
+        this.world = world;
+    }
+
+    public void setPlayer (Player player){
+        this.player = player;
+    }
+
+    public void setHeight ( float height){
+        this.height = height;
+    }
+
+    public ArrayList<Element> getElements () {
+        return elements;
+    }
+
+    public void setElements (ArrayList < Element > elements) {
+        this.elements = elements;
+    }
+
+    public ArrayList<Monster> getMonsters () {
+        return monsters;
+    }
+
+    public void addMonster (Monster monster){
+        this.monsters.add(monster);
+    }
+
+    private float getHeight () {
+        return this.height;
+    }
+
+    public boolean isVictory () {
+        return victory;
+    }
+
+    public void setVictory ( boolean victory){
+        this.victory = victory;
+    }
+
+    public boolean isDefeat () {
+        return defeat;
+    }
+
+    public void setDefeat ( boolean defeat){
+        this.defeat = defeat;
+    }
+
+    public int getScore () {
+        return score;
+    }
+
+    public CollisionListener getCollisionListener () {
+        return collisionListener;
+    }
+
+    public void setCollisionListener (CollisionListener collisionListener){
+        this.collisionListener = collisionListener;
+    }
+
+    public void setScore ( int score){
+        this.score = score;
+    }
+
+    public Monster getMonsterFromBody (Body b){
+        for (Monster m : this.getMonsters()) {
+            if (b == m.getBody()) {
+                return m;
             }
         }
-
-        public void endOfTheStageWon () {
-            //When the game is won, we go to the next stage.
-            victory = true;
-            this.getWorld().dispose();
-
-            this.stageNumber++;
-            createTower();
-        }
-
-        private void addElement (Element e){
-            this.elements.add(e);
-        }
-
-        public void setWorld (World world){
-            this.world = world;
-        }
-
-        public void setPlayer (Player player){
-            this.player = player;
-        }
-
-        public void setHeight ( float height){
-            this.height = height;
-        }
-
-        public ArrayList<Element> getElements () {
-            return elements;
-        }
-
-        public void setElements (ArrayList < Element > elements) {
-            this.elements = elements;
-        }
-
-        public ArrayList<Monster> getMonsters () {
-            return monsters;
-        }
-
-        public void addMonster (Monster monster){
-            this.monsters.add(monster);
-        }
-
-        private float getHeight () {
-            return this.height;
-        }
-
-        public boolean isVictory () {
-            return victory;
-        }
-
-        public void setVictory ( boolean victory){
-            this.victory = victory;
-        }
-
-        public boolean isDefeat () {
-            return defeat;
-        }
-
-        public void setDefeat ( boolean defeat){
-            this.defeat = defeat;
-        }
-
-        public int getScore () {
-            return score;
-        }
-
-        public CollisionListener getCollisionListener () {
-            return collisionListener;
-        }
-
-        public void setCollisionListener (CollisionListener collisionListener){
-            this.collisionListener = collisionListener;
-        }
-
-        public void setScore ( int score){
-            this.score = score;
-        }
-
-        public Monster getMonsterFromBody (Body b){
-            for (Monster m : this.getMonsters()) {
-                if (b == m.getBody()) {
-                    return m;
-                }
-            }
-            return null;
-        }
+        return null;
+    }
 
     public Weapon getWeaponFromBody (Body b){
         for (Weapon w : this.getWeapons()) {
@@ -285,7 +285,17 @@ public class Tower {
         getElements().remove(e);
         this.getWorld().destroyBody(e.getBody());
     }
+    public Element getElementFromBody (Body b){
+        for (Element e : this.elements) {
+            if (b == e.getBody()) {
+                return e;
+            }
+        }
+        return null;
+    }
 }
+
+
 
 
 

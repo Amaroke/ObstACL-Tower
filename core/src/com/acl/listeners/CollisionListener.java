@@ -1,27 +1,22 @@
 package com.acl.listeners;
 
-import com.acl.datas.elements.weapons.Weapon;
 import com.acl.enums.UserData;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class CollisionListener implements ContactListener {
     private boolean playerCollidesWithStairs = false;
-
     private boolean playerCollidesWithChest = false;
-
     private boolean playerCollidesWithTrap = false;
-
-    private boolean weaponsCollidesWithBreakableObject = false;
-
+    private boolean weaponCollidesWithBreakableObject = false;
     private boolean playerCollidesWithWall = false;
-
     private boolean weaponCollidesWithMonster = false;
     private boolean weaponCollidesWithWall = false;
     private Body weaponCollided;
-
     private boolean playerCollidesWithMonster = false;
-
     private Body monsterCollided = null;
+    private Body chestCollided = null;
+    private Body trapCollided = null;
+    private Body breakableObjectCollided = null;
 
     @Override
     public void beginContact(Contact contact) {
@@ -32,16 +27,36 @@ public class CollisionListener implements ContactListener {
             this.playerCollidesWithStairs = true;
         }
 
-        if ((A == UserData.PLAYER && B == UserData.CHEST) || (A == UserData.CHEST && B == UserData.PLAYER)){
+        if (A == UserData.PLAYER && B == UserData.CHEST){
             this.playerCollidesWithChest = true;
+            this.chestCollided = contact.getFixtureB().getBody();
         }
 
-        if ((A == UserData.PLAYER && B == UserData.TRAP) || (A == UserData.TRAP && B == UserData.PLAYER)){
+        if (A == UserData.CHEST && B == UserData.PLAYER){
+            this.playerCollidesWithChest = true;
+            this.chestCollided = contact.getFixtureA().getBody();
+        }
+
+        if (A == UserData.PLAYER && B == UserData.TRAP){
             this.playerCollidesWithTrap = true;
+            this.trapCollided = contact.getFixtureB().getBody();
         }
 
-        if ((A == UserData. WEAPON && B == UserData.BREAKABLEOBJ) || (A == UserData.BREAKABLEOBJ && B == UserData.WEAPON)){
-           this.weaponsCollidesWithBreakableObject = true;
+        if(A == UserData.TRAP && B == UserData.PLAYER){
+            this.playerCollidesWithTrap = true;
+            this.trapCollided = contact.getFixtureA().getBody();
+        }
+
+        if (A == UserData.WEAPON && B == UserData.BREAKABLEOBJ){
+           this.weaponCollidesWithBreakableObject = true;
+            this.weaponCollided = contact.getFixtureA().getBody();
+            this.breakableObjectCollided = contact.getFixtureB().getBody();
+        }
+
+        if(A == UserData.BREAKABLEOBJ && B == UserData.WEAPON){
+            this.weaponCollidesWithBreakableObject = true;
+            this.weaponCollided = contact.getFixtureB().getBody();
+            this.breakableObjectCollided = contact.getFixtureA().getBody();
         }
 
         if ((A == UserData.PLAYER && B == UserData.WALL) || (A == UserData.WALL && B == UserData.PLAYER)){
@@ -98,7 +113,9 @@ public class CollisionListener implements ContactListener {
     }
 
     public boolean isPlayerCollidesWithChest() {
-        return playerCollidesWithChest;
+        boolean value = playerCollidesWithChest;
+        playerCollidesWithChest = false;
+        return value;
     }
 
     public void setPlayerCollidesWithChest(boolean playerCollidesWithChest) {
@@ -106,19 +123,23 @@ public class CollisionListener implements ContactListener {
     }
 
     public boolean isPlayerCollidesWithTrap() {
-        return playerCollidesWithTrap;
+        boolean value = playerCollidesWithTrap;
+        playerCollidesWithTrap = false;
+        return value;
     }
 
     public void setPlayerCollidesWithTrap(boolean playerCollidesWithTrap) {
         this.playerCollidesWithTrap = playerCollidesWithTrap;
     }
 
-    public boolean isWeaponsCollidesWithBreakableObject() {
-        return weaponsCollidesWithBreakableObject;
+    public boolean isWeaponCollidesWithBreakableObject() {
+        boolean value = weaponCollidesWithBreakableObject;
+        weaponCollidesWithBreakableObject = false;
+        return value;
     }
 
-    public void setWeaponsCollidesWithBreakableObject(boolean weaponsCollidesWithBreakableObject) {
-        this.weaponsCollidesWithBreakableObject = weaponsCollidesWithBreakableObject;
+    public void setWeaponCollidesWithBreakableObject(boolean weaponCollidesWithBreakableObject) {
+        this.weaponCollidesWithBreakableObject = weaponCollidesWithBreakableObject;
     }
 
     public boolean isPlayerCollidesWithMonster() {
@@ -140,6 +161,24 @@ public class CollisionListener implements ContactListener {
     public Body getWeaponCollided() {
         Body value = weaponCollided;
         weaponCollided = null;
+        return value;
+    }
+
+    public Body getChestCollided() {
+        Body value = chestCollided;
+        chestCollided = null;
+        return value;
+    }
+
+    public Body getTrapCollided() {
+        Body value = trapCollided;
+        trapCollided = null;
+        return value;
+    }
+
+    public Body getBreakableObjectCollided(){
+        Body value = breakableObjectCollided;
+        breakableObjectCollided = null;
         return value;
     }
 }
