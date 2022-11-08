@@ -117,6 +117,15 @@ public class Tower {
                 w.setPosition(w.getBody().getPosition());
             }
 
+            if(this.getCollisionListener().isWeaponCollidesWithMonster()) {
+                Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
+                Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
+                getWeapons().remove(w);
+                deleteElem(w);
+                m.receiveDamage(5);
+                checkMonsterHealth(m);
+            }
+
             if(this.getCollisionListener().isWeaponCollidesWithWall()) {
                 Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
                 getWeapons().remove(w);

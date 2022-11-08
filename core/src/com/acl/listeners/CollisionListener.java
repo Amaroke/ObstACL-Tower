@@ -8,6 +8,7 @@ public class CollisionListener implements ContactListener {
     private boolean playerCollidesWithChest = false;
     private boolean playerCollidesWithTrap = false;
     private boolean weaponCollidesWithBreakableObject = false;
+    private boolean WeaponCollidesWithMonster = false;
     private boolean playerCollidesWithWall = false;
     private boolean weaponCollidesWithMonster = false;
     private boolean weaponCollidesWithWall = false;
@@ -63,9 +64,6 @@ public class CollisionListener implements ContactListener {
             this.playerCollidesWithWall = true;
         }
 
-        if ((A == UserData.WEAPON && B == UserData.MONSTER) || (A == UserData.MONSTER && B == UserData.WEAPON)){
-            this.weaponCollidesWithMonster = true;
-        }
 
         if (A == UserData.PLAYER && B == UserData.MONSTER){
             this.playerCollidesWithMonster = true;
@@ -79,6 +77,12 @@ public class CollisionListener implements ContactListener {
 
         if ((A == UserData.WEAPON && B == UserData.WALL) || (A == UserData.WALL && B == UserData.WEAPON)){
             this.weaponCollidesWithWall = true;
+            weaponCollided = (A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+        }
+
+        if ((A == UserData.WEAPON && B == UserData.MONSTER) || (A == UserData.MONSTER && B == UserData.WEAPON)){
+            this.weaponCollidesWithMonster = true;
+            monsterCollided = (A == UserData.MONSTER) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
             weaponCollided = (A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
     }
@@ -101,6 +105,12 @@ public class CollisionListener implements ContactListener {
     public boolean isWeaponCollidesWithWall() {
         boolean value = weaponCollidesWithWall;
         weaponCollidesWithWall = false;
+        return value;
+    }
+
+    public boolean isWeaponCollidesWithMonster() {
+        boolean value = weaponCollidesWithMonster;
+        weaponCollidesWithMonster = false;
         return value;
     }
 
