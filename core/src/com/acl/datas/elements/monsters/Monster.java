@@ -9,11 +9,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public abstract class Monster extends Element {
     //TODO ajouter les statistiques communes aux monstres (hp, atk, ...)
 
-    private PolygonShape shape;
-
-    private float density;
-    private float restitution;
-    private float friction;
 
     public Monster(Vector2 v) {
         super(v);
@@ -29,19 +24,6 @@ public abstract class Monster extends Element {
         this.setBodyDef(bodyDef);
     }
 
-    @Override
-    public void setFixture() {
-        if ((this.getBodyDef() != null) && (this.getBody() != null)) {
-            FixtureDef fixtureDef = new FixtureDef();
-            fixtureDef.shape = this.shape;
-            fixtureDef.density = this.density;
-            fixtureDef.restitution = this.restitution;
-            fixtureDef.friction = this.friction;
-            getBody().createFixture(fixtureDef);
-            getBody().setTransform(new Vector2(getPosition().x, getPosition().y), 0);
-        }
-        this.shape.dispose();
-    }
 
     public void setMotion(Vector2 v) {
         this.getBody().setLinearVelocity(v);

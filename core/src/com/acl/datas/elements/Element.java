@@ -3,9 +3,7 @@ package com.acl.datas.elements;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class Element {
     private Vector2 position;
@@ -14,6 +12,10 @@ public abstract class Element {
     private BodyDef bodyDef;
     private float height;
     private float width;
+    protected PolygonShape shape;
+    protected float density;
+    protected float restitution;
+    protected float friction;
 
     public Element(Vector2 v) {
         this.position = v;
@@ -21,7 +23,17 @@ public abstract class Element {
 
     public abstract void configureBodyDef();
 
-    public abstract void setFixture();
+    public void setFixture() {
+        if ((this.getBodyDef() != null) && (this.getBody() != null)) {
+            FixtureDef fixtureDef = new FixtureDef();
+            fixtureDef.shape = shape;
+            fixtureDef.density = density;
+            fixtureDef.restitution = restitution;
+            fixtureDef.friction = friction;
+            getBody().createFixture(fixtureDef);
+        }
+        shape.dispose();
+    };
 
     public void createBody(World world) {
         this.body = world.createBody(this.bodyDef);

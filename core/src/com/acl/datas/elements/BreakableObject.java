@@ -4,14 +4,10 @@ import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class BreakableObject extends Element{
-    private final PolygonShape shape;
-    private final float density;
-    private final float restitution;
-    private final float friction;
+
 
     public BreakableObject(Vector2 v) {
         super(v);
@@ -38,18 +34,6 @@ public class BreakableObject extends Element{
         this.setBodyDef(bodyDef);
     }
 
-    @Override
-    public void setFixture() {
-        if ((this.getBodyDef() != null) && (this.getBody() != null)) {
-            FixtureDef fixtureDef = new FixtureDef();
-            fixtureDef.shape = shape;
-            fixtureDef.density = density;
-            fixtureDef.restitution = restitution;
-            fixtureDef.friction = friction;
-            getBody().createFixture(fixtureDef);
-        }
-        this.shape.dispose();
-    }
 
     @Override
     public void setSprite() {

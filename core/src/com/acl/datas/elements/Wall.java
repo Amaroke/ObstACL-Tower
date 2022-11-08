@@ -8,10 +8,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Wall extends Element {
-    private final PolygonShape shape;
-    private final float density;
-    private final float restitution;
-    private final float friction;
 
     public Wall(Vector2 v) {
         super(v);
@@ -37,19 +33,6 @@ public class Wall extends Element {
         bodyDef.position.set(getPosition());
 
         this.setBodyDef(bodyDef);
-    }
-
-    @Override
-    public void setFixture() {
-        if ((this.getBodyDef() != null) && (this.getBody() != null)) {
-            FixtureDef fixtureDef = new FixtureDef();
-            fixtureDef.shape = shape;
-            fixtureDef.density = density;
-            fixtureDef.restitution = restitution;
-            fixtureDef.friction = friction;
-            getBody().createFixture(fixtureDef);
-        }
-        this.shape.dispose();
     }
 
     @Override

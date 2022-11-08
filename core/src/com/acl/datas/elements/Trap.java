@@ -8,10 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Trap extends Element{
-    private final PolygonShape shape;
-    private final float density;
-    private final float restitution;
-    private final float friction;
+
     public Trap(Vector2 v) {
         super(v);
         this.shape = new PolygonShape();
@@ -38,18 +35,6 @@ public class Trap extends Element{
         this.setBodyDef(bodyDef);
     }
 
-    @Override
-    public void setFixture() {
-        if ((this.getBodyDef() != null) && (this.getBody() != null)) {
-            FixtureDef fixtureDef = new FixtureDef();
-            fixtureDef.shape = shape;
-            fixtureDef.density = density;
-            fixtureDef.restitution = restitution;
-            fixtureDef.friction = friction;
-            getBody().createFixture(fixtureDef);
-        }
-        this.shape.dispose();
-    }
 
     @Override
     public void setSprite() {
