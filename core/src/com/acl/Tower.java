@@ -19,6 +19,9 @@ public class Tower {
     private ArrayList<Monster> monsters;
     private boolean victory;
     private boolean defeat;
+
+    private int trapDamage = 25;
+    private boolean allEnemiesAreDead = false;
     private int score = 0;
 
     private int stageNumber;
@@ -99,12 +102,26 @@ public class Tower {
             if(this.player.getHp() == 0){
                 this.endOfTheGameLost();
             }
-            //Si tous les ennemis sont morts : le joueur gagne
-            /*
-            if(){
-                this.endOfTheGameWon();
+
+            if(this.allEnemiesAreDead){
+                this.endOfTheStageWon();
             }
-            */
+
+            if(this.getCollisionListener().isPlayerCollidesWithStairs()){
+                this.endOfTheStageWon();
+            }
+
+            if(this.getCollisionListener().isPlayerCollidesWithChest()){
+                System.out.println("à voir");
+            }
+
+            if(this.getCollisionListener().isPlayerCollidesWithTrap()){
+                this.getPlayer().setHp( this.getPlayer().getHp() - this.trapDamage);
+            }
+
+            if(this.getCollisionListener().isWeaponsCollidesWithBreakableObject()){
+                System.out.println("Affichage du loot de la caisse");
+            }
             //We move all the monsters
             for (Monster m : this.monsters) {
                 m.Move();
@@ -120,7 +137,7 @@ public class Tower {
         this.getWorld().dispose();
     }
 
-    public void endOfTheGameWon() {
+    public void endOfTheStageWon() {
         //When the game is won, we go to the next stage.
         victory = true;
         this.getWorld().dispose();
