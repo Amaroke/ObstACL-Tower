@@ -2,6 +2,7 @@ package com.acl;
 
 import com.acl.datas.elements.*;
 import com.acl.datas.elements.monsters.BaseMonster;
+import com.acl.datas.elements.monsters.Monster;
 import com.acl.listeners.CollisionListener;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
@@ -15,6 +16,7 @@ public class Tower {
     private Player player;
     private float height;
     private ArrayList<Element> elements;
+    private ArrayList<Monster> monsters;
     private boolean victory;
     private boolean defeat;
     private int score = 0;
@@ -30,7 +32,8 @@ public class Tower {
     private void createTower() {
         world = new World(new Vector2(0, 0), true);
 
-        this.elements = new ArrayList<>(9);
+        this.elements = new ArrayList<>();
+        this.monsters = new ArrayList<>();
 
         this.height = 9 * 16;
 
@@ -70,7 +73,11 @@ public class Tower {
             case 'C' -> element = new Chest(position);
             case 'T' -> element = new Trap(position);
             case 'B' -> element = new BreakableObject(position);
-            case 'M' -> element = new BaseMonster(position);
+            case 'M' -> {
+                Monster monster = new BaseMonster(position);
+                element = monster;
+                addMonster(monster);
+            }
         }
         if (element != null) {
             //We place the elements
@@ -98,6 +105,10 @@ public class Tower {
                 this.endOfTheGameWon();
             }
             */
+            //We move all the monsters
+            for (Monster m : this.monsters) {
+                m.Move();
+            }
         }
     }
 
@@ -140,6 +151,14 @@ public class Tower {
 
     public void setElements(ArrayList<Element> elements) {
         this.elements = elements;
+    }
+
+    public ArrayList<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public void addMonster(Monster monster) {
+        this.monsters.add(monster);
     }
 
     private float getHeight() {

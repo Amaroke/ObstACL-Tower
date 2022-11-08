@@ -41,6 +41,10 @@ public class Player extends Element {
 
 
         this.shape.set(vectors);
+
+        this.density = 1f;
+        this.restitution = 1f;
+        this.friction = 0f;
         this.setSprite();
     }
 
@@ -59,9 +63,9 @@ public class Player extends Element {
         if ((this.getBodyDef() != null) && (this.getBody() != null)) {
             FixtureDef fixtureDef = new FixtureDef();
             fixtureDef.shape = this.shape;
-            fixtureDef.density = 0f;
-            fixtureDef.restitution = 0f;
-            fixtureDef.friction = 0f;
+            fixtureDef.density = this.density;
+            fixtureDef.restitution = this.restitution;
+            fixtureDef.friction = this.friction;
             getBody().createFixture(fixtureDef);
             getBody().setTransform(new Vector2(getPosition().x, getPosition().y), 0);
             getBody().setUserData(getUserData());
@@ -76,7 +80,6 @@ public class Player extends Element {
     }
 
     public void setMotion(Vector2 v) {
-
         this.getBody().setLinearVelocity(v);
     }
 

@@ -9,6 +9,8 @@ import java.util.Random;
 
 public class BaseMonster extends Monster{
 
+    private int nbMovBeforeChange = 0;
+
     public BaseMonster(Vector2 v) {
         super(v);
 
@@ -40,17 +42,24 @@ public class BaseMonster extends Monster{
 
     @Override
     public void Move() {
-        //The base monster moves randomly up, left, right or down
+        //The base monster moves randomly up, left, right or down for a period of time that is random as well.
 
-        Random random = new Random();
+        if (nbMovBeforeChange == 0) {
+            Random random = new Random();
+            float monsterMovementForce = 10f;
 
-        switch (random.nextInt(4)) {
-            case 0 -> setMotion(new Vector2(0, 1f));
-            case 1 -> setMotion(new Vector2(-1f, 0));
-            case 2 -> setMotion(new Vector2(1f, 0));
-            case 3 -> setMotion(new Vector2(0, -1f));
-            default -> System.out.println("apprends à faire un random stp");
+            switch (random.nextInt(4)) {
+                case 0 -> setMotion(new Vector2(0, monsterMovementForce));
+                case 1 -> setMotion(new Vector2(-monsterMovementForce, 0));
+                case 2 -> setMotion(new Vector2(monsterMovementForce, 0));
+                case 3 -> setMotion(new Vector2(0, -monsterMovementForce));
+                default -> System.out.println("apprends à faire un random stp");
+            }
+            nbMovBeforeChange = random.nextInt(50,200);
+        } else {
+            nbMovBeforeChange -= 1;
         }
+
     }
 
     public void giveLoot() {
