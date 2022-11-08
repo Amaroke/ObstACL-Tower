@@ -1,6 +1,7 @@
 package com.acl;
 
 import com.acl.datas.elements.*;
+import com.acl.datas.elements.monsters.BaseMonster;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -48,18 +49,20 @@ public class Tower {
 
     private void createElement(char letter, int i, int j) {
         Element element = null;
+        Vector2 position = new Vector2(i * 16, getHeight() - j * 16);
         switch(letter) {
             case 'P' -> {
-                player = new Player(new Vector2(i * 16, getHeight() - j * 16));
+                player = new Player(position);
                 player.configureBodyDef();
                 player.createBody(getWorld());
                 player.setFixture();
             }
-            case 'W' -> element = new Wall(new Vector2(i * 16, getHeight() - j * 16));
-            case 'S' -> element = new Stair(new Vector2(i * 16, getHeight() - j * 16));
-            case 'C' -> element = new Chest(new Vector2(i * 16, getHeight() - j * 16));
-            case 'T' -> element = new Trap(new Vector2(i * 16, getHeight() - j * 16));
-            case 'B' -> element = new BreakableObject(new Vector2(i * 16, getHeight() - j * 16));
+            case 'W' -> element = new Wall(position);
+            case 'S' -> element = new Stair(position);
+            case 'C' -> element = new Chest(position);
+            case 'T' -> element = new Trap(position);
+            case 'B' -> element = new BreakableObject(position);
+            case 'M' -> element = new BaseMonster(position);
         }
         if (element != null) {
             //We place the elements
