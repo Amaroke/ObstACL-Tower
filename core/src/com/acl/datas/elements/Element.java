@@ -1,5 +1,6 @@
 package com.acl.datas.elements;
 
+import com.acl.datas.UserData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -31,9 +32,10 @@ public abstract class Element {
             fixtureDef.restitution = restitution;
             fixtureDef.friction = friction;
             getBody().createFixture(fixtureDef);
+            getBody().setUserData(getUserData());
         }
         shape.dispose();
-    };
+    }
 
     public void createBody(World world) {
         this.body = world.createBody(this.bodyDef);
@@ -89,4 +91,11 @@ public abstract class Element {
     public void draw(SpriteBatch sb) {
         sb.draw(this.getSprite(), this.getBody().getPosition().x, this.getBody().getPosition().y, this.getWidth(), this.getHeight());
     }
+
+    public abstract UserData getUserData();
+
+    public void setShape(PolygonShape shape) {
+        this.shape = shape;
+    }
+
 }

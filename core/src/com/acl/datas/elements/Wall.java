@@ -1,10 +1,10 @@
 package com.acl.datas.elements;
 
+import com.acl.datas.UserData;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Wall extends Element {
@@ -38,5 +38,9 @@ public class Wall extends Element {
     @Override
     public void setSprite() {
         this.sprite = new Sprite(TextureFactory.getWallTexture());
+    }
+
+    public UserData getUserData() {
+        return UserData.WALL;
     }
 }

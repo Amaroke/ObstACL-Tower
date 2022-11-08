@@ -1,11 +1,9 @@
 package com.acl.datas.elements;
 
+import com.acl.datas.UserData;
 import com.acl.managers.Direction;
 import com.acl.managers.TextureFactory;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class Sword extends Weapon {
@@ -31,4 +29,7 @@ public class Sword extends Weapon {
         this.sprite = new Sprite(TextureFactory.getStairTexture());
     }
 
+    public UserData getUserData() {
+        return UserData.SWORD;
+    }
 }

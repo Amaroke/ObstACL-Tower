@@ -2,6 +2,7 @@ package com.acl;
 
 import com.acl.datas.elements.*;
 import com.acl.datas.elements.monsters.BaseMonster;
+import com.acl.listeners.CollisionListener;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -15,6 +16,8 @@ public class Tower {
     private float height;
 
     private ArrayList<Element> elements;
+
+    private CollisionListener collisionListener;
 
     public Tower() {
         createTower();
@@ -36,6 +39,8 @@ public class Tower {
             }
         }
 
+        setCollisionListener(new CollisionListener());
+        this.getWorld().setContactListener(this.getCollisionListener());
         //floorManager.saveLevel();
     }
 
@@ -100,5 +105,14 @@ public class Tower {
 
     private float getHeight() {
         return this.height;
+    }
+
+
+    public CollisionListener getCollisionListener() {
+        return collisionListener;
+    }
+
+    public void setCollisionListener(CollisionListener collisionListener) {
+        this.collisionListener = collisionListener;
     }
 }

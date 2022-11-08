@@ -1,5 +1,6 @@
 package com.acl.datas.elements;
 
+import com.acl.datas.UserData;
 import com.acl.managers.Direction;
 import com.acl.managers.TextureFactory;
 import com.acl.managers.WeaponType;
@@ -12,7 +13,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import java.util.ArrayList;
 
 public class Player extends Element {
-
     private final WeaponType weaponType = WeaponType.FIREBALL;
     private final ArrayList<Weapon> weapons;
     private Direction direction = Direction.NORTH;
@@ -46,12 +46,26 @@ public class Player extends Element {
         this.setBodyDef(bodyDef);
     }
 
+    @Override
+    public void setFixture() {
+        if ((this.getBodyDef() != null) && (this.getBody() != null)) {
+            FixtureDef fixtureDef = new FixtureDef();
+            fixtureDef.shape = this.shape;
+            fixtureDef.density = 0.5f;
+            fixtureDef.restitution = 0.1f;
+            fixtureDef.friction = 0.5f;
+            getBody().createFixture(fixtureDef);
+            getBody().setTransform(new Vector2(getPosition().x, getPosition().y), 0);
+            getBody().setUserData(getUserData());
+        }
+        this.shape.dispose();
+    }
+
 
     @Override
     public void setSprite() {
         this.sprite = new Sprite(TextureFactory.getChevalierTexture());
     }
-
 
     public void setMotion(Vector2 v) {
         this.getBody().setLinearVelocity(v);
@@ -73,5 +87,10 @@ public class Player extends Element {
 
     public WeaponType getWeaponType() {
         return weaponType;
+    }
+
+    @Override
+    public UserData getUserData() {
+        return UserData.PLAYER;
     }
 }

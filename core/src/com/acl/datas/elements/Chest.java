@@ -1,14 +1,13 @@
 package com.acl.datas.elements;
 
+import com.acl.datas.UserData;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Chest extends Element{
-
     public Chest(Vector2 v) {
         super(v);
         this.shape = new PolygonShape();
@@ -35,10 +34,13 @@ public class Chest extends Element{
         this.setBodyDef(bodyDef);
     }
 
-
-
     @Override
     public void setSprite() {
         this.sprite = new Sprite(TextureFactory.getChestTexture());
+    }
+
+    @Override
+    public UserData getUserData() {
+        return UserData.CHEST;
     }
 }
