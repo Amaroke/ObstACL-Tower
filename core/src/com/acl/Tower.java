@@ -88,6 +88,16 @@ public class Tower {
             for (Element e : this.elements) {
                 e.setPosition(e.getBody().getPosition());
             }
+
+            if(this.player.getHp() == 0){
+                this.endOfTheGameLost();
+            }
+            //Si tous les ennemis sont morts : le joueur gagne
+            /*
+            if(){
+                this.endOfTheGameWon();
+            }
+            */
         }
     }
 

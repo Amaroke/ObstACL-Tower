@@ -56,6 +56,21 @@ public class Text {
         textBatch.end();
     }
 
+    public void diplayDie(String message){
+        textBatch.begin();
+        float posX = (float) Gdx.graphics.getWidth() / 6;
+        float posY = (float) (Gdx.graphics.getHeight() - 10);
+        font.draw(textBatch, message, posX, posY, message.length(), 1, false);
+        textBatch.end();
+    }
+
+    public void diplayStageClear(String message){
+        textBatch.begin();
+        float posX = (float) Gdx.graphics.getWidth() / 6;
+        float posY = (float) (Gdx.graphics.getHeight() - 10);
+        font.draw(textBatch, message, posX, posY, message.length(), 1, false);
+        textBatch.end();
+    }
 
     public void dispose() {
         //font.dispose();

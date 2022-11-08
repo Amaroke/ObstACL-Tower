@@ -9,8 +9,6 @@ public class ObstACLTower extends Game {
 
     private Tower tower;
     public SpriteBatch batch;
-    private int score;
-    private int vie;
     private OrthographicCamera camera;
 
     @Override
@@ -22,8 +20,6 @@ public class ObstACLTower extends Game {
         camera.position.y += 16;
         camera.update();
         batch = new SpriteBatch();
-        score = 0;
-        vie = 100;
     }
 
     @Override
@@ -39,28 +35,12 @@ public class ObstACLTower extends Game {
         this.tower = monde;
     }
 
-    public int getScore() {
-        return this.score;
-    }
-
-    public int getVie() {
-        return vie;
-    }
-
-    public void setVie(int vie) {
-        this.vie = vie;
-    }
-
     public SpriteBatch getBatch() {
         return batch;
     }
 
     public void setBatch(SpriteBatch batch) {
         this.batch = batch;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public OrthographicCamera getCamera() {

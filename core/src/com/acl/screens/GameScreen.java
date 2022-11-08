@@ -100,10 +100,18 @@ public class GameScreen extends ScreenAdapter {
         // World step definition
         obstACLTower.getTower().getWorld().step(Gdx.graphics.getDeltaTime(), 6, 2);
         // We display score
-        text.displayScore("Score = " + obstACLTower.getScore());
-        text.displayVie("Vie = " + obstACLTower.getVie());
+        text.displayScore("Score = " + obstACLTower.getTower().getPlayer().getScore());
+        text.displayVie("Health = " + obstACLTower.getTower().getPlayer().getHp());
         // Print coordinate
         //System.out.println("La position:" + obstACLTower.getTower().getPlayer().getBody().getPosition());
+
+        if(this.obstACLTower.getTower().isVictory()){
+            text.diplayStageClear("Stage Clear");
+        }
+
+        if(this.obstACLTower.getTower().isDefeat()){
+            text.diplayStageClear("You lose \n Your score = " + obstACLTower.getTower().getPlayer().getScore());
+        }
     }
 
 

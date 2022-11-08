@@ -17,6 +17,10 @@ public class Player extends Element {
     private final ArrayList<Weapon> weapons;
     private Direction direction = Direction.NORTH;
 
+    private int score;
+    private int hp;
+
+
     public Player(Vector2 v) {
         super(v);
         this.weapons = new ArrayList<>();
@@ -31,6 +35,10 @@ public class Player extends Element {
         vectors[1] = new Vector2(getWidth(), 0f);
         vectors[2] = new Vector2(getWidth(), getHeight());
         vectors[3] = new Vector2(0f, getHeight());
+
+        score = 0;
+        hp = 100;
+
 
         this.shape.set(vectors);
         this.setSprite();
@@ -92,5 +100,21 @@ public class Player extends Element {
     @Override
     public UserData getUserData() {
         return UserData.PLAYER;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }
