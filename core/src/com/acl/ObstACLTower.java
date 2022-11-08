@@ -18,7 +18,9 @@ public class ObstACLTower extends Game {
         setScreen(new GameScreen(this));
         // Useful for display
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 16 * 16, 16 * 11);
+        camera.setToOrtho(false, 16*16, 9*16);
+        camera.position.y += 16;
+        camera.update();
         batch = new SpriteBatch();
         score = 0;
         vie = 100;

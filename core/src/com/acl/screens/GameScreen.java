@@ -11,12 +11,9 @@ import com.acl.managers.Text;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-
-import java.util.Iterator;
 
 public class GameScreen extends ScreenAdapter {
 
@@ -44,6 +41,7 @@ public class GameScreen extends ScreenAdapter {
         ScreenUtils.clear(0, 0, 0, 1);
         //We display things
         obstACLTower.batch.begin();
+        timeBetweenRender += 1;
         if (keyboardListener.isDebug()) {
             new Box2DDebugRenderer().render(obstACLTower.getTower().getWorld(), obstACLTower.getCamera().combined);
         } else {
@@ -56,19 +54,39 @@ public class GameScreen extends ScreenAdapter {
         for (Weapon w : obstACLTower.getTower().getPlayer().getWeapons()) {
             w.update();
             w.setSprite();
-            timeBetweenRender += 1;
-            TextureRegion t = new TextureRegion((TextureRegion) (((FireBall) w).getAnimation().getKeyFrame(timeBetweenRender, true)));
-            switch (w.getDirection()) {
-                case NORTH ->
-                        obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
-                case SOUTH ->
-                        obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 8, 0, 16f, 16f, 1f, 1f, 180);
-                case EAST ->
-                        obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 16, 0, 16f, 16f, 1f, 1f, 270);
-                case WEST ->
-                        obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
+            TextureRegion t;
+            switch (obstACLTower.getTower().getPlayer().getWeaponType()) {
+                case FIREBALL -> {
+                    t = new TextureRegion((((FireBall) w).getAnimation().getKeyFrame(timeBetweenRender, true)));
+                    switch (w.getDirection()) {
+                        case NORTH ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
+                        case SOUTH ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 8, 0, 16f, 16f, 1f, 1f, 180);
+                        case EAST ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 16, 0, 16f, 16f, 1f, 1f, 270);
+                        case WEST ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
 
+                    }
+                }
+                case SWORD -> {
+                    t = new TextureRegion(TextureFactory.getSwordTexture());
+                    switch (w.getDirection()) {
+                        case NORTH ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
+                        case SOUTH ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 8, 0, 16f, 16f, 1f, 1f, 180);
+                        case EAST ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 16, 0, 16f, 16f, 1f, 1f, 270);
+                        case WEST ->
+                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
+
+                    }
+                }
             }
+
+
         }
         // We get weapon use
         this.obstACLTower.getTower().getPlayer().setWeapon(this.keyboardListener.getUseWeapon());

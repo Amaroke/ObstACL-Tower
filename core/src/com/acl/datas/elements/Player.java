@@ -2,6 +2,7 @@ package com.acl.datas.elements;
 
 import com.acl.managers.Direction;
 import com.acl.managers.TextureFactory;
+import com.acl.managers.WeaponType;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public class Player extends Element {
 
     private final PolygonShape shape;
+    private final WeaponType weaponType = WeaponType.FIREBALL;
     private final ArrayList<Weapon> weapons;
     private Direction direction = Direction.NORTH;
 
@@ -82,5 +84,9 @@ public class Player extends Element {
 
     public void setDirection(Direction d) {
         this.direction = d;
+    }
+
+    public WeaponType getWeaponType() {
+        return weaponType;
     }
 }

@@ -21,9 +21,9 @@ public class Wall extends Element {
         this.friction = 0.25f;
         Vector2[] points = {
                 new Vector2(0, 0),
-                new Vector2(0, 100),
-                new Vector2(100, 100),
-                new Vector2(100, 0)
+                new Vector2(0, 16),
+                new Vector2(16, 16),
+                new Vector2(16, 0)
         };
         this.shape.set(points);
         this.setSprite();
