@@ -160,5 +160,41 @@ différents aspects de l'application, ce qui n'était pas possible pour ce premi
 
 ### <a id="review1"></a>Review
 
+Nous avons rencontré quelques problèmes comme par exemple lors de l’affichage du texte, car la classe «
+FreeTypeFontGenerator » était mal lié à gradle. Malgré ça, l’affichage est maintenant correct.
+
+Nous avons réussi à mettre en place le système de monstres, actuellement, il n'y a qu'une sorte de monstre, le slime,
+qui se déplace de manière aléatoire. L'implémentation des collisions s'est bien passée, en effet, les collisions sont
+bien fonctionnelles et n'ont pas déclenché beaucoup de bugs, ce qui est en partie dû à notre choix d'utiliser des
+hitboxs simples, des carrés en l'occurrence. La gestion de la mort des monstres et du loot a posé quelques problèmes, en
+effet, les monstres étant stockés sous forme de liste, quelques petits bugs sont apparus avec la combinaison de parcours
+et de suppression des monstres. La physique est maintenant corrigée pour le style de notre jeu (top-down) ce qui nous a
+permis d'avoir un mouvement beaucoup plus fluide.
+
+Nous avons également créé la classe abstract weapon, gérer l'attaque à distance qui est animé, et commencé la gestion de
+l'attaque en mêlée. L’attaque blesse ainsi les monstres et permet de les tuer. La mise en place d'une animation pour l'
+attaque de distance (la boule de feu) a posé beaucoup de problème à cause de la gestion des différentes textures, et du
+découpage du spritessheet.
+
+Des problèmes ont également été rencontrés pour la gestion des body des projectiles, qui devait avoir un "sensor"
+différents pour ne pas déplacer les autres éléments du jeu tout en conservant le système de collision.
+
+Des problèmes ont été rencontrés lors de la mise en place de la collision entre les différents éléments, mais de manière
+générale, cela, c'est plutôt bien passé. La boucle de jeu a posé plus de problèmes : la mise en place de la pause et la
+réactivation du jeu furent plus longues que prévu. L'affichage des différents textes d'informations sur l'écran de jeu
+s'est plutôt bien passé, seule la gestion de leurs positions fût "problématique" et a nécessité de nombreux tests. Nous
+avons décidé d'enlever l'élément porte, de cette manière, uniquement les escaliers permettent aux joueurs de monter
+d'étages. Ceux-ci sont bloqués tant que le niveau n'est pas terminé. Nous avons changé la classe abstraite Trap en
+classe Trap, nous avons choisi d'avoir uniquement un type de piège, de façon à simplifier l'expérience utilisateur.
+
 ### <a id="retrospective1"></a>Restrospective
 
+L'organisation de notre travail a été efficace à nouveau. <br>
+L'ambiance au sein de l'équipe ne s'est pas dégradé et l'entraide est toujours très présente entre les différents
+membres du groupe. <br>
+Sur ce sprint, nous avons majoritairement travaillé en simultané, cela fût possible, car les fonctionnalités à
+implémenter ne bloquaient pas l'implémentation des autres membres du groupe sauf dans certains cas. <br>
+La charge de travail pour le deuxième sprint était suffisante, nous avons réussi à tout implémenter, mais en faire plus
+aurait demandé plus de temps. <br>
+La base de notre Jeu est donc complète ce qui nous permettra de travailler encore plus en simultané pour le sprint
+3. <br>
