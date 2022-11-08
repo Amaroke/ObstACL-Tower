@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class BreakableObject extends Element{
+    private boolean destroyed;
+
     public BreakableObject(Vector2 v) {
         super(v);
         this.shape = new PolygonShape();
@@ -41,5 +43,13 @@ public class BreakableObject extends Element{
     @Override
     public UserData getUserData() {
         return UserData.BREAKABLEOBJ;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
     }
 }

@@ -37,6 +37,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        this.obstACLTower.getTower().update();
         // We clean screen
         ScreenUtils.clear(0, 0, 0, 1);
         //We display things

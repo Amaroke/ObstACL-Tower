@@ -14,8 +14,12 @@ public class Tower {
     private World world;
     private Player player;
     private float height;
-
     private ArrayList<Element> elements;
+    private boolean victory;
+    private boolean defeat;
+    private int score = 0;
+
+    private int stageNumber;
 
     private CollisionListener collisionListener;
 
@@ -25,7 +29,6 @@ public class Tower {
 
     private void createTower() {
         world = new World(new Vector2(0, 0), true);
-
 
         this.elements = new ArrayList<>(9);
 
@@ -79,6 +82,32 @@ public class Tower {
         }
     }
 
+    public void update() {
+        if (!victory && !defeat) {
+            // On met à jour la position des éléments dans le monde
+            for (Element e : this.elements) {
+                e.setPosition(e.getBody().getPosition());
+            }
+        }
+    }
+
+    public void endOfTheGameLost() {
+        //When the game is lost, we reset the score.
+        defeat = true;
+        setScore(0);
+
+        this.getWorld().dispose();
+    }
+
+    public void endOfTheGameWon() {
+        //When the game is won, we go to the next stage.
+        victory = true;
+        this.getWorld().dispose();
+
+        this.stageNumber++;
+        createTower();
+    }
+
     private void addElement(Element e) {
         this.elements.add(e);
     }
@@ -107,6 +136,25 @@ public class Tower {
         return this.height;
     }
 
+    public boolean isVictory() {
+        return victory;
+    }
+
+    public void setVictory(boolean victory) {
+        this.victory = victory;
+    }
+
+    public boolean isDefeat() {
+        return defeat;
+    }
+
+    public void setDefeat(boolean defeat) {
+        this.defeat = defeat;
+    }
+
+    public int getScore() {
+        return score;
+    }
 
     public CollisionListener getCollisionListener() {
         return collisionListener;
@@ -116,8 +164,9 @@ public class Tower {
         this.collisionListener = collisionListener;
     }
 
-    public void deleteElem(Element e) {
-        getElements().remove(e);
-        this.getWorld().destroyBody(e.getBody());
+    public void setScore(int score) {
+        this.score = score;
     }
 }
+
+
