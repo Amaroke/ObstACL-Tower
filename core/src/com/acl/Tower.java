@@ -281,11 +281,11 @@ public class Tower {
         }
         return null;
     }
-        public void deleteElem (Element e){
-            getElements().remove(e);
-            this.getWorld().destroyBody(e.getBody());
-        }
+    public void deleteElem (Element e){
+        getElements().remove(e);
+        this.getWorld().destroyBody(e.getBody());
     }
+}
 
 
 

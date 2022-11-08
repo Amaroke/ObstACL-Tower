@@ -45,7 +45,7 @@ public abstract class Monster extends Element {
 
     public abstract void Move();
 
-    public abstract void giveLoot();
+    public abstract int giveLoot();
 
     public int getHp() {
         return hp;

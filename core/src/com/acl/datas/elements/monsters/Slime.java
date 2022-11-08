@@ -11,6 +11,8 @@ public class Slime extends Monster{
 
     private int nbMovBeforeChange = 0;
 
+    private int scoreGiven;
+
     public Slime(Vector2 v) {
         super(v);
 
@@ -34,6 +36,7 @@ public class Slime extends Monster{
 
         this.setHp(10);
         this.setDmg(10);
+        this.scoreGiven = 50;
     }
 
     @Override
@@ -63,8 +66,8 @@ public class Slime extends Monster{
 
     }
 
-    public void giveLoot() {
+    public int giveLoot() {
         //The base monster gives gold coins and score
-        //TODO : implement the loot system when possible (when gold coins / score are properly implemented)
+        return scoreGiven;
     }
 }
