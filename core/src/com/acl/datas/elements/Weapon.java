@@ -28,7 +28,7 @@ public abstract class Weapon extends Element {
     @Override
     public void configureBodyDef() {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.fixedRotation = true;
         bodyDef.position.set(getPosition());
 

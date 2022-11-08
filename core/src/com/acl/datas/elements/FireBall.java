@@ -6,6 +6,8 @@ import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class FireBall extends Weapon {
     public float velocity;
@@ -34,6 +36,6 @@ public class FireBall extends Weapon {
 
     @Override
     public UserData getUserData() {
-        return UserData.FIREBALL;
+        return UserData.WEAPON;
     }
 }

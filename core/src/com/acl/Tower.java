@@ -63,7 +63,7 @@ public class Tower {
                 player = new Player(position);
                 player.configureBodyDef();
                 player.createBody(getWorld());
-                player.setFixture();
+                player.setFixture(  );
             }
             case 'W' -> element = new Wall(position);
             case 'S' -> element = new Stair(position);

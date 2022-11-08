@@ -34,7 +34,6 @@ public abstract class Element {
             getBody().createFixture(fixtureDef);
             getBody().setUserData(getUserData());
         }
-        shape.dispose();
     }
 
     public void createBody(World world) {

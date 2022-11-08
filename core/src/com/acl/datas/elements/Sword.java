@@ -30,6 +30,6 @@ public class Sword extends Weapon {
     }
 
     public UserData getUserData() {
-        return UserData.SWORD;
+        return UserData.WEAPON;
     }
 }
