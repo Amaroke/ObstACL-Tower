@@ -75,13 +75,13 @@ public class GameScreen extends ScreenAdapter {
                     t = new TextureRegion(TextureFactory.getSwordTexture());
                     switch (w.getDirection()) {
                         case NORTH ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 180);
                         case SOUTH ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 180);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
                         case EAST ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 270);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
                         case WEST ->
-                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 270);
 
                     }
                 }

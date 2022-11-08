@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import java.util.ArrayList;
 
 public class Player extends Element {
-    private final WeaponType weaponType = WeaponType.FIREBALL;
+    private final WeaponType weaponType = WeaponType.SWORD;
     private Direction direction = Direction.NORTH;
     private int score;
     private int hp;
