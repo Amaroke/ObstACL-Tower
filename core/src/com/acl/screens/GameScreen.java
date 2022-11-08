@@ -22,6 +22,8 @@ public class GameScreen extends ScreenAdapter {
     private final Text text;
     private int timeBetweenRender = 0;
 
+    private int pauseTime = 100;
+
     public GameScreen(ObstACLTower obstACLTower) {
         this.obstACLTower = obstACLTower;
         this.obstACLTower.setTower(new Tower());
@@ -37,6 +39,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        if(!this.obstACLTower.getTower().isGamePaused()){
         this.obstACLTower.getTower().update();
         // We clean screen
         ScreenUtils.clear(0, 0, 0, 1);
@@ -86,8 +89,6 @@ public class GameScreen extends ScreenAdapter {
                     }
                 }
             }
-
-
         }
         // We get weapon use
         if(this.keyboardListener.getUseWeapon()) {
@@ -106,16 +107,19 @@ public class GameScreen extends ScreenAdapter {
         text.displayVie("Health = " + obstACLTower.getTower().getPlayer().getHp());
         // Print coordinate
         //System.out.println("La position:" + obstACLTower.getTower().getPlayer().getBody().getPosition());
-
-        if(this.obstACLTower.getTower().isVictory()){
+        } else if(this.obstACLTower.getTower().isVictory()){
+            this.pauseTime--;
             text.diplayStageClear("Stage Clear");
-        }
-
-        if(this.obstACLTower.getTower().isDefeat()){
+        } else  if(this.obstACLTower.getTower().isDefeat()){
+            this.pauseTime--;
             text.diplayDie("You lose \n Your score = " + obstACLTower.getTower().getPlayer().getScore());
         }
-    }
 
+        if(pauseTime == 0){
+            this.pauseTime = 100;
+            this.obstACLTower.getTower().createTower();
+        }
+    }
 
     @Override
     public void dispose() {
