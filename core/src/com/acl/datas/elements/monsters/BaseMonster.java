@@ -26,9 +26,11 @@ public class BaseMonster extends Monster{
         shape.set(vectors);
         setShape(shape);
 
-        setDensity(0.5f);
-        setRestitution(0.1f);
-        setFriction(0.5f);
+        this.density = 0.5f;
+        this.restitution = 0.1f;
+        this.friction = 0.5f;
+
+        this.setHp(100);
     }
 
     @Override

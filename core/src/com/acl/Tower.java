@@ -115,4 +115,9 @@ public class Tower {
     public void setCollisionListener(CollisionListener collisionListener) {
         this.collisionListener = collisionListener;
     }
+
+    public void deleteElem(Element e) {
+        getElements().remove(e);
+        this.getWorld().destroyBody(e.getBody());
+    }
 }

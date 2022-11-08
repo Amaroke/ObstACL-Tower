@@ -1,4 +1,4 @@
-package com.acl.managers;
+package com.acl.enums;
 
 public enum Direction {
     NORTH, SOUTH, EAST, WEST

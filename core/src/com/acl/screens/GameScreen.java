@@ -6,7 +6,7 @@ import com.acl.datas.elements.Element;
 import com.acl.datas.elements.FireBall;
 import com.acl.datas.elements.Weapon;
 import com.acl.listeners.KeyboardListener;
-import com.acl.managers.Direction;
+import com.acl.enums.Direction;
 import com.acl.managers.Text;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.Gdx;

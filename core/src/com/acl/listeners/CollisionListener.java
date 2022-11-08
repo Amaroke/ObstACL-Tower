@@ -1,6 +1,6 @@
 package com.acl.listeners;
 
-import com.acl.datas.UserData;
+import com.acl.enums.UserData;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;

@@ -1,6 +1,6 @@
 package com.acl.listeners;
 
-import com.acl.managers.Direction;
+import com.acl.enums.Direction;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;

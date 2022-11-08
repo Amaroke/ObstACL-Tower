@@ -1,6 +1,6 @@
 package com.acl.datas.elements;
 
-import com.acl.datas.UserData;
+import com.acl.enums.UserData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;

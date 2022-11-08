@@ -1,16 +1,13 @@
 package com.acl.datas.elements.monsters;
 
-import com.acl.datas.UserData;
+import com.acl.enums.UserData;
 import com.acl.datas.elements.Element;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public abstract class Monster extends Element {
-    //TODO ajouter les statistiques communes aux monstres (hp, atk, ...)
-    private float density;
-    private float restitution;
-    private float friction;
+    private int hp;
 
     public Monster(Vector2 v) {
         super(v);
@@ -49,16 +46,16 @@ public abstract class Monster extends Element {
 
     public abstract void giveLoot();
 
-    public void setDensity(float density) {
-        this.density = density;
+    public int getHp() {
+        return hp;
     }
 
-    public void setRestitution(float restitution) {
-        this.restitution = restitution;
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
-    public void setFriction(float friction) {
-        this.friction = friction;
+    public void dealDamage(int amount) {
+        this.hp -= amount;
     }
 
     @Override
