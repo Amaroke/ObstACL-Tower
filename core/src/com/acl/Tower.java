@@ -22,7 +22,6 @@ public class Tower {
     private boolean defeat;
 
     private int trapDamage = 25;
-    private boolean allEnemiesAreDead = false;
     private int score = 0;
 
     private int stageNumber;
@@ -100,11 +99,7 @@ public class Tower {
                 e.setPosition(e.getBody().getPosition());
             }
 
-            if(this.player.getHp() == 0){
-                this.endOfTheGameLost();
-            }
-
-            if(this.allEnemiesAreDead){
+            if(this.monsters.size() == 0){
                 this.endOfTheStageWon();
             }
 
@@ -130,6 +125,9 @@ public class Tower {
                 getCollisionListener().setMonsterCollided(null);
                 getCollisionListener().setPlayerCollidesWithMonster(false);
             }
+            if(this.player.getHp() == 0){
+                this.endOfTheGameLost();
+            }
             //We move all the monsters
             for (Monster m : this.monsters) {
                 m.Move();
@@ -143,6 +141,13 @@ public class Tower {
         setScore(0);
 
         System.out.println("C'est loose");
+    }
+
+    private void checkMonsterHealth(Monster m) {
+        if (m.getHp() <= 0) {
+            getMonsters().remove(m);
+            deleteElem(m);
+        }
     }
 
     public void endOfTheStageWon() {
@@ -229,6 +234,11 @@ public class Tower {
             }
         }
         return null;
+    }
+
+    public void deleteElem(Element e) {
+        getElements().remove(e);
+        this.getWorld().destroyBody(e.getBody());
     }
 }
 
