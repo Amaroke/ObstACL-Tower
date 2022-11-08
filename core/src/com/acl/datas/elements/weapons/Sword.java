@@ -1,4 +1,4 @@
-package com.acl.datas.elements;
+package com.acl.datas.elements.weapons;
 
 import com.acl.enums.UserData;
 import com.acl.enums.Direction;

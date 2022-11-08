@@ -3,8 +3,8 @@ package com.acl.screens;
 import com.acl.ObstACLTower;
 import com.acl.Tower;
 import com.acl.datas.elements.Element;
-import com.acl.datas.elements.FireBall;
-import com.acl.datas.elements.Weapon;
+import com.acl.datas.elements.weapons.FireBall;
+import com.acl.datas.elements.weapons.Weapon;
 import com.acl.listeners.KeyboardListener;
 import com.acl.enums.Direction;
 import com.acl.managers.Text;
@@ -52,7 +52,7 @@ public class GameScreen extends ScreenAdapter {
             e.setSprite();
             obstACLTower.batch.draw(e.getSprite(), e.getBody().getPosition().x, e.getBody().getPosition().y);
         }
-        for (Weapon w : obstACLTower.getTower().getPlayer().getWeapons()) {
+        for (Weapon w : obstACLTower.getTower().getWeapons()) {
             w.update();
             w.setSprite();
             TextureRegion t;
@@ -61,13 +61,13 @@ public class GameScreen extends ScreenAdapter {
                     t = new TextureRegion((((FireBall) w).getAnimation().getKeyFrame(timeBetweenRender, true)));
                     switch (w.getDirection()) {
                         case NORTH ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
                         case SOUTH ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 8, 0, 16f, 16f, 1f, 1f, 180);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 180);
                         case EAST ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 16, 0, 16f, 16f, 1f, 1f, 270);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y+16, 0, 0, 16f, 16f, 1f, 1f, 270);
                         case WEST ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x+16, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
 
                     }
                 }
@@ -75,13 +75,13 @@ public class GameScreen extends ScreenAdapter {
                     t = new TextureRegion(TextureFactory.getSwordTexture());
                     switch (w.getDirection()) {
                         case NORTH ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
                         case SOUTH ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 8, 0, 16f, 16f, 1f, 1f, 180);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 180);
                         case EAST ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 16, 0, 16f, 16f, 1f, 1f, 270);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 270);
                         case WEST ->
-                                obstACLTower.batch.draw(t, w.getPosition().x, w.getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
+                                obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
 
                     }
                 }
@@ -90,7 +90,9 @@ public class GameScreen extends ScreenAdapter {
 
         }
         // We get weapon use
-        this.obstACLTower.getTower().getPlayer().setWeapon(this.keyboardListener.getUseWeapon());
+        if(this.keyboardListener.getUseWeapon()) {
+            this.obstACLTower.getTower().createWeapon();
+        }
         obstACLTower.getTower().getPlayer().draw(obstACLTower.batch);
         obstACLTower.batch.end();
         obstACLTower.batch.setProjectionMatrix(obstACLTower.getCamera().combined);

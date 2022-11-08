@@ -17,6 +17,7 @@ public abstract class Element {
     protected float density;
     protected float restitution;
     protected float friction;
+    protected boolean sensor = false;
 
     public Element(Vector2 v) {
         this.position = v;
@@ -31,6 +32,7 @@ public abstract class Element {
             fixtureDef.density = density;
             fixtureDef.restitution = restitution;
             fixtureDef.friction = friction;
+            fixtureDef.isSensor = sensor;
             getBody().createFixture(fixtureDef);
             getBody().setUserData(getUserData());
         }

@@ -7,11 +7,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.Random;
 
-public class BaseMonster extends Monster{
+public class Slime extends Monster{
 
     private int nbMovBeforeChange = 0;
 
-    public BaseMonster(Vector2 v) {
+    public Slime(Vector2 v) {
         super(v);
 
         setHeight(16);
@@ -38,7 +38,7 @@ public class BaseMonster extends Monster{
 
     @Override
     public void setSprite() {
-        this.sprite = new Sprite(TextureFactory.getChevalierTexture());
+        this.sprite = new Sprite(TextureFactory.getSlimeTexture());
     }
 
     @Override

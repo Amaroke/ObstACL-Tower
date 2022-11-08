@@ -1,5 +1,6 @@
-package com.acl.datas.elements;
+package com.acl.datas.elements.weapons;
 
+import com.acl.datas.elements.Element;
 import com.acl.enums.Direction;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,9 +13,9 @@ public abstract class Weapon extends Element {
     public Weapon(Vector2 v, Direction d) {
         super(v);
         this.shape = new PolygonShape();
-        this.density = 1f;
-        this.restitution = 0.1f;
-        this.friction = 0.25f;
+        this.density = 0f;
+        this.restitution = 0f;
+        this.friction = 0f;
         Vector2[] points = {
                 new Vector2(0, 0),
                 new Vector2(0, 16),

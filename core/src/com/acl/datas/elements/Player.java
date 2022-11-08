@@ -14,16 +14,13 @@ import java.util.ArrayList;
 
 public class Player extends Element {
     private final WeaponType weaponType = WeaponType.FIREBALL;
-    private final ArrayList<Weapon> weapons;
     private Direction direction = Direction.NORTH;
-
     private int score;
     private int hp;
 
 
     public Player(Vector2 v) {
         super(v);
-        this.weapons = new ArrayList<>();
         setHeight(16);
         setWidth(16);
 
@@ -83,16 +80,6 @@ public class Player extends Element {
         this.getBody().setLinearVelocity(v);
     }
 
-    public ArrayList<Weapon> getWeapons() {
-        return weapons;
-    }
-
-    public void setWeapon(Boolean b) {
-        if(b) {
-            weapons.add(new FireBall(new Vector2(this.getBody().getPosition().x, this.getBody().getPosition().y),this.direction));
-        }
-    }
-
     public void setDirection(Direction d) {
         this.direction = d;
     }
@@ -124,5 +111,9 @@ public class Player extends Element {
 
     public void receiveDamage(int amount) {
         this.hp -= amount;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

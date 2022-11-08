@@ -1,5 +1,6 @@
 package com.acl.listeners;
 
+import com.acl.datas.elements.weapons.Weapon;
 import com.acl.enums.UserData;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -15,6 +16,8 @@ public class CollisionListener implements ContactListener {
     private boolean playerCollidesWithWall = false;
 
     private boolean weaponCollidesWithMonster = false;
+    private boolean weaponCollidesWithWall = false;
+    private Body weaponCollided;
 
     private boolean playerCollidesWithMonster = false;
 
@@ -60,7 +63,8 @@ public class CollisionListener implements ContactListener {
         }
 
         if ((A == UserData.WEAPON && B == UserData.WALL) || (A == UserData.WALL && B == UserData.WEAPON)){
-            System.out.println("contact wall weapon");
+            this.weaponCollidesWithWall = true;
+            weaponCollided = (A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
     }
 
@@ -77,6 +81,12 @@ public class CollisionListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    public boolean isWeaponCollidesWithWall() {
+        boolean value = weaponCollidesWithWall;
+        weaponCollidesWithWall = false;
+        return value;
     }
 
     public boolean isPlayerCollidesWithStairs() {
@@ -125,5 +135,11 @@ public class CollisionListener implements ContactListener {
 
     public void setMonsterCollided(Body monsterCollided) {
         this.monsterCollided = monsterCollided;
+    }
+
+    public Body getWeaponCollided() {
+        Body value = weaponCollided;
+        weaponCollided = null;
+        return value;
     }
 }

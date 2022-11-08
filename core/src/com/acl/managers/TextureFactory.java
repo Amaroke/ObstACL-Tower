@@ -30,6 +30,8 @@ public class TextureFactory {
     private final static Texture fireBallTexture = new Texture((Gdx.files.internal("fireBall.png")));
     private final static Texture swordTexture = new Texture((Gdx.files.internal("sword.png")));
 
+    private final static Texture slimeTexture = new Texture((Gdx.files.internal("slime.png")));
+
     public static Texture getBackTexture() {
         return backTexture;
     }
@@ -65,5 +67,7 @@ public class TextureFactory {
     public static Texture getSwordTexture() {
         return swordTexture;
     }
+
+    public static Texture getSlimeTexture() {return slimeTexture; }
 
 }
