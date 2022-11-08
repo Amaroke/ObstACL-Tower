@@ -1,5 +1,6 @@
 package com.acl.listeners;
 
+import com.acl.managers.Direction;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -10,9 +11,22 @@ import java.util.Scanner;
 public class KeyboardListener implements InputProcessor {
 
     private final Vector2 motion = new Vector2(0f, 0f);
+    private Boolean useWeapon = false;
+    private Direction direction;
+    private boolean debug = false;
 
     public Vector2 getMotion() {
         return motion;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public Boolean getUseWeapon() {
+        boolean weaponInUse = useWeapon;
+        useWeapon = false;
+        return weaponInUse;
     }
 
     @Override
@@ -42,24 +56,37 @@ public class KeyboardListener implements InputProcessor {
             }
 
         }
+        // When pressing the space bar, the weapon of the player is used
+        if (keycode == Input.Keys.SPACE) {
+            useWeapon = true;
+
+        }
         // When pressing the UP, Z or W keys, the character goes up.
         if (keycode == Input.Keys.UP || keycode == Input.Keys.Z || keycode == Input.Keys.W) {
             motion.y = 10f;
+            direction = Direction.NORTH;
             return true;
         }
         // When pressing the LEFT, Q or A keys, the character goes left.
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.Q || keycode == Input.Keys.A) {
             motion.x = -10f;
+            direction = Direction.WEST;
             return true;
         }
         // When pressing the RIGHT or D keys, the character goes right.
         if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             motion.x = 10f;
+            direction = Direction.EAST;
             return true;
         }
         // When pressing the DOWN or S keys, the character goes down.
         if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S) {
             motion.y = -10f;
+            direction = Direction.SOUTH;
+            return true;
+        }
+        if (keycode == Input.Keys.SHIFT_LEFT) {
+            debug = !debug;
             return true;
         }
         return false;
@@ -108,5 +135,9 @@ public class KeyboardListener implements InputProcessor {
     @Override
     public boolean scrolled(float amountX, float amountY) {
         return false;
+    }
+
+    public boolean isDebug() {
+        return debug;
     }
 }

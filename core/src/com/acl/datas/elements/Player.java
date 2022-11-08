@@ -1,5 +1,6 @@
 package com.acl.datas.elements;
 
+import com.acl.managers.Direction;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -7,13 +8,17 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
+import java.util.ArrayList;
+
 public class Player extends Element {
 
     private final PolygonShape shape;
+    private final ArrayList<Weapon> weapons;
+    private Direction direction = Direction.NORTH;
 
     public Player(Vector2 v) {
         super(v);
-
+        this.weapons = new ArrayList<>();
         setHeight(16);
         setWidth(16);
 
@@ -63,5 +68,19 @@ public class Player extends Element {
 
     public void setMotion(Vector2 v) {
         this.getBody().setLinearVelocity(v);
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapon(Boolean b) {
+        if(b) {
+            weapons.add(new FireBall(new Vector2(this.getBody().getPosition().x, this.getBody().getPosition().y),this.direction));
+        }
+    }
+
+    public void setDirection(Direction d) {
+        this.direction = d;
     }
 }

@@ -67,7 +67,7 @@ public class Tower {
             element.createBody(getWorld());
             element.setFixture();
             this.addElement(element);
-            System.out.println(letter + "" + element.getPosition().x + " " + element.getPosition().y);
+            //System.out.println(letter + "" + element.getPosition().x + " " + element.getPosition().y);
         }
     }
 

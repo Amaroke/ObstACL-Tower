@@ -27,6 +27,7 @@ public class TextureFactory {
     private final static Texture wallTexture = new Texture(Gdx.files.internal("wall.png"));
     private final static Texture stairTexture = new Texture(Gdx.files.internal("stair.png"));
     private final static Texture trapTexture = new Texture(Gdx.files.internal("trap.png"));
+    private final static Texture fireBallTexture = new Texture((Gdx.files.internal("FireBall.png")));
 
 
     public static Texture getBackTexture() {
@@ -55,6 +56,10 @@ public class TextureFactory {
 
     public static Texture getChevalierTexture() {
         return chevalierTexture;
+    }
+
+    public static Texture getFireBallTexture() {
+        return fireBallTexture;
     }
 
 }
