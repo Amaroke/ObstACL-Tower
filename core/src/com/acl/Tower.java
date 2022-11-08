@@ -142,7 +142,7 @@ public class Tower {
         defeat = true;
         setScore(0);
 
-        this.getWorld().dispose();
+        System.out.println("C'est loose");
     }
 
     public void endOfTheStageWon() {

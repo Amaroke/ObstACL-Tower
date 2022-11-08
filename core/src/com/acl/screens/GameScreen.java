@@ -110,7 +110,7 @@ public class GameScreen extends ScreenAdapter {
         }
 
         if(this.obstACLTower.getTower().isDefeat()){
-            text.diplayStageClear("You lose \n Your score = " + obstACLTower.getTower().getPlayer().getScore());
+            text.diplayDie("You lose \n Your score = " + obstACLTower.getTower().getPlayer().getScore());
         }
     }
 

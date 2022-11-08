@@ -58,8 +58,8 @@ public class Text {
 
     public void diplayDie(String message){
         textBatch.begin();
-        float posX = (float) Gdx.graphics.getWidth() / 6;
-        float posY = (float) (Gdx.graphics.getHeight() - 10);
+        float posX = (float) (Gdx.graphics.getWidth() / 2 - 15);
+        float posY = (float) (Gdx.graphics.getHeight() / 1.5 - 35);
         font.draw(textBatch, message, posX, posY, message.length(), 1, false);
         textBatch.end();
     }
