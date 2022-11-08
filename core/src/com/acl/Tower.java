@@ -14,7 +14,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import java.util.ArrayList;
 
 public class Tower {
-
     private World world;
     private Player player;
     private float height;
@@ -23,11 +22,10 @@ public class Tower {
     private ArrayList<Weapon> weapons;
     private boolean victory;
     private boolean defeat;
+    private boolean gamePaused;
 
-    private final boolean allEnemiesAreDead = false;
+    private boolean allEnemiesAreDead;
     private int score = 0;
-
-    private int stageNumber;
 
     private CollisionListener collisionListener;
 
@@ -35,12 +33,15 @@ public class Tower {
         createTower();
     }
 
-    private void createTower() {
+    public void createTower() {
         world = new World(new Vector2(0, 0), true);
 
         this.weapons = new ArrayList<>();
         this.elements = new ArrayList<>();
         this.monsters = new ArrayList<>();
+
+        this.gamePaused = false;
+        this.allEnemiesAreDead = false;
 
         this.height = 9 * 16;
 
@@ -132,14 +133,14 @@ public class Tower {
             }
 
             if (this.monsters.size() == 0) {
-                this.endOfTheStageWon();
+                this.allEnemiesAreDead = true;
             }
 
             if (this.player.getHp() <= 0) {
                 this.endOfTheGameLost();
             }
 
-            if (this.getCollisionListener().isPlayerCollidesWithStairs()) {
+            if (this.getCollisionListener().isPlayerCollidesWithStairs() && allEnemiesAreDead) {
                 this.endOfTheStageWon();
             }
 
@@ -181,8 +182,9 @@ public class Tower {
     }
 
     public void endOfTheGameLost() {
-        // When the game is lost, we reset the score.
+        // When the game is lost.
         defeat = true;
+        gamePaused = true;
         setScore(0);
     }
 
@@ -194,12 +196,9 @@ public class Tower {
     }
 
     public void endOfTheStageWon() {
-        // When the game is won, we go to the next stage.
+        // When the game is won.
         victory = true;
-        this.getWorld().dispose();
-
-        this.stageNumber++;
-        createTower();
+        gamePaused = true;
     }
 
     private void addElement(Element e) {
@@ -300,6 +299,14 @@ public class Tower {
             }
         }
         return null;
+    }
+
+    public boolean isGamePaused() {
+        return gamePaused;
+    }
+
+    public void setGamePaused(boolean gamePaused) {
+        this.gamePaused = gamePaused;
     }
 }
 
