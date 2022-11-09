@@ -2,6 +2,7 @@ package com.acl.listeners;
 
 import com.acl.enums.Direction;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
@@ -14,6 +15,7 @@ public class KeyboardListener implements InputProcessor {
     private Boolean useWeapon = false;
     private Direction direction;
     private boolean debug = false;
+    private boolean fullScreen = false;
 
     public Vector2 getMotion() {
         return motion;
@@ -31,8 +33,16 @@ public class KeyboardListener implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+
         // When pressing the escape key, the menu opens
         if (keycode == Input.Keys.ESCAPE) {
+            fullScreen = !fullScreen;
+            Graphics.DisplayMode currentMode = Gdx.graphics.getDisplayMode();
+            if (!fullScreen)
+                Gdx.graphics.setWindowedMode(currentMode.width-200, currentMode.height-200);
+            else
+                Gdx.graphics.setFullscreenMode(currentMode);
+            /*
             Scanner input = new Scanner(System.in);
 
             int choice = -1;
@@ -53,7 +63,7 @@ public class KeyboardListener implements InputProcessor {
                     case 2:
                         break;
                 }
-            }
+            }*/
 
         }
         // When pressing the space bar, the weapon of the player is used

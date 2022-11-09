@@ -1,5 +1,7 @@
 # ObstACL Tower
 
+## Iopeti Hugo, MATHIEU
+
 ## Sommaire
 
 1. <a href="#vision-du-jeu-final">Vision du jeu final</a>
@@ -196,5 +198,27 @@ Sur ce sprint, nous avons majoritairement travaillé en simultané, cela fût po
 implémenter ne bloquaient pas l'implémentation des autres membres du groupe sauf dans certains cas. <br>
 La charge de travail pour le deuxième sprint était suffisante, nous avons réussi à tout implémenter, mais en faire plus
 aurait demandé plus de temps. <br>
-La base de notre Jeu est donc complète ce qui nous permettra de travailler encore plus en simultané pour le sprint
-3. <br>
+La base de notre Jeu est donc complète ce qui nous permettra de travailler encore plus en simultané pour le sprint<br>
+
+-----
+
+## Sprint 2
+
+### <p id="backlogs2">Backlogs</p>
+
+| Item                                          | Estimate |
+|-----------------------------------------------|----------|
+| Finaliser l'attaque de mêlée et son animation | 3        |
+| Menu et pause                                 | 11       |
+| Ajout d'étages                                | 8        |
+| Amélioration des Hit-box                      | 5        |
+| Ajout de monstres                             | 3        |
+
+### <p id="liste2">Liste des tâches</p>
+
+| Responsable            | Tâches | Temps estimé | Temps réel |
+|------------------------|--------|--------------|------------|
+| IOPETI Hugo            |        |              |            |
+| MATHIEU STEINBACH Hugo |        |              |            |
+| YVOZ Ludovic           |        |              |            |
+| ZIMOL Guillaume        |        |              |            |
