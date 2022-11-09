@@ -1,0 +1,336 @@
+@startuml
+class com.acl.datas.elements.weapons.Sword {
++ void update()
++ void setSprite()
++ UserData getUserData()
+}
+enum com.acl.enums.Direction {
++  NORTH
++  SOUTH
++  EAST
++  WEST
+}
+class com.acl.datas.elements.Trap {
+- int dealDamage
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
++ int getDealDamage()
+}
+enum com.acl.enums.WeaponType {
++  FIREBALL
++  SWORD
+}
+class com.acl.listeners.KeyboardListener {
+- Vector2 motion
+- Boolean useWeapon
+- Direction direction
+- boolean debug
++ Vector2 getMotion()
++ Direction getDirection()
++ Boolean getUseWeapon()
++ boolean keyDown(int)
++ boolean keyUp(int)
++ boolean keyTyped(char)
++ boolean touchDown(int,int,int,int)
++ boolean touchUp(int,int,int,int)
++ boolean touchDragged(int,int,int)
++ boolean mouseMoved(int,int)
++ boolean scrolled(float,float)
++ boolean isDebug()
+}
+class com.acl.screens.MenuScreen {
++ void show()
++ void render(float)
+}
+enum com.acl.enums.UserData {
++  BREAKABLE
++  CHEST
++  PLAYER
++  STAIR
++  TRAP
++  WALL
++  MONSTER
++  WEAPON
+}
+class com.acl.datas.elements.Stair {
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
+}
+abstract class com.acl.datas.elements.monsters.Monster {
+- int hp
+- int dmg
++ void configureBodyDef()
++ void setMotion(Vector2)
++ {abstract}void Move()
++ {abstract}int giveLoot()
++ int getHp()
++ void setHp(int)
++ int getDmg()
++ void setDmg(int)
++ void receiveDamage(int)
++ UserData getUserData()
+}
+abstract class com.acl.datas.elements.weapons.Weapon {
+- Direction direction
++ void configureBodyDef()
++ {abstract}void setSprite()
++ {abstract}void update()
++ Direction getDirection()
+}
+class com.acl.Tower {
+- World world
+- float height
+- boolean victory
+- boolean defeat
+- boolean allEnemiesAreDead
+- int score
+- int stageNumber
+- CollisionListener collisionListener
+- void createTower()
++ void createWeapon()
++ Player getPlayer()
++ World getWorld()
+- void createElement(char,int,int)
++ void update()
++ ArrayList<Weapon> getWeapons()
++ void endOfTheGameLost()
+- void checkMonsterHealth(Monster)
++ void endOfTheStageWon()
+- void addElement(Element)
++ void setWorld(World)
++ void setPlayer(Player)
++ void setHeight(float)
++ ArrayList<Element> getElements()
++ void setElements(ArrayList<Element>)
++ ArrayList<Monster> getMonsters()
++ void addMonster(Monster)
+- float getHeight()
++ boolean isVictory()
++ void setVictory(boolean)
++ boolean isDefeat()
++ void setDefeat(boolean)
++ int getScore()
++ CollisionListener getCollisionListener()
++ void setCollisionListener(CollisionListener)
++ void setScore(int)
++ Monster getMonsterFromBody(Body)
++ Weapon getWeaponFromBody(Body)
++ void deleteElem(Element)
++ Element getElementFromBody(Body)
+}
+class com.acl.listeners.CollisionListener {
+- boolean playerCollidesWithStairs
+- boolean playerCollidesWithChest
+- boolean playerCollidesWithTrap
+- boolean weaponCollidesWithBreakableObject
+- boolean WeaponCollidesWithMonster
+- boolean weaponCollidesWithMonster
+- boolean weaponCollidesWithWall
+- Body weaponCollided
+- boolean playerCollidesWithMonster
+- Body monsterCollided
+- Body chestCollided
+- Body trapCollided
+- Body breakableObjectCollided
++ void beginContact(Contact)
++ void endContact(Contact)
++ void preSolve(Contact,Manifold)
++ void postSolve(Contact,ContactImpulse)
++ boolean isWeaponCollidesWithWall()
++ boolean isWeaponCollidesWithMonster()
++ boolean isPlayerCollidesWithStairs()
++ void setPlayerCollidesWithStairs(boolean)
++ boolean isPlayerCollidesWithChest()
++ void setPlayerCollidesWithChest(boolean)
++ boolean isPlayerCollidesWithTrap()
++ void setPlayerCollidesWithTrap(boolean)
++ boolean isWeaponCollidesWithBreakableObject()
++ void setWeaponCollidesWithBreakableObject(boolean)
++ boolean isPlayerCollidesWithMonster()
++ Body getMonsterCollided()
++ void setPlayerCollidesWithMonster(boolean)
++ void setMonsterCollided(Body)
++ Body getWeaponCollided()
++ Body getChestCollided()
++ Body getTrapCollided()
++ Body getBreakableObjectCollided()
+}
+class com.acl.managers.TextureFactory {
+- {static} TextureFactory instance
+- {static} Texture backTexture
+- {static} Texture chevalierTexture
+- {static} Texture chestTexture
+- {static} Texture breakableTexture
+- {static} Texture wallTexture
+- {static} Texture stairTexture
+- {static} Texture trapTexture
+- {static} Texture fireBallTexture
+- {static} Texture swordTexture
+- {static} Texture slimeTexture
++ {static} TextureFactory getInstance()
++ {static} Texture getBackTexture()
++ {static} Texture getBreakableTexture()
++ {static} Texture getChestTexture()
++ {static} Texture getWallTexture()
++ {static} Texture getTrapTexture()
++ {static} Texture getStairTexture()
++ {static} Texture getChevalierTexture()
++ {static} Texture getFireBallTexture()
++ {static} Texture getSwordTexture()
++ {static} Texture getSlimeTexture()
+}
+class com.acl.managers.FloorManager {
+- char[][] table
+- int width
+- int height
+- String floor
++ void createLevel()
++ void saveLevel()
++ char[][] getTable()
+}
+class com.acl.datas.elements.Player {
+- WeaponType weaponType
+- Direction direction
+- int score
+- int hp
++ void configureBodyDef()
++ void setFixture()
++ void setSprite()
++ void setMotion(Vector2)
++ void setDirection(Direction)
++ WeaponType getWeaponType()
++ UserData getUserData()
++ int getScore()
++ int getHp()
++ void receiveDamage(int)
++ Direction getDirection()
++ void incrementScore(int)
+}
+class com.acl.ObstACLTower {
++ SpriteBatch batch
+- OrthographicCamera camera
++ void create()
++ void dispose()
++ Tower getTower()
++ void setTower(Tower)
++ SpriteBatch getBatch()
++ void setBatch(SpriteBatch)
++ OrthographicCamera getCamera()
++ void setCamera(OrthographicCamera)
+}
+class com.acl.datas.elements.monsters.Slime {
+- int nbMovBeforeChange
+- int givenScore
++ void setSprite()
++ void Move()
++ int giveLoot()
+}
+class com.acl.datas.elements.monsters.Crawler {
+
+}
+class com.acl.datas.elements.monsters.Guardian {
+
+}
+class com.acl.datas.elements.BreakableObject {
+- int givenScore
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
++ int giveLoot()
+}
+class com.acl.managers.Text {
++ SpriteBatch textBatch
++ BitmapFont font
++ void displayScore(String)
++ void displayHP(String)
++ void displayDie(String)
++ void displayStageClear(String)
++ void dispose()
+}
+class com.acl.datas.elements.weapons.FireBall {
++ float velocity
+- Animation<TextureRegion> animation
++ void setSprite()
++ void update()
++ Animation<TextureRegion> getAnimation()
++ UserData getUserData()
+}
+class com.acl.screens.GameScreen {
+- int timeBetweenRender
++ void show()
++ void render(float)
++ void dispose()
+}
+abstract class com.acl.datas.elements.Element {
+- Vector2 position
+- Body body
+# Sprite sprite
+- BodyDef bodyDef
+- float height
+- float width
+# PolygonShape shape
+# float density
+# float restitution
+# float friction
+# boolean sensor
++ {abstract}void configureBodyDef()
++ void setFixture()
++ void createBody(World)
++ float getHeight()
++ void setHeight(float)
++ float getWidth()
++ void setWidth(float)
++ Vector2 getPosition()
++ void setPosition(Vector2)
++ Body getBody()
++ BodyDef getBodyDef()
++ void setBodyDef(BodyDef)
++ Sprite getSprite()
++ {abstract}void setSprite()
++ void draw(SpriteBatch)
++ {abstract}UserData getUserData()
++ void setShape(PolygonShape)
+}
+class com.acl.datas.elements.Wall {
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
+}
+class com.acl.datas.elements.Chest {
+- int givenScore
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
++ int giveLoot()
+}
+
+
+com.acl.datas.elements.weapons.Weapon <|-- com.acl.datas.elements.weapons.Sword
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Trap
+com.badlogic.gdx.InputProcessor <|.. com.acl.listeners.KeyboardListener
+com.badlogic.gdx.ScreenAdapter <|-- com.acl.screens.MenuScreen
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Stair
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.monsters.Monster
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.weapons.Weapon
+com.acl.listeners.ContactListener <|.. com.acl.listeners.CollisionListener
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Player
+com.badlogic.gdx.Game <|-- com.acl.ObstACLTower
+com.acl.datas.elements.monsters.Monster <|-- com.acl.datas.elements.monsters.Slime
+com.acl.datas.elements.monsters.Monster <|-- com.acl.datas.elements.monsters.Crawler
+com.acl.datas.elements.monsters.Monster <|-- com.acl.datas.elements.monsters.Guardian
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.BreakableObject
+com.acl.datas.elements.weapons.Weapon <|-- com.acl.datas.elements.weapons.FireBall
+com.badlogic.gdx.ScreenAdapter <|-- com.acl.screens.GameScreen
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Wall
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Chest
+com.acl.Tower -- "*" com.acl.datas.elements.Element
+com.acl.Tower -- "*" com.acl.datas.elements.monsters.Monster
+com.acl.Tower -- "*" com.acl.datas.elements.weapons.Weapon
+com.acl.Tower -- "1" com.acl.datas.elements.Player
+com.acl.screens.GameScreen -- "1" com.acl.ObstACLTower
+com.acl.screens.GameScreen -- "1" com.acl.listeners.KeyboardListener
+com.acl.screens.GameScreen -- "1" com.acl.managers.Text
+com.acl.ObstACLTower -- "1" com.acl.Tower
+@enduml

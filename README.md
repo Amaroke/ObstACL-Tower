@@ -1,6 +1,6 @@
 # ObstACL Tower
 
-## Iopeti Hugo, MATHIEU
+#### Iopeti Hugo, MATHIEU STEINBACH Hugo, YVOZ Ludovic & ZIMOL Guillaume
 
 ## Sommaire
 
@@ -20,11 +20,11 @@
         4. <a href="#review1">Sprint Review
         5. <a href="#retrospective1">Sprint Retrospective
     3. <a href="#sprint-2">Sprint 2</a>
-        1. Backlogs
-        2. Liste des tâches
-        3. Diagramme(s)
-        4. Sprint Review
-        5. Sprint Retrospective
+        1. <a href="#backlogs2">Backlogs
+        2. <a href="#liste2">Liste des tâches
+        3. <a href="#diagramme2">Diagramme(s)
+        4. <a href="#review2">Sprint Review
+        5. <a href="#retrospective2">Sprint Retrospective
     4. <a href="#sprint-3">Sprint 3</a>
         1. Backlogs
         2. Liste des tâches
@@ -212,13 +212,25 @@ La base de notre Jeu est donc complète ce qui nous permettra de travailler enco
 | Menu et pause                                 | 11       |
 | Ajout d'étages                                | 8        |
 | Amélioration des Hit-box                      | 5        |
-| Ajout de monstres                             | 3        |
+| Ajout de monstres                             | 8        |
 
 ### <p id="liste2">Liste des tâches</p>
 
-| Responsable            | Tâches | Temps estimé | Temps réel |
-|------------------------|--------|--------------|------------|
-| IOPETI Hugo            |        |              |            |
-| MATHIEU STEINBACH Hugo |        |              |            |
-| YVOZ Ludovic           |        |              |            |
-| ZIMOL Guillaume        |        |              |            |
+| Responsable            | Tâches                                                                                         | Temps estimé           | Temps réel |
+|------------------------|------------------------------------------------------------------------------------------------|------------------------|------------|
+| IOPETI Hugo            | Gestion de la pause la boucle de jeu.<br><br>Reprise de la boucle de jeu.<br><br>Ajout d'étages. | 2h<br><br>2h<br><br>1h |            |
+| MATHIEU STEINBACH Hugo | Attaque de mêlée et animation.<br><br>Ajout d'un monstre (Guardian)                            | 2h30<br><br>2h30       |            |
+| YVOZ Ludovic           | Gestion du menu principal<br><br>Gestion du menu pause                                         | 3h<br><br>2h           |            |
+| ZIMOL Guillaume        | Changement des Hit-box.<br><br>Ajout d'un monstre (Crawler)                                    | 3h<br><br>2h           |            |
+
+### <a id="diagramme2"></a>Diagramme UML
+
+<img src="sprint2/UML_predev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_predev.png"/>
+<img src="sprint2/SEQ_mainmenu.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_attack.png"/>
+<img src="sprint2/SEQ_pausemenu.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_endgame.png"/>
+<img src="sprint2/UML_postdev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_postdev.png"/>
+
+### <a id="review2"></a>Review
+
+### <a id="retrospective2"></a>Restrospective
+
