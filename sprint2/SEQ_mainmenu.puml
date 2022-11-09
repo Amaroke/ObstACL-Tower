@@ -1,0 +1,13 @@
+@startuml
+participant World as w
+
+w -> w: w.displayMainMenu()
+
+alt buttonStart.isClick = true
+w -> w: w.creatTower(0)
+end
+
+alt buttonQuit.isClick = true
+w -> w: w.destroyTower()
+end
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+participant user as u
+participant World as w
+
+u -> w: keypressed = escape
+w -> w: isPaused = true
+w -> w: w.displayMenuPause()
+
+alt keypressed = escape || buttonResume.isClick = true
+w -> w: isPaused = false
+w -> w: w.hideMenuPause()
+end
+
+alt buttonGiveUp.isClick = true
+w -> w: w.hideMenuPause()
+w -> w: isPaused = false
+w -> w: w.creatTower(0)
+end
+
+alt buttonFullscreen.isClick = true
+w -> w: w.fullScreen = true
+end
+
+alt mainMenu.isClick = true
+w -> w: w.displayMainMenu()
+end
+
+@enduml
