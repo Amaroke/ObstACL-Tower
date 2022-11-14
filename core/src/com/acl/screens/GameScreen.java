@@ -3,6 +3,7 @@ package com.acl.screens;
 import com.acl.ObstACLTower;
 import com.acl.Tower;
 import com.acl.datas.elements.Element;
+import com.acl.datas.elements.monsters.Guardian;
 import com.acl.datas.elements.weapons.FireBall;
 import com.acl.datas.elements.weapons.Weapon;
 import com.acl.listeners.KeyboardListener;
@@ -52,8 +53,20 @@ public class GameScreen extends ScreenAdapter {
                 obstACLTower.batch.draw(TextureFactory.getBackTexture(), 0, 0);
             }
             for (Element e : obstACLTower.getTower().getElements()) {
-                e.setSprite();
-                obstACLTower.batch.draw(e.getSprite(), e.getBody().getPosition().x, e.getBody().getPosition().y);
+                if (e.isGuardian()) {
+                    TextureRegion t = new TextureRegion((((Guardian) e).getAnimationNorth().getKeyFrame(timeBetweenRender/10f, true)));
+                    switch (((Guardian) e).getDirection()) {
+                        case SOUTH -> t = new TextureRegion((((Guardian) e).getAnimationSouth().getKeyFrame(timeBetweenRender/10f, true)));
+                        case EAST -> t = new TextureRegion((((Guardian) e).getAnimationEast().getKeyFrame(timeBetweenRender/10f, true)));
+                        case WEST -> t = new TextureRegion((((Guardian) e).getAnimationWest().getKeyFrame(timeBetweenRender/10f, true)));
+
+                    }
+                    obstACLTower.batch.draw(t, e.getBody().getPosition().x, e.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);
+
+                } else {
+                    e.setSprite();
+                    obstACLTower.batch.draw(e.getSprite(), e.getBody().getPosition().x, e.getBody().getPosition().y);
+                }
             }
             for (Weapon w : obstACLTower.getTower().getWeapons()) {
                 w.update();
@@ -71,7 +84,6 @@ public class GameScreen extends ScreenAdapter {
                                     obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y + 16, 0, 0, 16f, 16f, 1f, 1f, 270);
                             case WEST ->
                                     obstACLTower.batch.draw(t, w.getBody().getPosition().x + 16, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 90);
-
                         }
                     }
                     case SWORD -> {

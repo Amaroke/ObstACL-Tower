@@ -94,4 +94,8 @@ public abstract class Element {
         this.shape = shape;
     }
 
+    public boolean isGuardian(){
+        return false;
+    }
+
 }

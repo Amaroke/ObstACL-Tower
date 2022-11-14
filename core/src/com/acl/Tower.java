@@ -1,6 +1,7 @@
 package com.acl;
 
 import com.acl.datas.elements.*;
+import com.acl.datas.elements.monsters.Guardian;
 import com.acl.datas.elements.monsters.Slime;
 import com.acl.datas.elements.monsters.Monster;
 import com.acl.datas.elements.weapons.FireBall;
@@ -94,6 +95,11 @@ public class Tower {
                 element = slime;
                 addMonster(slime);
             }
+            case 'G' -> {
+                Monster guardian = new Guardian(position);
+                element = guardian;
+                addMonster(guardian);
+            }
         }
         if (element != null) {
             // We place the elements
@@ -170,6 +176,12 @@ public class Tower {
             if (this.player.getHp() == 0) {
                 this.endOfTheGameLost();
             }
+
+            if (this.getCollisionListener().isGuardianCollidesWithWall()) {
+                Guardian guardian = (Guardian) getElementFromBody(getCollisionListener().getGuardianCollided());
+                guardian.chaneDirection();
+            }
+
             // We move all the monsters
             for (Monster m : this.monsters) {
                 m.Move();
