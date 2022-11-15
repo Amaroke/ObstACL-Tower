@@ -23,6 +23,7 @@ public class GameScreen extends ScreenAdapter {
     private final Text text;
     private int timeBetweenRender = 0;
 
+    private int weaponCooldown = 0;
     private int pauseTime = 100;
 
     public GameScreen(ObstACLTower obstACLTower) {
@@ -47,6 +48,7 @@ public class GameScreen extends ScreenAdapter {
             // We display things.
             obstACLTower.batch.begin();
             timeBetweenRender += 1;
+            weaponCooldown--;
             if (keyboardListener.isDebug()) {
                 new Box2DDebugRenderer().render(obstACLTower.getTower().getWorld(), obstACLTower.getCamera().combined);
             } else {
@@ -74,7 +76,7 @@ public class GameScreen extends ScreenAdapter {
                 TextureRegion t;
                 switch (obstACLTower.getTower().getPlayer().getWeaponType()) {
                     case FIREBALL -> {
-                        t = new TextureRegion((((FireBall) w).getAnimation().getKeyFrame(timeBetweenRender, true)));
+                        t = new TextureRegion(w.getAnimation().getKeyFrame(timeBetweenRender, true));
                         switch (w.getDirection()) {
                             case NORTH ->
                                     obstACLTower.batch.draw(t, w.getBody().getPosition().x, w.getBody().getPosition().y, 0, 0, 16f, 16f, 1f, 1f, 0);
@@ -87,7 +89,7 @@ public class GameScreen extends ScreenAdapter {
                         }
                     }
                     case SWORD -> {
-                        t = new TextureRegion(TextureFactory.getSwordTexture());
+                        t = new TextureRegion(w.getSprite());
                         switch (w.getDirection()) {
                             case NORTH ->
                                     obstACLTower.batch.draw(t, w.getBody().getPosition().x + 16, w.getBody().getPosition().y + 16, 0, 0, 16f, 16f, 1f, 1f, 180);
@@ -106,7 +108,10 @@ public class GameScreen extends ScreenAdapter {
             }
             // We get weapon use
             if (this.keyboardListener.getUseWeapon()) {
-                this.obstACLTower.getTower().createWeapon();
+                if(weaponCooldown <= 0) {
+                    this.weaponCooldown = 30; //TODO A INCLURE DANS LES CONSTANTES
+                    this.obstACLTower.getTower().createWeapon();
+                }
             }
             obstACLTower.getTower().getPlayer().draw(obstACLTower.batch);
             obstACLTower.batch.end();

@@ -216,12 +216,12 @@ La base de notre Jeu est donc complète ce qui nous permettra de travailler enco
 
 ### <p id="liste2">Liste des tâches</p>
 
-| Responsable            | Tâches                                                                                         | Temps estimé           | Temps réel |
-|------------------------|------------------------------------------------------------------------------------------------|------------------------|------------|
-| IOPETI Hugo            | Gestion de la pause la boucle de jeu.<br><br>Reprise de la boucle de jeu.<br><br>Ajout d'étages. | 2h<br><br>2h<br><br>1h |            |
-| MATHIEU STEINBACH Hugo | Attaque de mêlée et animation.<br><br>Ajout d'un monstre (Guardian)                            | 2h30<br><br>2h30       |            |
-| YVOZ Ludovic           | Gestion du menu principal<br><br>Gestion du menu pause                                         | 3h<br><br>2h           |            |
-| ZIMOL Guillaume        | Changement des Hit-box.<br><br>Ajout d'un monstre (Crawler)                                    | 3h<br><br>2h           |            |
+| Responsable            | Tâches                                                                                           | Temps estimé           | Temps réel     |
+|------------------------|--------------------------------------------------------------------------------------------------|------------------------|----------------|
+| IOPETI Hugo            | Gestion de la pause la boucle de jeu.<br><br>Reprise de la boucle de jeu.<br><br>Ajout d'étages. | 2h<br><br>2h<br><br>1h |                |
+| MATHIEU STEINBACH Hugo | Attaque de mêlée et animation.<br><br>Ajout d'un monstre (Guardian)                              | 2h30<br><br>2h30       | 2h<br><br>2h30 |
+| YVOZ Ludovic           | Gestion du menu principal<br><br>Gestion du menu pause                                           | 3h<br><br>2h           |                |
+| ZIMOL Guillaume        | Changement des Hit-box.<br><br>Ajout d'un monstre (Crawler)                                      | 3h<br><br>2h           |                |
 
 ### <a id="diagramme2"></a>Diagramme UML
 

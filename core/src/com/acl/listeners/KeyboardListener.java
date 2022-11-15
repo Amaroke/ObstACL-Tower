@@ -42,29 +42,6 @@ public class KeyboardListener implements InputProcessor {
                 Gdx.graphics.setWindowedMode(currentMode.width-200, currentMode.height-200);
             else
                 Gdx.graphics.setFullscreenMode(currentMode);
-            /*
-            Scanner input = new Scanner(System.in);
-
-            int choice = -1;
-            while (choice == -1) {
-                System.out.println("********* MENU PAUSE *********\n");
-                System.out.print("1.) Exit \n");
-                System.out.print("2.) Resume\n");
-                System.out.print("\nEnter Your Menu Choice: ");
-
-                choice = input.nextInt();
-
-                switch (choice) {
-
-                    case 1:
-                        Gdx.app.exit();
-                        break;
-
-                    case 2:
-                        break;
-                }
-            }*/
-
         }
         // When pressing the space bar, the weapon of the player is used
         if (keycode == Input.Keys.SPACE) {

@@ -5,7 +5,9 @@ import com.acl.datas.elements.monsters.Guardian;
 import com.acl.datas.elements.monsters.Slime;
 import com.acl.datas.elements.monsters.Monster;
 import com.acl.datas.elements.weapons.FireBall;
+import com.acl.datas.elements.weapons.Sword;
 import com.acl.datas.elements.weapons.Weapon;
+import com.acl.enums.WeaponType;
 import com.acl.listeners.CollisionListener;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
@@ -60,6 +62,9 @@ public class Tower {
 
     public void createWeapon() {
         Weapon weapon = new FireBall(getPlayer().getBody().getPosition(), getPlayer().getDirection());
+        if (getPlayer().getWeaponType() == WeaponType.SWORD) {
+            weapon = new Sword(getPlayer().getBody().getPosition(), getPlayer().getDirection());
+        }
         weapon.configureBodyDef();
         weapon.createBody(getWorld());
         weapon.setFixture();
@@ -120,6 +125,11 @@ public class Tower {
             for (Weapon w : this.weapons) {
                 w.update();
                 w.setPosition(w.getBody().getPosition());
+                if(w.toDestroy()) {
+                    getWeapons().remove(w);
+                    deleteElem(w);
+                    break;
+                }
             }
 
             if (this.getCollisionListener().isWeaponCollidesWithMonster()) {

@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Player extends Element {
     // TODO Weapon can be swap
-    private final WeaponType weaponType = WeaponType.SWORD;
+    private final WeaponType weaponType = WeaponType.FIREBALL;
     private Direction direction = Direction.NORTH;
     private int score;
     private int hp;
