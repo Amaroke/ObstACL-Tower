@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Stair extends Element {
+    private boolean locked = true;
     public Stair(Vector2 v) {
         super(v);
         this.shape = new PolygonShape();
@@ -30,12 +31,16 @@ public class Stair extends Element {
     }
 
     @Override
-    public void setSprite() {
-        this.sprite = new Sprite(TextureFactory.getStairTexture());
+    public void setSprite(){
+        this.sprite = this.locked ? new Sprite(TextureFactory.getDoorTexture()) : new Sprite(TextureFactory.getStairTexture());
     }
 
     @Override
     public UserData getUserData() {
         return UserData.STAIR;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 }

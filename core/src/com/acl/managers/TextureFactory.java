@@ -2,6 +2,7 @@ package com.acl.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class TextureFactory {
 
@@ -26,6 +27,8 @@ public class TextureFactory {
     private final static Texture swordTexture = new Texture((Gdx.files.internal("sword.png")));
     private final static Texture slimeTexture = new Texture((Gdx.files.internal("slime.png")));
     private final static Texture guardianTexture = new Texture((Gdx.files.internal("guardian.png")));
+
+    private final static Texture doorTexture = new Texture((Gdx.files.internal("door.png")));
 
     public static Texture getBackTexture() {
         return backTexture;
@@ -71,4 +74,7 @@ public class TextureFactory {
         return guardianTexture;
     }
 
+    public static Texture getDoorTexture() {
+        return doorTexture;
+    }
 }

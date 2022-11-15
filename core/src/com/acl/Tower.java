@@ -26,9 +26,10 @@ public class Tower {
     private boolean victory;
     private boolean defeat;
     private boolean gamePaused;
-
     private boolean allEnemiesAreDead;
     private int score = 0;
+
+    private Stair stair;
 
     private CollisionListener collisionListener;
 
@@ -91,7 +92,10 @@ public class Tower {
                 player.setFixture();
             }
             case 'W' -> element = new Wall(position);
-            case 'S' -> element = new Stair(position);
+            case 'S' ->  {
+                this.stair = new Stair(position);
+                element = this.stair;
+            }
             case 'C' -> element = new Chest(position);
             case 'T' -> element = new Trap(position);
             case 'B' -> element = new BreakableObject(position);
@@ -150,6 +154,8 @@ public class Tower {
 
             if (this.monsters.size() == 0) {
                 this.allEnemiesAreDead = true;
+                //Loading the stair
+                this.stair.setLocked(false);
             }
 
             if (this.player.getHp() <= 0) {
