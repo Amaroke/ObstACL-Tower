@@ -21,7 +21,7 @@ public class Sword extends Weapon {
     @Override
     public void update() {
         System.out.println("GROS FDP" + count);
-        if(count < 20 && !retour) {
+        if(count < 25 && !retour) {
             count++;
             switch (this.getDirection()) {
                 case NORTH -> this.getBody().setLinearVelocity(0, velocity);

@@ -41,6 +41,10 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        if (keyboardListener.isMenuOpen()) {
+            obstACLTower.setScreen(new MenuScreen(obstACLTower, keyboardListener, this));
+            return;
+        }
         if (!this.obstACLTower.getTower().isGamePaused()) {
             this.obstACLTower.getTower().update();
             // We clean screen.

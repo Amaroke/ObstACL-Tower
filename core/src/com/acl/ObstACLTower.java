@@ -1,6 +1,7 @@
 package com.acl;
 
 import com.acl.screens.GameScreen;
+import com.acl.screens.MenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +15,7 @@ public class ObstACLTower extends Game {
     @Override
     public void create() {
         setScreen(new GameScreen(this));
+        //setScreen(new MenuScreen(this));
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 16 * 16, 9 * 16);
         camera.position.y += 16;

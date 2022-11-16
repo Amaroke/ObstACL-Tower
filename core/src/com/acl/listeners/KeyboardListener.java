@@ -16,6 +16,7 @@ public class KeyboardListener implements InputProcessor {
     private Direction direction;
     private boolean debug = false;
     private boolean fullScreen = false;
+    private boolean menuOpen = false;
 
     public Vector2 getMotion() {
         return motion;
@@ -77,6 +78,10 @@ public class KeyboardListener implements InputProcessor {
             debug = !debug;
             return true;
         }
+        if (keycode == Input.Keys.CONTROL_LEFT) {
+            menuOpen = !menuOpen;
+            return true;
+        }
         return false;
     }
 
@@ -127,5 +132,9 @@ public class KeyboardListener implements InputProcessor {
 
     public boolean isDebug() {
         return debug;
+    }
+
+    public boolean isMenuOpen() {
+        return menuOpen;
     }
 }

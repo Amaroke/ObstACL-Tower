@@ -9,6 +9,7 @@ import com.acl.datas.elements.weapons.Sword;
 import com.acl.datas.elements.weapons.Weapon;
 import com.acl.enums.WeaponType;
 import com.acl.listeners.CollisionListener;
+import com.acl.listeners.KeyboardListener;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -121,6 +122,8 @@ public class Tower {
 
     public void update() {
         if (!victory && !defeat) {
+
+
             // On met à jour la position des éléments dans le monde
             for (Element e : this.elements) {
                 e.setPosition(e.getBody().getPosition());

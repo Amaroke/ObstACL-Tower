@@ -27,6 +27,7 @@ public class TextureFactory {
     private final static Texture swordTexture = new Texture((Gdx.files.internal("sword.png")));
     private final static Texture slimeTexture = new Texture((Gdx.files.internal("slime.png")));
     private final static Texture guardianTexture = new Texture((Gdx.files.internal("guardian.png")));
+    private final static Texture menuBackgroundTexture = new Texture((Gdx.files.internal("obstACL_tower.png")));
 
     private final static Texture doorTexture = new Texture((Gdx.files.internal("door.png")));
 
@@ -72,6 +73,10 @@ public class TextureFactory {
 
     public static Texture getGuardianTexture() {
         return guardianTexture;
+    }
+
+    public static Texture getMenuBackgroundTexture() {
+        return menuBackgroundTexture;
     }
 
     public static Texture getDoorTexture() {
