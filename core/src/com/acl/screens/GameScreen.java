@@ -4,10 +4,10 @@ import com.acl.ObstACLTower;
 import com.acl.Tower;
 import com.acl.datas.elements.Element;
 import com.acl.datas.elements.monsters.Guardian;
-import com.acl.datas.elements.weapons.FireBall;
+import com.acl.datas.elements.monsters.Lich;
 import com.acl.datas.elements.weapons.Weapon;
-import com.acl.listeners.KeyboardListener;
 import com.acl.enums.Direction;
+import com.acl.listeners.KeyboardListener;
 import com.acl.managers.Text;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.Gdx;
@@ -60,11 +60,21 @@ public class GameScreen extends ScreenAdapter {
             }
             for (Element e : obstACLTower.getTower().getElements()) {
                 if (e.isGuardian()) {
-                    TextureRegion t = new TextureRegion((((Guardian) e).getAnimationNorth().getKeyFrame(timeBetweenRender/10f, true)));
+                    TextureRegion t = new TextureRegion((((Guardian) e).getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true)));
                     switch (((Guardian) e).getDirection()) {
-                        case SOUTH -> t = new TextureRegion((((Guardian) e).getAnimationSouth().getKeyFrame(timeBetweenRender/10f, true)));
-                        case EAST -> t = new TextureRegion((((Guardian) e).getAnimationEast().getKeyFrame(timeBetweenRender/10f, true)));
-                        case WEST -> t = new TextureRegion((((Guardian) e).getAnimationWest().getKeyFrame(timeBetweenRender/10f, true)));
+                        case SOUTH -> t = new TextureRegion((((Guardian) e).getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case EAST -> t = new TextureRegion((((Guardian) e).getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case WEST -> t = new TextureRegion((((Guardian) e).getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true)));
+
+                    }
+                    obstACLTower.batch.draw(t, e.getBody().getPosition().x, e.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);
+
+                } else if (e.isLich()) {
+                    TextureRegion t = new TextureRegion((((Lich) e).getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true)));
+                    switch (((Lich) e).getDirection()) {
+                        case SOUTH -> t = new TextureRegion((((Lich) e).getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case EAST -> t = new TextureRegion((((Lich) e).getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case WEST -> t = new TextureRegion((((Lich) e).getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true)));
 
                     }
                     obstACLTower.batch.draw(t, e.getBody().getPosition().x, e.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);

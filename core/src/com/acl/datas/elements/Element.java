@@ -94,7 +94,11 @@ public abstract class Element {
         this.shape = shape;
     }
 
-    public boolean isGuardian(){
+    public boolean isGuardian() {
+        return false;
+    }
+
+    public boolean isLich() {
         return false;
     }
 

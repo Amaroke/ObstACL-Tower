@@ -1,7 +1,7 @@
 package com.acl.datas.elements.weapons;
 
-import com.acl.enums.UserData;
 import com.acl.enums.Direction;
+import com.acl.enums.UserData;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -20,7 +20,6 @@ public class Sword extends Weapon {
 
     @Override
     public void update() {
-        System.out.println("GROS FDP" + count);
         if(count < 25 && !retour) {
             count++;
             switch (this.getDirection()) {

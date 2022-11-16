@@ -2,14 +2,14 @@ package com.acl;
 
 import com.acl.datas.elements.*;
 import com.acl.datas.elements.monsters.Guardian;
-import com.acl.datas.elements.monsters.Slime;
+import com.acl.datas.elements.monsters.Lich;
 import com.acl.datas.elements.monsters.Monster;
+import com.acl.datas.elements.monsters.Slime;
 import com.acl.datas.elements.weapons.FireBall;
 import com.acl.datas.elements.weapons.Sword;
 import com.acl.datas.elements.weapons.Weapon;
 import com.acl.enums.WeaponType;
 import com.acl.listeners.CollisionListener;
-import com.acl.listeners.KeyboardListener;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -110,6 +110,11 @@ public class Tower {
                 element = guardian;
                 addMonster(guardian);
             }
+            case 'L' -> {
+                Monster lich = new Lich(position);
+                element = lich;
+                addMonster(lich);
+            }
         }
         if (element != null) {
             // We place the elements
@@ -199,6 +204,12 @@ public class Tower {
             if (this.getCollisionListener().isGuardianCollidesWithWall()) {
                 Guardian guardian = (Guardian) getElementFromBody(getCollisionListener().getGuardianCollided());
                 guardian.chaneDirection();
+            }
+
+            if (this.getCollisionListener().isLichCollidesWithWall()) {
+                System.out.println("caca");
+                Lich lich = (Lich) getElementFromBody(getCollisionListener().getLichCollided());
+                lich.chaneDirection();
             }
 
             // We move all the monsters

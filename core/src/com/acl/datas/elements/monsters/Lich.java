@@ -8,30 +8,22 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-import java.util.Random;
+public class Lich extends Monster {
 
-public class Guardian extends Monster {
-
-    private Direction direction;
     private final int givenScore;
     private final Animation<TextureRegion> animationNorth;
     private final Animation<TextureRegion> animationSouth;
     private final Animation<TextureRegion> animationWest;
     private final Animation<TextureRegion> animationEast;
+    private Direction direction;
 
-    public Guardian(Vector2 v) {
+    public Lich(Vector2 v) {
         super(v);
-        int random = new Random().nextInt(4) + 1;
-        switch (random) {
-            case 1 -> direction = Direction.NORTH;
-            case 2 -> direction = Direction.SOUTH;
-            case 3 -> direction = Direction.WEST;
-            case 4 -> direction = Direction.EAST;
-        }
-        animationNorth = new Animation<>(1f, TextureRegion.split(TextureFactory.getGuardianTexture(), 48, 64)[0]);
-        animationSouth = new Animation<>(1f, TextureRegion.split(TextureFactory.getGuardianTexture(), 48, 64)[2]);
-        animationWest = new Animation<>(1f, TextureRegion.split(TextureFactory.getGuardianTexture(), 48, 64)[3]);
-        animationEast = new Animation<>(1f, TextureRegion.split(TextureFactory.getGuardianTexture(), 48, 64)[1]);
+        direction = Direction.EAST;
+        animationNorth = new Animation<>(1f, TextureRegion.split(TextureFactory.getLichTexture(), 48, 64)[0]);
+        animationSouth = new Animation<>(1f, TextureRegion.split(TextureFactory.getLichTexture(), 48, 64)[2]);
+        animationWest = new Animation<>(1f, TextureRegion.split(TextureFactory.getLichTexture(), 48, 64)[3]);
+        animationEast = new Animation<>(1f, TextureRegion.split(TextureFactory.getLichTexture(), 48, 64)[1]);
 
         setHeight(14);
         setWidth(14);
@@ -51,18 +43,19 @@ public class Guardian extends Monster {
         this.restitution = 0.1f;
         this.friction = 0.5f;
 
-        this.setHp(20);
-        this.setDmg(30);
-        this.givenScore = 100;
+        this.setHp(50);
+        this.setDmg(10);
+        this.givenScore = 120;
     }
 
     @Override
     public void setSprite() {
+
     }
 
     @Override
     public void Move() {
-        // The guardian monster move horizontally or vertically only
+        // The lich monster move around the
         float monsterMovementForce = 10f;
         switch (this.getDirection()) {
             case NORTH -> setMotion(new Vector2(0, monsterMovementForce));
@@ -72,18 +65,8 @@ public class Guardian extends Monster {
         }
     }
 
-    public void chaneDirection() {
-        switch (this.getDirection()) {
-            case NORTH -> this.direction = Direction.SOUTH;
-            case SOUTH -> this.direction = Direction.NORTH;
-            case EAST ->  this.direction = Direction.WEST;
-            case WEST ->  this.direction = Direction.EAST;
-        }
-    }
-
-    public int giveLoot() {
-        // The base monster gives gold coins and score
-        return givenScore;
+    public Direction getDirection() {
+        return direction;
     }
 
     public Animation<TextureRegion> getAnimationNorth() {
@@ -103,21 +86,32 @@ public class Guardian extends Monster {
     }
 
     @Override
-    public boolean isGuardian() {
+    public boolean isLich() {
         return true;
     }
 
     @Override
-    public boolean isLich() {
+    public boolean isGuardian() {
         return false;
     }
 
-    public Direction getDirection() {
-        return direction;
+    @Override
+    public int giveLoot() {
+        return 0;
+    }
+
+    public void chaneDirection() {
+        System.out.println(this.getDirection());
+        switch (this.getDirection()) {
+            case NORTH -> this.direction = Direction.EAST;
+            case SOUTH -> this.direction = Direction.WEST;
+            case EAST -> this.direction = Direction.SOUTH;
+            case WEST -> this.direction = Direction.NORTH;
+        }
     }
 
     @Override
     public UserData getUserData() {
-        return UserData.GUARDIAN;
+        return UserData.LICH;
     }
 }

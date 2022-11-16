@@ -9,6 +9,7 @@ public class CollisionListener implements ContactListener {
     private boolean playerCollidesWithTrap = false;
 
     private boolean guardianCollidesWithWall = false;
+    private boolean lichCollidesWithWall = false;
     private boolean weaponCollidesWithBreakableObject = false;
 
     private final boolean WeaponCollidesWithMonster = false;
@@ -20,8 +21,8 @@ public class CollisionListener implements ContactListener {
     private Body chestCollided = null;
     private Body trapCollided = null;
     private Body breakableObjectCollided = null;
-
     private Body guardianCollided = null;
+    private Body lichCollided = null;
 
     @Override
     public void beginContact(Contact contact) {
@@ -64,12 +65,12 @@ public class CollisionListener implements ContactListener {
             this.breakableObjectCollided = contact.getFixtureA().getBody();
         }
 
-        if (A == UserData.PLAYER && (B == UserData.MONSTER || B == UserData.GUARDIAN)) {
+        if (A == UserData.PLAYER && (B == UserData.MONSTER || B == UserData.GUARDIAN || B == UserData.LICH)) {
             this.playerCollidesWithMonster = true;
             this.monsterCollided = contact.getFixtureB().getBody();
         }
 
-        if ((A == UserData.MONSTER || A == UserData.GUARDIAN) && B == UserData.PLAYER) {
+        if ((A == UserData.MONSTER || A == UserData.GUARDIAN || A == UserData.LICH) && B == UserData.PLAYER) {
             this.playerCollidesWithMonster = true;
             this.monsterCollided = contact.getFixtureA().getBody();
         }
@@ -79,14 +80,19 @@ public class CollisionListener implements ContactListener {
             guardianCollided = (A == UserData.GUARDIAN) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
+        if ((A == UserData.LICH && B == UserData.WALL) || (A == UserData.WALL && B == UserData.LICH)) {
+            this.lichCollidesWithWall = true;
+            lichCollided = (A == UserData.LICH) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+        }
+
         if ((A == UserData.WEAPON && B == UserData.WALL) || (A == UserData.WALL && B == UserData.WEAPON)) {
             this.weaponCollidesWithWall = true;
             weaponCollided = (A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
-        if ((A == UserData.WEAPON && (B == UserData.MONSTER || B == UserData.GUARDIAN)) || ((A == UserData.MONSTER || A == UserData.GUARDIAN) && B == UserData.WEAPON)) {
+        if ((A == UserData.WEAPON && (B == UserData.MONSTER || B == UserData.GUARDIAN || B == UserData.LICH)) || ((A == UserData.MONSTER || A == UserData.GUARDIAN || A == UserData.LICH) && B == UserData.WEAPON)) {
             this.weaponCollidesWithMonster = true;
-            monsterCollided = (A == UserData.MONSTER || A == UserData.GUARDIAN) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+            monsterCollided = (A == UserData.MONSTER || A == UserData.GUARDIAN || A == UserData.LICH) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
             weaponCollided = (A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
     }
@@ -158,6 +164,12 @@ public class CollisionListener implements ContactListener {
         return value;
     }
 
+    public boolean isLichCollidesWithWall() {
+        boolean value = lichCollidesWithWall;
+        lichCollidesWithWall = false;
+        return value;
+    }
+
     public void setWeaponCollidesWithBreakableObject(boolean weaponCollidesWithBreakableObject) {
         this.weaponCollidesWithBreakableObject = weaponCollidesWithBreakableObject;
     }
@@ -187,6 +199,12 @@ public class CollisionListener implements ContactListener {
     public Body getGuardianCollided() {
         Body value = guardianCollided;
         guardianCollided = null;
+        return value;
+    }
+
+    public Body getLichCollided() {
+        Body value = lichCollided;
+        lichCollided = null;
         return value;
     }
 

@@ -2,7 +2,6 @@ package com.acl.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class TextureFactory {
 
@@ -28,7 +27,7 @@ public class TextureFactory {
     private final static Texture slimeTexture = new Texture((Gdx.files.internal("slime.png")));
     private final static Texture guardianTexture = new Texture((Gdx.files.internal("guardian.png")));
     private final static Texture menuBackgroundTexture = new Texture((Gdx.files.internal("obstACL_tower.png")));
-
+    private final static Texture lichTexture = new Texture((Gdx.files.internal("dead_lich.png")));
     private final static Texture doorTexture = new Texture((Gdx.files.internal("door.png")));
 
     public static Texture getBackTexture() {
@@ -77,6 +76,10 @@ public class TextureFactory {
 
     public static Texture getMenuBackgroundTexture() {
         return menuBackgroundTexture;
+    }
+
+    public static Texture getLichTexture() {
+        return lichTexture;
     }
 
     public static Texture getDoorTexture() {

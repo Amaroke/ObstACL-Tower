@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
 public class MenuScreen extends ScreenAdapter {
-    private ObstACLTower obstACLTower;
+    private final ObstACLTower obstACLTower;
     private final Texture background;
     private final KeyboardListener keyboardListener;
     private final GameScreen gameScreen;
@@ -24,7 +24,6 @@ public class MenuScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        System.out.println("OMG le menu");
         Gdx.input.setInputProcessor(this.keyboardListener);
     }
 
