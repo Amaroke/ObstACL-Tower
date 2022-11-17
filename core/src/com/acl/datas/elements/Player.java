@@ -93,7 +93,7 @@ public class Player extends Element {
     }
 
     public void receiveDamage(int amount) {
-        this.hp -= amount;
+        this.hp = Math.max(hp - amount, 0);
     }
 
     public Direction getDirection() {
