@@ -68,9 +68,12 @@ public class GameScreen extends ScreenAdapter {
                 if (e.isGuardian()) {
                     TextureRegion t = new TextureRegion((((Guardian) e).getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true)));
                     switch (((Guardian) e).getDirection()) {
-                        case SOUTH -> t = new TextureRegion((((Guardian) e).getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true)));
-                        case EAST -> t = new TextureRegion((((Guardian) e).getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true)));
-                        case WEST -> t = new TextureRegion((((Guardian) e).getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case SOUTH ->
+                                t = new TextureRegion((((Guardian) e).getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case EAST ->
+                                t = new TextureRegion((((Guardian) e).getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case WEST ->
+                                t = new TextureRegion((((Guardian) e).getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true)));
 
                     }
                     obstACLTower.batch.draw(t, e.getBody().getPosition().x, e.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);
@@ -78,9 +81,12 @@ public class GameScreen extends ScreenAdapter {
                 } else if (e.isLich()) {
                     TextureRegion t = new TextureRegion((((Lich) e).getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true)));
                     switch (((Lich) e).getDirection()) {
-                        case SOUTH -> t = new TextureRegion((((Lich) e).getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true)));
-                        case EAST -> t = new TextureRegion((((Lich) e).getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true)));
-                        case WEST -> t = new TextureRegion((((Lich) e).getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case SOUTH ->
+                                t = new TextureRegion((((Lich) e).getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case EAST ->
+                                t = new TextureRegion((((Lich) e).getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true)));
+                        case WEST ->
+                                t = new TextureRegion((((Lich) e).getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true)));
 
                     }
                     obstACLTower.batch.draw(t, e.getBody().getPosition().x, e.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);
@@ -128,7 +134,7 @@ public class GameScreen extends ScreenAdapter {
             }
             // We get weapon use
             if (this.keyboardListener.getUseWeapon()) {
-                if(weaponCooldown <= 0) {
+                if (weaponCooldown <= 0) {
                     this.weaponCooldown = 30; //TODO A INCLURE DANS LES CONSTANTES
                     this.obstACLTower.getTower().createWeapon();
                 }
@@ -144,18 +150,25 @@ public class GameScreen extends ScreenAdapter {
             // We display score
             text.displayScore("Score = " + obstACLTower.getTower().getScore());
             text.displayHP("Health = " + obstACLTower.getTower().getPlayer().getHp());
-            // Print coordinate
+        } else {
             if (this.obstACLTower.getTower().isVictory()) {
                 text.displayStageClear("Stage Clear");
             }
             if (this.obstACLTower.getTower().isDefeat()) {
                 text.displayDie("You lose \n Your score = " + obstACLTower.getTower().getScore());
             }
-
             if (pauseTime == 0) {
+                Tower tower = this.obstACLTower.getTower();
                 this.pauseTime = 100;
-                this.obstACLTower.getTower().createTower(this.obstACLTower.getTower().getNbLevel(), this.obstACLTower.getTower().getScore());
+                tower.getWorld().dispose();
+
+                if (tower.isVictory()) {
+                    tower.createTower(tower.getNbLevel() == 3 ? 1 : tower.getNbLevel() + 1, tower.getScore());
+                } else {
+                    tower.createTower(1, 0);
+                }
             }
+            pauseTime--;
         }
     }
 }

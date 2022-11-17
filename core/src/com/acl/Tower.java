@@ -31,11 +31,10 @@ public class Tower {
     private int score;
     private Stair stair;
     private int nbLevel;
-
     private CollisionListener collisionListener;
 
     public Tower() {
-        createTower(1,0);
+        createTower(1, 0);
     }
 
     public void createTower(int nbLevel, int score) {
@@ -100,7 +99,7 @@ public class Tower {
                 player.setFixture();
             }
             case 'W' -> element = new Wall(position);
-            case 'S' ->  {
+            case 'S' -> {
                 this.stair = new Stair(position);
                 element = this.stair;
             }
@@ -142,7 +141,7 @@ public class Tower {
             for (Weapon w : this.weapons) {
                 w.update();
                 w.setPosition(w.getBody().getPosition());
-                if(w.toDestroy()) {
+                if (w.toDestroy()) {
                     getWeapons().remove(w);
                     deleteElem(w);
                     break;
@@ -233,17 +232,12 @@ public class Tower {
         gamePaused = true;
 
         setScore(0);
-        this.getWorld().dispose();
-        createTower(1, 0);
     }
 
     public void endOfTheStageWon() {
         // When the game is won.
         victory = true;
         gamePaused = true;
-        getWorld().dispose();
-
-        createTower(getNbLevel()== 3 ? 1 : this.nbLevel + 1, getScore());
     }
 
     private void checkMonsterHealth(Monster m) {
