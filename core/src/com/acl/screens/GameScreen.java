@@ -12,6 +12,7 @@ import com.acl.managers.Text;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -25,17 +26,22 @@ public class GameScreen extends ScreenAdapter {
 
     private int weaponCooldown = 0;
     private int pauseTime = 100;
+    private final OrthographicCamera camera;
 
     public GameScreen(ObstACLTower obstACLTower) {
         this.obstACLTower = obstACLTower;
         this.obstACLTower.setTower(new Tower());
         this.text = new Text();
-
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 16 * 16, 9 * 16);
+        camera.position.y += 16;
         Gdx.input.setInputProcessor(this.keyboardListener);
     }
 
     @Override
     public void show() {
+        obstACLTower.setCamera(camera);
+        obstACLTower.getCamera().update();
         Gdx.input.setInputProcessor(this.keyboardListener);
     }
 
