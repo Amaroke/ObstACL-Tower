@@ -17,7 +17,16 @@ public class BreakableObject extends Element {
         this.restitution = 0.1f;
         this.friction = 0.25f;
         this.givenScore = 5;
-        Vector2[] points = {new Vector2(0, 0), new Vector2(0, 16), new Vector2(16, 16), new Vector2(16, 0)};
+        Vector2[] points = {
+                new Vector2(4f, 2f),
+                new Vector2(8f, 2f),
+                new Vector2(2f, 4f),
+                new Vector2(10f, 4f),
+                new Vector2(4f, 14f),
+                new Vector2(8f, 14f),
+                new Vector2(2f, 12f),
+                new Vector2(10f, 12f),
+        };
         this.shape.set(points);
     }
 

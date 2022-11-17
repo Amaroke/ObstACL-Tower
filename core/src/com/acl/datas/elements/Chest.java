@@ -22,7 +22,7 @@ public class Chest extends Element {
         Random random = new Random();
         this.givenScore = random.nextInt(50, 200);
 
-        Vector2[] points = {new Vector2(0, 0), new Vector2(0, 16), new Vector2(16, 16), new Vector2(16, 0)};
+        Vector2[] points = {new Vector2(2, 2), new Vector2(12, 2), new Vector2(12, 12), new Vector2(2, 12), new Vector2(4, 14), new Vector2(10, 14)};
         this.shape.set(points);
         this.setSprite();
     }

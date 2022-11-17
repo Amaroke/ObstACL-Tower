@@ -19,9 +19,25 @@ public abstract class Weapon extends Element {
         this.density = 0f;
         this.restitution = 0f;
         this.friction = 0f;
-        Vector2[] points = {new Vector2(0, 0), new Vector2(0, 16), new Vector2(16, 16), new Vector2(16, 0)};
-        this.shape.set(points);
         direction = d;
+        switch (d) {
+            case EAST -> {
+                Vector2[] points = {new Vector2(4, 6), new Vector2(4, 10), new Vector2(14, 6), new Vector2(14, 10), new Vector2(16, 8)};
+                this.shape.set(points);
+            }
+            case WEST -> {
+                Vector2[] points = {new Vector2(4, 6), new Vector2(4, 10), new Vector2(14, 6), new Vector2(14, 10), new Vector2(2, 8)};
+                this.shape.set(points);
+            }
+            case NORTH -> {
+                Vector2[] points = {new Vector2(6, 4), new Vector2(10, 4), new Vector2(6, 14), new Vector2(10, 14), new Vector2(8, 16)};
+                this.shape.set(points);
+            }
+            case SOUTH -> {
+                Vector2[] points = {new Vector2(6, 4), new Vector2(10, 4), new Vector2(6, 14), new Vector2(10, 14), new Vector2(8, 2)};
+                this.shape.set(points);
+            }
+        }
     }
 
     @Override

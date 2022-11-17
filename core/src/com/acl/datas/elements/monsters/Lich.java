@@ -31,10 +31,10 @@ public class Lich extends Monster {
         // The base monster is represented by a square for now.
         PolygonShape shape = new PolygonShape();
         Vector2[] vectors = new Vector2[4];
-        vectors[0] = new Vector2(0f, 0f);
-        vectors[1] = new Vector2(getWidth(), 0f);
-        vectors[2] = new Vector2(getWidth(), getHeight());
-        vectors[3] = new Vector2(0f, getHeight());
+        vectors[0] = new Vector2(4f, 2f);
+        vectors[1] = new Vector2(getWidth() - 4, 2f);
+        vectors[2] = new Vector2(getWidth() - 4, getHeight() - 2f);
+        vectors[3] = new Vector2(4f, getHeight() - 2f);
 
         shape.set(vectors);
         setShape(shape);
