@@ -54,6 +54,8 @@ public class Guardian extends Monster {
         this.setHp(20);
         this.setDmg(30);
         this.givenScore = 100;
+
+        sensor = true;
     }
 
     @Override

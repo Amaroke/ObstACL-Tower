@@ -46,6 +46,8 @@ public class Lich extends Monster {
         this.setHp(20);
         this.setDmg(10);
         this.givenScore = 120;
+
+        sensor = true;
     }
 
     @Override
