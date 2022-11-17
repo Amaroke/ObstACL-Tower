@@ -28,8 +28,8 @@ public class Text {
         FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
         //PARAMS
-        params.size = Gdx.graphics.getWidth() * 50 / 1024;
-        params.color = new Color(255, 255, 0, 0.75f);
+        params.size = Gdx.graphics.getWidth() * 35 / 1024;
+        params.color = new Color(255, 0, 100, 0.75f);
         params.borderColor = Color.BLACK;
         params.borderWidth = (float) (Gdx.graphics.getWidth() * 3) / 1024;
         params.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
