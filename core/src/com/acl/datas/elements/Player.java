@@ -14,7 +14,6 @@ public class Player extends Element {
     // TODO Weapon can be swap
     private final WeaponType weaponType = WeaponType.SWORD;
     private Direction direction = Direction.NORTH;
-    private int score;
     private int hp;
 
     public Player(Vector2 v) {
@@ -31,7 +30,6 @@ public class Player extends Element {
         vectors[2] = new Vector2(getWidth(), getHeight());
         vectors[3] = new Vector2(0f, getHeight());
 
-        score = 0;
         hp = 100;
 
         this.shape.set(vectors);
@@ -90,10 +88,6 @@ public class Player extends Element {
         return UserData.PLAYER;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public int getHp() {
         return hp;
     }
@@ -104,9 +98,5 @@ public class Player extends Element {
 
     public Direction getDirection() {
         return direction;
-    }
-
-    public void incrementScore(int amount) {
-        this.score += amount;
     }
 }

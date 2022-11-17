@@ -12,7 +12,6 @@ public class FloorManager {
     private char[][] table;
     private int width;
     private int height;
-
     private final String floor;
 
     public FloorManager(String floor) {
@@ -38,7 +37,6 @@ public class FloorManager {
 
     public void saveLevel() {
         try {
-
             File file = new File("floor2.txt");
 
             FileWriter fw = new FileWriter(file.getAbsoluteFile());

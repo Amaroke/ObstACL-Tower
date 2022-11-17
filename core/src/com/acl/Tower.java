@@ -28,17 +28,17 @@ public class Tower {
     private boolean defeat;
     private boolean gamePaused;
     private boolean allEnemiesAreDead;
-    private int score = 0;
-
+    private int score;
     private Stair stair;
+    private int nbLevel;
 
     private CollisionListener collisionListener;
 
     public Tower() {
-        createTower();
+        createTower(1,0);
     }
 
-    public void createTower() {
+    public void createTower(int nbLevel, int score) {
         world = new World(new Vector2(0, 0), true);
 
         this.weapons = new ArrayList<>();
@@ -47,10 +47,17 @@ public class Tower {
 
         this.gamePaused = false;
         this.allEnemiesAreDead = false;
+        this.victory = false;
+        this.defeat = false;
 
         this.height = 9 * 16;
 
-        FloorManager floorManager = new FloorManager("floor.txt");
+        this.score = score;
+        this.setGamePaused(false);
+
+        this.setNbLevel(nbLevel);
+
+        FloorManager floorManager = new FloorManager("floor" + this.getNbLevel() + ".txt");
         char[][] table = floorManager.getTable();
         for (int i = 0; i < table.length; ++i) {
             for (int j = 0; j < table[i].length; ++j) {
@@ -127,8 +134,6 @@ public class Tower {
 
     public void update() {
         if (!victory && !defeat) {
-
-
             // On met à jour la position des éléments dans le monde
             for (Element e : this.elements) {
                 e.setPosition(e.getBody().getPosition());
@@ -176,7 +181,7 @@ public class Tower {
 
             if (this.getCollisionListener().isPlayerCollidesWithChest()) {
                 Chest c = (Chest) getElementFromBody(getCollisionListener().getChestCollided());
-                this.getPlayer().incrementScore(c.giveLoot());
+                this.score += c.giveLoot();
                 deleteElem(c);
             }
 
@@ -187,7 +192,7 @@ public class Tower {
 
             if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
                 BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollided());
-                this.getPlayer().incrementScore(bo.giveLoot());
+                this.score += bo.giveLoot();
                 deleteElem(bo);
             }
 
@@ -207,7 +212,6 @@ public class Tower {
             }
 
             if (this.getCollisionListener().isLichCollidesWithWall()) {
-                System.out.println("caca");
                 Lich lich = (Lich) getElementFromBody(getCollisionListener().getLichCollided());
                 lich.chaneDirection();
             }
@@ -227,7 +231,19 @@ public class Tower {
         // When the game is lost.
         defeat = true;
         gamePaused = true;
+
         setScore(0);
+        this.getWorld().dispose();
+        createTower(1, 0);
+    }
+
+    public void endOfTheStageWon() {
+        // When the game is won.
+        victory = true;
+        gamePaused = true;
+        getWorld().dispose();
+
+        createTower(getNbLevel()== 3 ? 1 : this.nbLevel + 1, getScore());
     }
 
     private void checkMonsterHealth(Monster m) {
@@ -235,12 +251,6 @@ public class Tower {
             getMonsters().remove(m);
             deleteElem(m);
         }
-    }
-
-    public void endOfTheStageWon() {
-        // When the game is won.
-        victory = true;
-        gamePaused = true;
     }
 
     private void addElement(Element e) {
@@ -349,6 +359,14 @@ public class Tower {
 
     public void setGamePaused(boolean gamePaused) {
         this.gamePaused = gamePaused;
+    }
+
+    public int getNbLevel() {
+        return nbLevel;
+    }
+
+    public void setNbLevel(int nbLevel) {
+        this.nbLevel = nbLevel;
     }
 }
 

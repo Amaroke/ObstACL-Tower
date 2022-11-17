@@ -43,7 +43,7 @@ public class Lich extends Monster {
         this.restitution = 0.1f;
         this.friction = 0.5f;
 
-        this.setHp(50);
+        this.setHp(20);
         this.setDmg(10);
         this.givenScore = 120;
     }
@@ -101,7 +101,6 @@ public class Lich extends Monster {
     }
 
     public void chaneDirection() {
-        System.out.println(this.getDirection());
         switch (this.getDirection()) {
             case NORTH -> this.direction = Direction.EAST;
             case SOUTH -> this.direction = Direction.WEST;
