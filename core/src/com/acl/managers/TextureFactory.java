@@ -27,6 +27,10 @@ public class TextureFactory {
     private final static Texture slimeTexture = new Texture((Gdx.files.internal("slime.png")));
     private final static Texture guardianTexture = new Texture((Gdx.files.internal("guardian.png")));
     private final static Texture menuBackgroundTexture = new Texture((Gdx.files.internal("obstACL_tower.png")));
+    private final static Texture menuBackButton = new Texture((Gdx.files.internal("button_back.png")));
+    private final static Texture menuStartButton = new Texture((Gdx.files.internal("button_start.png")));
+    private final static Texture menuQuitButton = new Texture((Gdx.files.internal("button_exit.png")));
+    private final static Texture menuSelectArrow = new Texture((Gdx.files.internal("select_arrow.png")));
     private final static Texture lichTexture = new Texture((Gdx.files.internal("dead_lich.png")));
     private final static Texture doorTexture = new Texture((Gdx.files.internal("door.png")));
 
@@ -78,6 +82,20 @@ public class TextureFactory {
         return menuBackgroundTexture;
     }
 
+    public static Texture getMenuBackButton() {
+        return menuBackButton;
+    }
+
+    public static Texture getMenuStartButton() {
+        return menuStartButton;
+    }
+
+    public static Texture getMenuExitButton() {
+        return menuQuitButton;
+    }
+    public static Texture getMenuSelectArrow() {
+        return menuSelectArrow;
+    }
     public static Texture getLichTexture() {
         return lichTexture;
     }

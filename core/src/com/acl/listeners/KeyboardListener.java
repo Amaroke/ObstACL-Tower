@@ -7,16 +7,17 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.Scanner;
-
 public class KeyboardListener implements InputProcessor {
-
     private final Vector2 motion = new Vector2(0f, 0f);
     private Boolean useWeapon = false;
     private Direction direction;
     private boolean debug = false;
     private boolean fullScreen = false;
     private boolean menuOpen = false;
+    private boolean confirmed = false;
+    private int currentChoice = 0;
+    private static final int topChoice = 0;
+    private static final int bottomChoice = 2;
 
     public Vector2 getMotion() {
         return motion;
@@ -35,8 +36,8 @@ public class KeyboardListener implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
 
-        // When pressing the escape key, the menu opens
-        if (keycode == Input.Keys.ESCAPE) {
+        // When pressing the P key, the menu opens
+        if (keycode == Input.Keys.P) {
             fullScreen = !fullScreen;
             Graphics.DisplayMode currentMode = Gdx.graphics.getDisplayMode();
             if (!fullScreen)
@@ -47,13 +48,16 @@ public class KeyboardListener implements InputProcessor {
         // When pressing the space bar, the weapon of the player is used
         if (keycode == Input.Keys.SPACE) {
             useWeapon = true;
-
         }
-        // When pressing the UP, Z or W keys, the character goes up.
+        // When pressing the UP, Z or W keys, the character goes up, or if we are on the menu, the choice changes.
         float playerMovementForce = 30f;
         if (keycode == Input.Keys.UP || keycode == Input.Keys.Z || keycode == Input.Keys.W) {
-            motion.y = playerMovementForce;
-            direction = Direction.NORTH;
+            if (menuOpen) {
+                currentChoice = currentChoice == topChoice ? bottomChoice : currentChoice - 1;
+            } else {
+                motion.y = playerMovementForce;
+                direction = Direction.NORTH;
+            }
             return true;
         }
         // When pressing the LEFT, Q or A keys, the character goes left.
@@ -70,16 +74,25 @@ public class KeyboardListener implements InputProcessor {
         }
         // When pressing the DOWN or S keys, the character goes down.
         if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S) {
-            motion.y = -playerMovementForce;
-            direction = Direction.SOUTH;
+            if (menuOpen) {
+                currentChoice = currentChoice == bottomChoice ? topChoice : currentChoice + 1;
+            } else {
+                motion.y = -playerMovementForce;
+                direction = Direction.SOUTH;
+            }
             return true;
         }
         if (keycode == Input.Keys.SHIFT_LEFT) {
             debug = !debug;
             return true;
         }
-        if (keycode == Input.Keys.CONTROL_LEFT) {
+        if (keycode == Input.Keys.ESCAPE) {
             menuOpen = !menuOpen;
+            return true;
+        }
+        // When pressing Enter, the choice is confirmed.
+        if (keycode == Input.Keys.ENTER) {
+            confirmed = true;
             return true;
         }
         return false;
@@ -136,5 +149,24 @@ public class KeyboardListener implements InputProcessor {
 
     public boolean isMenuOpen() {
         return menuOpen;
+    }
+    public int getCurrentChoice() {
+        return currentChoice;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setMenuOpen(boolean menuOpen) {
+        this.menuOpen = menuOpen;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public void setCurrentChoice(int currentChoice) {
+        this.currentChoice = currentChoice;
     }
 }
