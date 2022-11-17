@@ -8,8 +8,10 @@ import com.acl.datas.elements.monsters.Slime;
 import com.acl.datas.elements.weapons.FireBall;
 import com.acl.datas.elements.weapons.Sword;
 import com.acl.datas.elements.weapons.Weapon;
+import com.acl.enums.Direction;
 import com.acl.enums.WeaponType;
 import com.acl.listeners.CollisionListener;
+import com.acl.listeners.KeyboardListener;
 import com.acl.managers.FloorManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -32,6 +34,9 @@ public class Tower {
     private Stair stair;
     private int nbLevel;
     private CollisionListener collisionListener;
+
+    private int weaponCooldown = 0;
+    private int pauseTime = 100;
 
     public Tower() {
         createTower(1, 0);
@@ -131,95 +136,140 @@ public class Tower {
         }
     }
 
-    public void update() {
-        if (!victory && !defeat) {
-            // On met à jour la position des éléments dans le monde
-            for (Element e : this.elements) {
-                e.setPosition(e.getBody().getPosition());
+    public void update(KeyboardListener keyboardListener) {
+        if (gamePaused) {
+            if (pauseTime == 0) {
+                this.pauseTime = 100;
+                this.getWorld().dispose();
+                if (this.isVictory()) {
+                    this.createTower(this.getNbLevel() == 3 ? 1 : this.getNbLevel() + 1, this.getScore());
+                } else {
+                    this.createTower(1, 0);
+                }
             }
+            pauseTime--;
+        }
 
-            for (Weapon w : this.weapons) {
-                w.update();
-                w.setPosition(w.getBody().getPosition());
-                if (w.toDestroy()) {
-                    getWeapons().remove(w);
-                    deleteElem(w);
-                    break;
+        weaponCooldown--;
+
+        if (!gamePaused) {
+            if (keyboardListener.getUseWeapon()) {
+                if (weaponCooldown <= 0) {
+                    this.weaponCooldown = 30; //TODO A INCLURE DANS LES CONSTANTES
+                    createWeapon();
                 }
             }
 
-            if (this.getCollisionListener().isWeaponCollidesWithMonster()) {
-                Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
-                Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
-                getWeapons().remove(w);
-                deleteElem(w);
-                // TODO Adapt to damage
-                m.receiveDamage(5);
-                checkMonsterHealth(m);
-            }
+            // We move player
+            getPlayer().setMotion(keyboardListener.getMotion());
+            getPlayer().setDirection(keyboardListener.getDirection() != null ? keyboardListener.getDirection() : Direction.NORTH);
+        }
 
-            if (this.getCollisionListener().isWeaponCollidesWithWall()) {
-                Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
-                getWeapons().remove(w);
-                deleteElem(w);
-            }
 
-            if (this.monsters.size() == 0) {
-                this.allEnemiesAreDead = true;
-                //Loading the stair
-                this.stair.setLocked(false);
-            }
+        if (!victory && !defeat) {
+            if (!gamePaused) {
+                // On met à jour la position des éléments dans le monde
+                for (Element e : this.elements) {
+                    e.setPosition(e.getBody().getPosition());
+                }
 
-            if (this.player.getHp() <= 0) {
-                this.endOfTheGameLost();
-            }
 
-            if (this.getCollisionListener().isPlayerCollidesWithStairs() && allEnemiesAreDead) {
-                this.endOfTheStageWon();
-            }
+                for (Weapon w : this.weapons) {
+                    w.update();
+                    w.setPosition(w.getBody().getPosition());
+                    if (w.toDestroy()) {
+                        getWeapons().remove(w);
+                        deleteElem(w);
+                        break;
+                    }
+                }
 
-            if (this.getCollisionListener().isPlayerCollidesWithChest()) {
-                Chest c = (Chest) getElementFromBody(getCollisionListener().getChestCollided());
-                this.score += c.giveLoot();
-                deleteElem(c);
-            }
+                if (this.getCollisionListener().isWeaponCollidesWithMonster()) {
+                    Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
+                    Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
+                    getWeapons().remove(w);
+                    deleteElem(w);
+                    // TODO Adapt to damage
+                    m.receiveDamage(5);
+                    checkMonsterHealth(m);
+                }
 
-            if (this.getCollisionListener().isPlayerCollidesWithTrap()) {
-                Trap t = (Trap) getElementFromBody(getCollisionListener().getTrapCollided());
-                player.receiveDamage(t.getDealDamage());
-            }
+                if (this.getCollisionListener().isWeaponCollidesWithWall()) {
+                    Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollided());
+                    getWeapons().remove(w);
+                    deleteElem(w);
+                }
 
-            if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
-                BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollided());
-                this.score += bo.giveLoot();
-                deleteElem(bo);
-            }
+                if (this.monsters.size() == 0) {
+                    this.allEnemiesAreDead = true;
+                    //Loading the stair
+                    this.stair.setLocked(false);
+                }
 
-            if (this.getCollisionListener().isPlayerCollidesWithMonster()) {
-                Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
-                player.receiveDamage(m.getDmg());
-                getCollisionListener().setMonsterCollided(null);
-                getCollisionListener().setPlayerCollidesWithMonster(false);
-            }
-            if (this.player.getHp() == 0) {
-                this.endOfTheGameLost();
-            }
+                if (this.player.getHp() <= 0) {
+                    this.endOfTheGameLost();
+                }
 
-            if (this.getCollisionListener().isGuardianCollidesWithWall()) {
-                Guardian guardian = (Guardian) getElementFromBody(getCollisionListener().getGuardianCollided());
-                guardian.chaneDirection();
-            }
+                if (this.getCollisionListener().isPlayerCollidesWithStairs() && allEnemiesAreDead) {
+                    this.endOfTheStageWon();
+                }
 
-            if (this.getCollisionListener().isLichCollidesWithWall()) {
-                Lich lich = (Lich) getElementFromBody(getCollisionListener().getLichCollided());
-                lich.chaneDirection();
-            }
+                if (this.getCollisionListener().isPlayerCollidesWithChest()) {
+                    Chest c = (Chest) getElementFromBody(getCollisionListener().getChestCollided());
+                    this.score += c.giveLoot();
+                    deleteElem(c);
+                }
 
-            // We move all the monsters
-            for (Monster m : this.monsters) {
-                m.Move();
+                if (this.getCollisionListener().isPlayerCollidesWithTrap()) {
+                    Trap t = (Trap) getElementFromBody(getCollisionListener().getTrapCollided());
+                    player.receiveDamage(t.getDealDamage());
+                }
+
+                if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
+                    BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollided());
+                    this.score += bo.giveLoot();
+                    deleteElem(bo);
+                }
+
+                if (this.getCollisionListener().isPlayerCollidesWithMonster()) {
+                    Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollided());
+                    player.receiveDamage(m.getDmg());
+                    getCollisionListener().setMonsterCollided(null);
+                    getCollisionListener().setPlayerCollidesWithMonster(false);
+                }
+                if (this.player.getHp() == 0) {
+                    this.endOfTheGameLost();
+                }
+
+                if (this.getCollisionListener().isGuardianCollidesWithWall()) {
+                    Guardian guardian = (Guardian) getElementFromBody(getCollisionListener().getGuardianCollided());
+                    guardian.chaneDirection();
+                }
+
+                if (this.getCollisionListener().isLichCollidesWithWall()) {
+                    Lich lich = (Lich) getElementFromBody(getCollisionListener().getLichCollided());
+                    lich.chaneDirection();
+                }
+
+                // We move all the monsters
+                for (Monster m : this.monsters) {
+                    m.Move();
+                }
             }
         }
+        if (gamePaused) {
+            this.player.setMotion(new Vector2(0, 0));
+            for (Monster m : this.monsters) {
+                m.getBody().setLinearVelocity(0, 0);
+            }
+            for (Weapon w : this.weapons) {
+                w.getBody().setLinearVelocity(0, 0);
+            }
+            for (Element e : this.elements) {
+                e.getBody().setLinearVelocity(0, 0);
+            }
+        }
+
     }
 
     public ArrayList<Weapon> getWeapons() {
