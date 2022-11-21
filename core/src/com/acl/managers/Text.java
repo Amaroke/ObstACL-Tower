@@ -72,7 +72,4 @@ public class Text {
         textBatch.end();
     }
 
-    public void dispose() {
-    }
-
 }

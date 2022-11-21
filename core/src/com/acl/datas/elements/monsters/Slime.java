@@ -70,6 +70,6 @@ public class Slime extends Monster {
 
     public int giveLoot() {
         // The base monster gives gold coins and score
-        return givenScore;
+        return givenScore; // TODO CONSTANTES
     }
 }

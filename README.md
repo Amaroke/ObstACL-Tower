@@ -8,6 +8,8 @@
 2. <a href="#comment-compiler-et-exécuter-le-projet">Compilation & exécution du projet</a>
 3. <a href="comment-jouer-au-jeu">Comment jouer au jeu</a>
 
+Pour tout ce qui concerne notre organisation des sprints, tout est détaillé dans le Sprints.md.
+
 <img src="./assets/obstACL_tower.png" alt="illustration"/>
 
 -----

@@ -13,7 +13,6 @@ import java.util.Random;
 public class Guardian extends Monster {
 
     private Direction direction;
-    private final int givenScore;
     private final Animation<TextureRegion> animationNorth;
     private final Animation<TextureRegion> animationSouth;
     private final Animation<TextureRegion> animationWest;
@@ -53,7 +52,6 @@ public class Guardian extends Monster {
 
         this.setHp(20);
         this.setDmg(30);
-        this.givenScore = 100;
 
         sensor = true;
     }
@@ -85,7 +83,7 @@ public class Guardian extends Monster {
 
     public int giveLoot() {
         // The base monster gives gold coins and score
-        return givenScore;
+        return 100; //TODO Ajouter aux constantes
     }
 
     public Animation<TextureRegion> getAnimationNorth() {

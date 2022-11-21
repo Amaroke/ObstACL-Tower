@@ -183,12 +183,12 @@ La base de notre Jeu est donc complète ce qui nous permettra de travailler enco
 
 ### <p id="liste2">Liste des tâches</p>
 
-| Responsable            | Tâches                                                                                                                                                        | Temps estimé                     | Temps réel                         |
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|------------------------------------|
-| IOPETI Hugo            | Gestion de la pause la boucle de jeu.<br><br>Ajout d'étages.<br><br>Création/Amélioration des sprites (Boutons et flèche du menu, trapdoor, pièges).          | 3h<br><br>1h<br><br>1h | 3h<br><br>1h30<br><br>1h |
-| MATHIEU STEINBACH Hugo | Attaque de mêlée et animation.<br><br>Ajout d'un monstre (Guardian).<br><br>Refonte de la boucle de l'affichage, et remaniement de certaines parties du code. | 1h30<br><br>1h30<br><br>2h       | 1h30<br><br>1h30<br><br>2h         |
-| YVOZ Ludovic           | Gestion du menu pause.                                                                                                                                        | 5h                               | 5h30                               |
-| ZIMOL Guillaume        | Changement des Hit-box.<br><br>Ajout d'un monstre (Crawler).                                                                                                  | 3h<br><br>2h                     | 3h<br><br>2h                                      |
+| Responsable            | Tâches                                                                                                                                                        | Temps estimé               | Temps réel                 |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|----------------------------|
+| IOPETI Hugo            | Gestion de la pause la boucle de jeu.<br><br>Ajout d'étages.<br><br>Création/Amélioration des sprites (Boutons et flèche du menu, trapdoor, pièges).          | 3h<br><br>1h<br><br>1h     | 3h<br><br>1h30<br><br>1h   |
+| MATHIEU STEINBACH Hugo | Attaque de mêlée et animation.<br><br>Ajout d'un monstre (Guardian).<br><br>Refonte de la boucle de l'affichage, et remaniement de certaines parties du code. | 1h30<br><br>1h30<br><br>2h | 1h30<br><br>1h30<br><br>2h |
+| YVOZ Ludovic           | Gestion du menu pause.                                                                                                                                        | 5h                         | 5h30                       |
+| ZIMOL Guillaume        | Changement des Hit-box.<br><br>Ajout d'un monstre (Crawler).                                                                                                  | 3h<br><br>2h               | 3h<br><br>2h               |
 
 ### <a id="diagramme2"></a>Diagramme UML
 
@@ -199,5 +199,22 @@ La base de notre Jeu est donc complète ce qui nous permettra de travailler enco
 
 ### <a id="review2"></a>Review
 
+L'attaque de mêlée a été finalisée, et son animation complétée.<br>
+Le monstre guardian qui se déplace verticalement ou horizontalement a été ajouté au jeu.
+Des problèmes concernant la pause du jeu, ont été détectés en effet, de multiples modifications du monde, et plus généralement une partie de la boucle du jeu était en fait effectuée dans la boucle d'affichage. Tout a été revu et déplacé corrigeant ainsi les problèmes liés.<br>
+La boucle de jeu a été implémentée correctement, sans trop de soucis.<br>
+La pause et la reprise de la boucle de jeu ont été réalisées rapidement, et furent fonctionnelles après de nombreux tests.<br>
+Deux étages ont été ajoutés, ayant une difficulté croissante. Tant qu'il existe des monstres à un étage, les escaliers sont inaccessibles par le joueur, une fois tout les montres tués, et l'étage fini, les escaliers sont libérés et empruntable par le joueur.<br>
+Depuis le sprint précédant, des nouveaux sprites ont été ajoutés, ainsi que des anciens ont été améliorés.<br>
+Un menu opérationnel ainsi que ces boutons ont été mis en place efficacement.<br>
+Nous avons réussi à implémenter la menu de pause, mais cela à été assez compliqué, le passage d'un "écran" à un autre fut difficile à mettre en place à cause de la gestion des caméras, car la caméra de notre jeu est modifiée souvent, ce qui à posé pas mal de problèmes pour afficher l'image du menu de pause correctement.<br>
+La pause de la boucle de jeu lors de l'affichage du menu de pause se fait automatiquement, avec notre implémentation, selon l'écran qui est affiché.<br>
+Suite aux modifications évoquées précédemment, la pause de la boucle de jeu qui n'est désormais utilisé que pour la mort du joueur et pour le passage au prochain niveau.<br>
+De grosses modifications ont été apportées à toutes les hitbox des éléments du jeu, pour bien plus s'adapter aux textures utilisées.<br>
+Et pour finir, un nouveau monstre a encore été ajouté, il s'agit du Crawler qui se déplace en longeant les murs de la salle.<br>
+
 ### <a id="retrospective2"></a>Restrospective
 
+L'ambiance ne s'est pas du tout détériorée au sein du groupe lors de ce sprint, l'entraide était de mise pour toutes les décisions importantes, surtout relatives au menu de pause et aux monstres.<br>
+La charge de travail était encore mieux réparties pendant ce sprint, grâce aux sprints précédents, toutes les tâches étaient indépendantes les unes des autres, ce qui a permis de travailler en parallèle pendant la totalité du sprint.<br>
+Comme pour chaque sprint, nous avons débuté les tâches que nous avions d'assigné dès le début du sprint. Ce qui nous laisse le temps de finaliser, de prendre connaissance et de tester le code de chacun des membres du groupe.

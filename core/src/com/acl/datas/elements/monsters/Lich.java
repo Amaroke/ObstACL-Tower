@@ -9,8 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Lich extends Monster {
-
-    private final int givenScore;
     private final Animation<TextureRegion> animationNorth;
     private final Animation<TextureRegion> animationSouth;
     private final Animation<TextureRegion> animationWest;
@@ -45,7 +43,6 @@ public class Lich extends Monster {
 
         this.setHp(20);
         this.setDmg(10);
-        this.givenScore = 120;
 
         sensor = true;
     }
@@ -99,7 +96,7 @@ public class Lich extends Monster {
 
     @Override
     public int giveLoot() {
-        return 0;
+        return 120; // TODO Ajouter dans les constantes
     }
 
     public void chaneDirection() {
