@@ -213,6 +213,9 @@ Suite aux modifications évoquées précédemment, la pause de la boucle de jeu 
 De grosses modifications ont été apportées à toutes les hitbox des éléments du jeu, pour bien plus s'adapter aux textures utilisées.<br>
 Et pour finir, un nouveau monstre a encore été ajouté, il s'agit du Crawler qui se déplace en longeant les murs de la salle.<br>
 
+Voici un comparatif des hitbox pour pouvoir visualiser le changement :
+<img src="sprint2/hitbox_avant_apres.png" alt="⚠️Si l'avant/après ne s'affiche pas, regarder le fichier hitbox_avant_apres.png"/>
+
 ### <a id="retrospective2"></a>Restrospective
 
 L'ambiance ne s'est pas du tout détériorée au sein du groupe lors de ce sprint, l'entraide était de mise pour toutes les décisions importantes, surtout relatives au menu de pause et aux monstres.<br>
