@@ -1,0 +1,19 @@
+@startuml
+participant World as w
+participant BreakableObj as b
+participant Item as i
+
+alt Le joueur à détruit b
+w -> w : world.destroy(b)
+b -> w : i = b.giveLoot()
+w -> i : w.dropItem(i)
+alt this.getCollisionListener().isPlayerCollidesWithItem()
+alt i.isGold()
+w -> w : this.score += i.getScoreGiven()
+end
+alt i.isPotion()
+i -> p : i.applyEffect(p)
+end
+w -> w : world.destroy(i)
+end
+@enduml

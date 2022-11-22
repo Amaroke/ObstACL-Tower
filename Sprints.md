@@ -1,6 +1,6 @@
 # ObstACL Tower
 
-#### Iopeti Hugo, MATHIEU STEINBACH Hugo, YVOZ Ludovic & ZIMOL Guillaume
+#### IOPETI Hugo, MATHIEU STEINBACH Hugo, YVOZ Ludovic & ZIMOL Guillaume
 
 ## Sommaire
 
@@ -11,23 +11,23 @@
     4. <a href="#review0">Sprint Review</a>
     5. <a href="#retrospective0">Sprint Retrospective</a>
 2. <a href="#sprint-1">Sprint 1</a>
-    1. <a href="#backlogs1">Backlogs
-    2. <a href="#liste1">Liste des tâches
-    3. <a href="#diagramme1">Diagramme(s)
-    4. <a href="#review1">Sprint Review
-    5. <a href="#retrospective1">Sprint Retrospective
+    1. <a href="#backlogs1">Backlogs</a>
+    2. <a href="#liste1">Liste des tâches</a>
+    3. <a href="#diagramme1">Diagramme(s)</a>
+    4. <a href="#review1">Sprint Review</a>
+    5. <a href="#retrospective1">Sprint Retrospective</a>
 3. <a href="#sprint-2">Sprint 2</a>
-    1. <a href="#backlogs2">Backlogs
-    2. <a href="#liste2">Liste des tâches
-    3. <a href="#diagramme2">Diagramme(s)
-    4. <a href="#review2">Sprint Review
-    5. <a href="#retrospective2">Sprint Retrospective
+    1. <a href="#backlogs2">Backlogs</a>
+    2. <a href="#liste2">Liste des tâches</a>
+    3. <a href="#diagramme2">Diagramme(s)</a>
+    4. <a href="#review2">Sprint Review</a>
+    5. <a href="#retrospective2">Sprint Retrospective</a>
 4. <a href="#sprint-3">Sprint 3</a>
-    1. Backlogs
-    2. Liste des tâches
-    3. Diagramme(s)
-    4. Sprint Review
-    5. Sprint Retrospective
+   1. <a href="#backlogs3">Backlogs</a>
+   2. <a href="#liste3">Liste des tâches</a>
+   3. <a href="#diagramme3">Diagramme(s)</a>
+   4. <a href="#review3">Sprint Review</a>
+   5. <a href="#retrospective3">Sprint Retrospective</a>
 
 ---------------
 
@@ -218,3 +218,40 @@ Et pour finir, un nouveau monstre a encore été ajouté, il s'agit du Crawler q
 L'ambiance ne s'est pas du tout détériorée au sein du groupe lors de ce sprint, l'entraide était de mise pour toutes les décisions importantes, surtout relatives au menu de pause et aux monstres.<br>
 La charge de travail était encore mieux réparties pendant ce sprint, grâce aux sprints précédents, toutes les tâches étaient indépendantes les unes des autres, ce qui a permis de travailler en parallèle pendant la totalité du sprint.<br>
 Comme pour chaque sprint, nous avons débuté les tâches que nous avions d'assigné dès le début du sprint. Ce qui nous laisse le temps de finaliser, de prendre connaissance et de tester le code de chacun des membres du groupe.
+
+-----
+
+## Sprint 3
+
+### <p id="backlogs3">Backlogs</p>
+
+| Item                                                                      | Estimate |
+|---------------------------------------------------------------------------|----------|
+| Réparation de l'UI (plein écran).                                         | 3        |
+| Ajout d'items (armes).                                                    | 8        |
+| Ajouts des sons.                                                          | 8        |
+| Animation de déplacement (joueur).                                        | 5        |
+| Gérer la hauteur d'affichage (éléments, monstres).                        | 3        |
+| Harmonisation du code (clean de la boucle du jeu, création de fonctions). | 5        |
+| Ajouter des niveaux.                                                      | 3        |
+| Revoir déplacements de la liche.                                          | 3        |
+
+### <p id="liste3">Liste des tâches</p>
+
+| Responsable            | Tâches                                                                                                       | Temps estimé                     | Temps réel |
+|------------------------|--------------------------------------------------------------------------------------------------------------|----------------------------------|------------|
+| IOPETI Hugo            | Ajout de niveaux.<br><br>Implémentation des items.                                                           | 1h30<br><br>3h30                 |            |
+| MATHIEU STEINBACH Hugo | Animation de déplacement.<br><br>Réparation de l'UI.<br><br>Changement d'arme.<br><br>Harmonisation du code. | 1h<br><br>1h<br><br>1h<br><br>2h |            |
+| YVOZ Ludovic           | Gestion de la hauteur d'affichage.<br><br>Changement déplacement de la liche.<br><br>Ajouts des items.       | 1h<br><br>1h30<br><br>3h         |            |
+| ZIMOL Guillaume        | Ajout d'une musique.<br><br>Ajout de sons.                                                                   | 2h<br><br>3h                     |            |
+
+### <a id="diagramme3"></a>Diagramme UML
+
+<img src="sprint3/UML_predev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_predev.png"/>
+<img src="sprint3/SEQ_sounds.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_sounds.png"/>
+<img src="sprint3/SEQ_items.png" alt="⚠️Si le diagramme ne s'affiche pas, regarder le fichier SEQ_items.png"/>
+<img src="sprint3/UML_postdev.png" alt="⚠️Si l'UML ne s'affiche pas, regarder le fichier UML_postdev.png"/>
+
+### <a id="review3"></a>Review
+
+### <a id="retrospective3"></a>Restrospective

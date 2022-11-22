@@ -1,0 +1,31 @@
+@startuml
+participant World as w
+
+w -> w : w.backgroundSound()
+
+alt this.getCollisionListener().isPlayerCollidesWithMonsters()
+w -> w : this.soundFactory.damage();
+end
+
+alt world.monsters.size() == 0
+w -> w : this.soundFactory.trapDoorOpen();
+
+end
+
+alt this.getCollisionListener().isPlayerCollidesWithChest()
+w -> w : this.soundFactory.chest();
+end
+
+alt this.getCollisionListener().isPlayerCollidesWithBarrel()
+w -> w : this.soundFactory.barrel();
+end
+
+alt p.attack()
+w -> w : this.soundFactory.attack();
+end
+
+alt world.victory == true
+w -> w : this.soundFactory.win();
+end
+
+@enduml

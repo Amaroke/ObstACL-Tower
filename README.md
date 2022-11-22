@@ -1,6 +1,6 @@
 # ObstACL Tower
 
-#### Iopeti Hugo, MATHIEU STEINBACH Hugo, YVOZ Ludovic & ZIMOL Guillaume
+#### IOPETI Hugo, MATHIEU STEINBACH Hugo, YVOZ Ludovic & ZIMOL Guillaume
 
 ## Sommaire
 
