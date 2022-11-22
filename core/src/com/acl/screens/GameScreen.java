@@ -5,6 +5,7 @@ import com.acl.Tower;
 import com.acl.datas.elements.Element;
 import com.acl.datas.elements.monsters.Guardian;
 import com.acl.datas.elements.monsters.Lich;
+import com.acl.datas.elements.weapons.FireBall;
 import com.acl.datas.elements.weapons.Weapon;
 import com.acl.listeners.KeyboardListener;
 import com.acl.managers.Text;
@@ -103,7 +104,7 @@ public class GameScreen extends ScreenAdapter {
                 w.update();
                 w.setSprite();
                 TextureRegion t;
-                switch (obstACLTower.getTower().getPlayer().getWeaponType()) {
+                switch (w.getType()) {
                     case FIREBALL -> {
                         t = new TextureRegion(w.getAnimation().getKeyFrame(timeBetweenRender, true));
                         switch (w.getDirection()) {

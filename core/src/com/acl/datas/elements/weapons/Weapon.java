@@ -2,6 +2,7 @@ package com.acl.datas.elements.weapons;
 
 import com.acl.datas.elements.Element;
 import com.acl.enums.Direction;
+import com.acl.enums.WeaponType;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -70,4 +71,6 @@ public abstract class Weapon extends Element {
     public boolean toDestroy() {
         return false;
     }
+
+    public abstract WeaponType getType();
 }

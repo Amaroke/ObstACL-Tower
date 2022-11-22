@@ -2,6 +2,7 @@ package com.acl.datas.elements.weapons;
 
 import com.acl.enums.Direction;
 import com.acl.enums.UserData;
+import com.acl.enums.WeaponType;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -20,7 +21,7 @@ public class Sword extends Weapon {
 
     @Override
     public void update() {
-        if(count < 25 && !retour) {
+        if(count < 20 && !retour) {
             count++;
             switch (this.getDirection()) {
                 case NORTH -> this.getBody().setLinearVelocity(0, velocity);
@@ -61,6 +62,11 @@ public class Sword extends Weapon {
     @Override
     public boolean toDestroy() {
         return count <= 5 && retour;
+    }
+
+    @Override
+    public WeaponType getType() {
+        return WeaponType.SWORD;
     }
 
 

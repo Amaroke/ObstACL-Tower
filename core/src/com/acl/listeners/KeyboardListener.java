@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 public class KeyboardListener implements InputProcessor {
     private final Vector2 motion = new Vector2(0f, 0f);
     private Boolean useWeapon = false;
+    private Boolean swapWeapon = false;
     private Direction direction;
     private boolean debug = false;
     private boolean fullScreen = false;
@@ -33,6 +34,12 @@ public class KeyboardListener implements InputProcessor {
         return weaponInUse;
     }
 
+    public Boolean getSwapWeapon() {
+        boolean weaponInSwap = swapWeapon;
+        swapWeapon = false;
+        return weaponInSwap;
+    }
+
     @Override
     public boolean keyDown(int keycode) {
 
@@ -44,6 +51,10 @@ public class KeyboardListener implements InputProcessor {
                 Gdx.graphics.setWindowedMode(currentMode.width-200, currentMode.height-200);
             else
                 Gdx.graphics.setFullscreenMode(currentMode);
+        }
+        // When pressing the E key, weapon swap
+        if (keycode == Input.Keys.E) {
+            swapWeapon = true;
         }
         // When pressing the space bar, the weapon of the player is used
         if (keycode == Input.Keys.SPACE) {

@@ -39,7 +39,7 @@ public class Tower {
     private int pauseTime = 100;
 
     public Tower() {
-        createTower(1, 0);
+        createTower(3, 0);
     }
 
     public void createTower(int nbLevel, int score) {
@@ -158,6 +158,10 @@ public class Tower {
                     this.weaponCooldown = 30; //TODO A INCLURE DANS LES CONSTANTES
                     createWeapon();
                 }
+            }
+
+            if (keyboardListener.getSwapWeapon()) {
+                player.swapWeapon();
             }
 
             // We move player

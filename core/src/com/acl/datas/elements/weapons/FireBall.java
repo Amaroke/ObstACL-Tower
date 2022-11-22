@@ -2,6 +2,7 @@ package com.acl.datas.elements.weapons;
 
 import com.acl.enums.Direction;
 import com.acl.enums.UserData;
+import com.acl.enums.WeaponType;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,5 +35,10 @@ public class FireBall extends Weapon {
     @Override
     public UserData getUserData() {
         return UserData.WEAPON;
+    }
+
+    @Override
+    public WeaponType getType() {
+        return WeaponType.FIREBALL;
     }
 }
