@@ -55,4 +55,6 @@ public abstract class Monster extends Element {
     public UserData getUserData() {
         return UserData.MONSTER;
     }
+
+    public abstract void changeDirection();
 }

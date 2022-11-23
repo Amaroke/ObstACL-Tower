@@ -6,7 +6,6 @@ import com.acl.datas.elements.Element;
 import com.acl.datas.elements.Player;
 import com.acl.datas.elements.monsters.Guardian;
 import com.acl.datas.elements.monsters.Lich;
-import com.acl.datas.elements.weapons.FireBall;
 import com.acl.datas.elements.weapons.Weapon;
 import com.acl.listeners.KeyboardListener;
 import com.acl.managers.Text;

@@ -1,7 +1,6 @@
 package com.acl.datas.elements.monsters;
 
 import com.acl.enums.Direction;
-import com.acl.enums.UserData;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -99,7 +98,7 @@ public class Lich extends Monster {
         return 120; // TODO Ajouter dans les constantes
     }
 
-    public void chaneDirection() {
+    public void changeDirection() {
         switch (this.getDirection()) {
             case NORTH -> this.direction = Direction.EAST;
             case SOUTH -> this.direction = Direction.WEST;
@@ -108,8 +107,4 @@ public class Lich extends Monster {
         }
     }
 
-    @Override
-    public UserData getUserData() {
-        return UserData.LICH;
-    }
 }

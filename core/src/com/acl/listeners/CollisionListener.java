@@ -3,26 +3,29 @@ package com.acl.listeners;
 import com.acl.enums.UserData;
 import com.badlogic.gdx.physics.box2d.*;
 
+import java.util.ArrayList;
+
 public class CollisionListener implements ContactListener {
+
     private boolean playerCollidesWithStairs = false;
     private boolean playerCollidesWithChest = false;
-    private boolean playerCollidesWithTrap = false;
-
-    private boolean guardianCollidesWithWall = false;
-    private boolean lichCollidesWithWall = false;
-    private boolean weaponCollidesWithBreakableObject = false;
-
-    private final boolean WeaponCollidesWithMonster = false;
-    private boolean weaponCollidesWithMonster = false;
-    private boolean weaponCollidesWithWall = false;
-    private Body weaponCollided;
-    private boolean playerCollidesWithMonster = false;
-    private Body monsterCollided = null;
     private Body chestCollided = null;
+    private boolean playerCollidesWithTrap = false;
     private Body trapCollided = null;
-    private Body breakableObjectCollided = null;
-    private Body guardianCollided = null;
-    private Body lichCollided = null;
+
+    private boolean weaponCollidesWithBreakableObject = false;
+    private Body weaponCollidedWithBreakableObject = null;
+    private Body breakableObjectCollidedWithWeapon = null;
+
+    private boolean weaponCollidesWithMonster = false;
+    private Body weaponCollidedWithMonster = null;
+    private Body monsterCollidedWithWeapon = null;
+
+    private boolean playerCollidesWithMonster = false;
+    private Body monsterCollidedWithPlayer = null;
+
+    private ArrayList<Body> weaponsCollideWithWall = new ArrayList<>();
+    private ArrayList<Body> monstersCollideWithWall = new ArrayList<>();
 
     @Override
     public void beginContact(Contact contact) {
@@ -33,67 +36,46 @@ public class CollisionListener implements ContactListener {
             this.playerCollidesWithStairs = true;
         }
 
-        if (A == UserData.PLAYER && B == UserData.CHEST) {
+        if ((A == UserData.PLAYER && B == UserData.CHEST) || (A == UserData.CHEST && B == UserData.PLAYER)) {
             this.playerCollidesWithChest = true;
-            this.chestCollided = contact.getFixtureB().getBody();
+            this.chestCollided = contact.getFixtureA().getUserData() == UserData.CHEST ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
-        if (A == UserData.CHEST && B == UserData.PLAYER) {
-            this.playerCollidesWithChest = true;
-            this.chestCollided = contact.getFixtureA().getBody();
-        }
-
-        if (A == UserData.PLAYER && B == UserData.TRAP) {
+        if (A == UserData.PLAYER && B == UserData.TRAP || (A == UserData.TRAP && B == UserData.PLAYER)) {
             this.playerCollidesWithTrap = true;
-            this.trapCollided = contact.getFixtureB().getBody();
+            this.trapCollided = contact.getFixtureA().getUserData() == UserData.TRAP ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
-        if (A == UserData.TRAP && B == UserData.PLAYER) {
-            this.playerCollidesWithTrap = true;
-            this.trapCollided = contact.getFixtureA().getBody();
-        }
-
-        if (A == UserData.WEAPON && B == UserData.BREAKABLE) {
+        if ((A == UserData.WEAPON && B == UserData.BREAKABLE) || (A == UserData.BREAKABLE && B == UserData.WEAPON)) {
             this.weaponCollidesWithBreakableObject = true;
-            this.weaponCollided = contact.getFixtureA().getBody();
-            this.breakableObjectCollided = contact.getFixtureB().getBody();
+            this.weaponCollidedWithBreakableObject = contact.getFixtureA().getUserData() == UserData.WEAPON ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+            this.breakableObjectCollidedWithWeapon = contact.getFixtureA().getUserData() == UserData.BREAKABLE ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
-        if (A == UserData.BREAKABLE && B == UserData.WEAPON) {
-            this.weaponCollidesWithBreakableObject = true;
-            this.weaponCollided = contact.getFixtureB().getBody();
-            this.breakableObjectCollided = contact.getFixtureA().getBody();
+        if ((A == UserData.WEAPON && B == UserData.MONSTER) || (A == UserData.MONSTER && B == UserData.WEAPON)) {
+            this.weaponCollidesWithMonster = true;
+            this.weaponCollidedWithMonster = contact.getFixtureA().getUserData() == UserData.WEAPON ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+            this.monsterCollidedWithWeapon = contact.getFixtureA().getUserData() == UserData.MONSTER ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
-        if (A == UserData.PLAYER && (B == UserData.MONSTER || B == UserData.GUARDIAN || B == UserData.LICH)) {
+        if ((A == UserData.PLAYER && B == UserData.MONSTER) || (A == UserData.MONSTER && B == UserData.PLAYER)) {
             this.playerCollidesWithMonster = true;
-            this.monsterCollided = contact.getFixtureB().getBody();
-        }
-
-        if ((A == UserData.MONSTER || A == UserData.GUARDIAN || A == UserData.LICH) && B == UserData.PLAYER) {
-            this.playerCollidesWithMonster = true;
-            this.monsterCollided = contact.getFixtureA().getBody();
-        }
-
-        if ((A == UserData.GUARDIAN && B == UserData.WALL) || (A == UserData.WALL && B == UserData.GUARDIAN)) {
-            this.guardianCollidesWithWall = true;
-            guardianCollided = (A == UserData.GUARDIAN) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
-        }
-
-        if ((A == UserData.LICH && B == UserData.WALL) || (A == UserData.WALL && B == UserData.LICH)) {
-            this.lichCollidesWithWall = true;
-            lichCollided = (A == UserData.LICH) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+            this.monsterCollidedWithPlayer = contact.getFixtureA().getUserData() == UserData.MONSTER ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
         if ((A == UserData.WEAPON && B == UserData.WALL) || (A == UserData.WALL && B == UserData.WEAPON)) {
-            this.weaponCollidesWithWall = true;
-            weaponCollided = (A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+            this.weaponsCollideWithWall.add((A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody());
         }
 
-        if ((A == UserData.WEAPON && (B == UserData.MONSTER || B == UserData.GUARDIAN || B == UserData.LICH)) || ((A == UserData.MONSTER || A == UserData.GUARDIAN || A == UserData.LICH) && B == UserData.WEAPON)) {
-            this.weaponCollidesWithMonster = true;
-            monsterCollided = (A == UserData.MONSTER || A == UserData.GUARDIAN || A == UserData.LICH) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
-            weaponCollided = (A == UserData.WEAPON) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
+        if ((A == UserData.MONSTER && B == UserData.WALL) || (A == UserData.WALL && B == UserData.MONSTER)) {
+            this.monstersCollideWithWall.add((A == UserData.MONSTER) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody());
         }
     }
 
@@ -103,33 +85,19 @@ public class CollisionListener implements ContactListener {
     }
 
     @Override
-    public void preSolve(Contact contact, Manifold oldManifold) {
+    public void preSolve(Contact contact, Manifold manifold) {
 
     }
 
     @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
+    public void postSolve(Contact contact, ContactImpulse contactImpulse) {
 
-    }
-
-    public boolean isWeaponCollidesWithWall() {
-        boolean value = weaponCollidesWithWall;
-        weaponCollidesWithWall = false;
-        return value;
-    }
-
-    public boolean isWeaponCollidesWithMonster() {
-        boolean value = weaponCollidesWithMonster;
-        weaponCollidesWithMonster = false;
-        return value;
     }
 
     public boolean isPlayerCollidesWithStairs() {
-        return playerCollidesWithStairs;
-    }
-
-    public void setPlayerCollidesWithStairs(boolean playerCollidesWithStairs) {
-        this.playerCollidesWithStairs = playerCollidesWithStairs;
+        boolean value = playerCollidesWithStairs;
+        playerCollidesWithStairs = false;
+        return value;
     }
 
     public boolean isPlayerCollidesWithChest() {
@@ -138,8 +106,8 @@ public class CollisionListener implements ContactListener {
         return value;
     }
 
-    public void setPlayerCollidesWithChest(boolean playerCollidesWithChest) {
-        this.playerCollidesWithChest = playerCollidesWithChest;
+    public Body getChestCollided() {
+        return chestCollided;
     }
 
     public boolean isPlayerCollidesWithTrap() {
@@ -148,8 +116,8 @@ public class CollisionListener implements ContactListener {
         return value;
     }
 
-    public void setPlayerCollidesWithTrap(boolean playerCollidesWithTrap) {
-        this.playerCollidesWithTrap = playerCollidesWithTrap;
+    public Body getTrapCollided() {
+        return trapCollided;
     }
 
     public boolean isWeaponCollidesWithBreakableObject() {
@@ -158,71 +126,48 @@ public class CollisionListener implements ContactListener {
         return value;
     }
 
-    public boolean isGuardianCollidesWithWall() {
-        boolean value = guardianCollidesWithWall;
-        guardianCollidesWithWall = false;
+    public Body getWeaponCollidedWithBreakableObject() {
+        return weaponCollidedWithBreakableObject;
+    }
+
+    public Body getBreakableObjectCollidedWithWeapon() {
+        return breakableObjectCollidedWithWeapon;
+    }
+
+    public boolean isWeaponCollidesWithMonster() {
+        boolean value = weaponCollidesWithMonster;
+        weaponCollidesWithMonster = false;
         return value;
     }
 
-    public boolean isLichCollidesWithWall() {
-        boolean value = lichCollidesWithWall;
-        lichCollidesWithWall = false;
-        return value;
+    public Body getWeaponCollidedWithMonster() {
+        return weaponCollidedWithMonster;
     }
 
-    public void setWeaponCollidesWithBreakableObject(boolean weaponCollidesWithBreakableObject) {
-        this.weaponCollidesWithBreakableObject = weaponCollidesWithBreakableObject;
+    public Body getMonsterCollidedWithWeapon() {
+        return monsterCollidedWithWeapon;
     }
 
     public boolean isPlayerCollidesWithMonster() {
-        return playerCollidesWithMonster;
-    }
-
-    public Body getMonsterCollided() {
-        return monsterCollided;
-    }
-
-    public void setPlayerCollidesWithMonster(boolean playerCollidesWithMonster) {
-        this.playerCollidesWithMonster = playerCollidesWithMonster;
-    }
-
-    public void setMonsterCollided(Body monsterCollided) {
-        this.monsterCollided = monsterCollided;
-    }
-
-    public Body getWeaponCollided() {
-        Body value = weaponCollided;
-        weaponCollided = null;
+        boolean value = playerCollidesWithMonster;
+        playerCollidesWithMonster = false;
         return value;
     }
 
-    public Body getGuardianCollided() {
-        Body value = guardianCollided;
-        guardianCollided = null;
-        return value;
+    public Body getMonsterCollidedWithPlayer() {
+        return monsterCollidedWithPlayer;
     }
 
-    public Body getLichCollided() {
-        Body value = lichCollided;
-        lichCollided = null;
-        return value;
+    public ArrayList<Body> getWeaponsCollideWithWall() {
+        return weaponsCollideWithWall;
     }
 
-    public Body getChestCollided() {
-        Body value = chestCollided;
-        chestCollided = null;
-        return value;
+    public ArrayList<Body> getMonstersCollideWithWall() {
+        return monstersCollideWithWall;
     }
 
-    public Body getTrapCollided() {
-        Body value = trapCollided;
-        trapCollided = null;
-        return value;
-    }
-
-    public Body getBreakableObjectCollided() {
-        Body value = breakableObjectCollided;
-        breakableObjectCollided = null;
-        return value;
+    public void resetCollideWithWall() {
+        weaponsCollideWithWall = new ArrayList<>();
+        monstersCollideWithWall = new ArrayList<>();
     }
 }

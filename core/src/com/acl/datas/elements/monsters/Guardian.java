@@ -1,7 +1,6 @@
 package com.acl.datas.elements.monsters;
 
 import com.acl.enums.Direction;
-import com.acl.enums.UserData;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -116,8 +115,4 @@ public class Guardian extends Monster {
         return direction;
     }
 
-    @Override
-    public UserData getUserData() {
-        return UserData.GUARDIAN;
-    }
 }

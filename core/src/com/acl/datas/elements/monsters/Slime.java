@@ -72,4 +72,9 @@ public class Slime extends Monster {
         // The base monster gives gold coins and score
         return givenScore; // TODO CONSTANTES
     }
+
+    @Override
+    public void changeDirection() {
+
+    }
 }
