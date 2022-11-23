@@ -4,7 +4,9 @@ import com.acl.enums.Direction;
 import com.acl.enums.UserData;
 import com.acl.enums.WeaponType;
 import com.acl.managers.TextureFactory;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -14,6 +16,10 @@ public class Player extends Element {
     // TODO Weapon can be swap
     private WeaponType weaponType = WeaponType.FIREBALL;
     private Direction direction = Direction.NORTH;
+    private final Animation<TextureRegion> animationNorth;
+    private final Animation<TextureRegion> animationSouth;
+    private final Animation<TextureRegion> animationWest;
+    private final Animation<TextureRegion> animationEast;
     private int hp;
 
     public Player(Vector2 v) {
@@ -38,6 +44,21 @@ public class Player extends Element {
         this.restitution = 1f;
         this.friction = 0f;
         this.setSprite();
+
+        animationNorth = new Animation<>(1f, TextureRegion.split(TextureFactory.getPlayerTexture(), 48, 64)[0]);
+        animationSouth = new Animation<>(1f, TextureRegion.split(TextureFactory.getPlayerTexture(), 48, 64)[2]);
+        animationWest = new Animation<>(1f, TextureRegion.split(TextureFactory.getPlayerTexture(), 48, 64)[3]);
+        animationEast = new Animation<>(1f, TextureRegion.split(TextureFactory.getPlayerTexture(), 48, 64)[1]);
+
+    }
+
+    public void changeDirection() {
+        switch (this.getDirection()) {
+            case NORTH -> this.direction = Direction.SOUTH;
+            case SOUTH -> this.direction = Direction.NORTH;
+            case EAST ->  this.direction = Direction.WEST;
+            case WEST ->  this.direction = Direction.EAST;
+        }
     }
 
     @Override
@@ -65,10 +86,9 @@ public class Player extends Element {
         this.shape.dispose();
     }
 
-
     @Override
     public void setSprite() {
-        this.sprite = new Sprite(TextureFactory.getChevalierTexture());
+
     }
 
     public void setMotion(Vector2 v) {
@@ -106,5 +126,21 @@ public class Player extends Element {
         } else {
             weaponType = WeaponType.FIREBALL;
         }
+    }
+
+    public Animation<TextureRegion> getAnimationNorth() {
+        return animationNorth;
+    }
+
+    public Animation<TextureRegion> getAnimationSouth() {
+        return animationSouth;
+    }
+
+    public Animation<TextureRegion> getAnimationWest() {
+        return animationWest;
+    }
+
+    public Animation<TextureRegion> getAnimationEast() {
+        return animationEast;
     }
 }

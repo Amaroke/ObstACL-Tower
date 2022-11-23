@@ -247,7 +247,7 @@ public class Tower {
 
                 if (this.getCollisionListener().isGuardianCollidesWithWall()) {
                     Guardian guardian = (Guardian) getElementFromBody(getCollisionListener().getGuardianCollided());
-                    guardian.chaneDirection();
+                    guardian.changeDirection();
                 }
 
                 if (this.getCollisionListener().isLichCollidesWithWall()) {

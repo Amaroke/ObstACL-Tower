@@ -72,7 +72,7 @@ public class Guardian extends Monster {
         }
     }
 
-    public void chaneDirection() {
+    public void changeDirection() {
         switch (this.getDirection()) {
             case NORTH -> this.direction = Direction.SOUTH;
             case SOUTH -> this.direction = Direction.NORTH;

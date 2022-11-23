@@ -3,6 +3,7 @@ package com.acl.screens;
 import com.acl.ObstACLTower;
 import com.acl.Tower;
 import com.acl.datas.elements.Element;
+import com.acl.datas.elements.Player;
 import com.acl.datas.elements.monsters.Guardian;
 import com.acl.datas.elements.monsters.Lich;
 import com.acl.datas.elements.weapons.FireBall;
@@ -135,8 +136,17 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
 
-            // We draw player
-            obstACLTower.getTower().getPlayer().draw(obstACLTower.batch);
+            Player p = obstACLTower.getTower().getPlayer();
+            TextureRegion t = new TextureRegion(p.getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true));
+            switch (p.getDirection()) {
+                case SOUTH ->
+                        t = new TextureRegion(p.getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true));
+                case EAST ->
+                        t = new TextureRegion(p.getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true));
+                case WEST ->
+                        t = new TextureRegion(p.getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true));
+            }
+            obstACLTower.batch.draw(t, p.getBody().getPosition().x, p.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);
         }
 
         // We strop to draw things.

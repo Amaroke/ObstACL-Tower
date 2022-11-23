@@ -16,7 +16,7 @@ public class TextureFactory {
     }
 
     private final static Texture backTexture = new Texture(Gdx.files.internal("floor.png"));
-    private final static Texture chevalierTexture = new Texture(Gdx.files.internal("knight_cheri.png"));
+    private final static Texture playerTexture = new Texture(Gdx.files.internal("player.png"));
     private final static Texture chestTexture = new Texture(Gdx.files.internal("chest.png"));
     private final static Texture breakableTexture = new Texture(Gdx.files.internal("barrel.png"));
     private final static Texture wallTexture = new Texture(Gdx.files.internal("wall.png"));
@@ -31,7 +31,7 @@ public class TextureFactory {
     private final static Texture menuStartButton = new Texture((Gdx.files.internal("button_start.png")));
     private final static Texture menuQuitButton = new Texture((Gdx.files.internal("button_exit.png")));
     private final static Texture menuSelectArrow = new Texture((Gdx.files.internal("select_arrow.png")));
-    private final static Texture lichTexture = new Texture((Gdx.files.internal("dead_lich.png")));
+    private final static Texture lichTexture = new Texture((Gdx.files.internal("lich.png")));
     private final static Texture doorTexture = new Texture((Gdx.files.internal("door.png")));
 
     public static Texture getBackTexture() {
@@ -58,10 +58,6 @@ public class TextureFactory {
         return stairTexture;
     }
 
-    public static Texture getChevalierTexture() {
-        return chevalierTexture;
-    }
-
     public static Texture getFireBallTexture() {
         return fireBallTexture;
     }
@@ -76,6 +72,9 @@ public class TextureFactory {
 
     public static Texture getGuardianTexture() {
         return guardianTexture;
+    }
+    public static Texture getPlayerTexture() {
+        return playerTexture;
     }
 
     public static Texture getMenuBackgroundTexture() {
