@@ -13,6 +13,7 @@ import com.acl.enums.WeaponType;
 import com.acl.listeners.CollisionListener;
 import com.acl.listeners.KeyboardListener;
 import com.acl.managers.FloorManager;
+import com.acl.managers.SoundsManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -34,6 +35,9 @@ public class Tower {
     private Stair stair;
     private int nbLevel;
     private CollisionListener collisionListener;
+    private final SoundsManager soundsManager = new SoundsManager();
+    private boolean soundPlayed = false;
+
 
     private int weaponCooldown = 0;
     private int pauseTime = 100;
@@ -75,8 +79,10 @@ public class Tower {
 
     public void createWeapon() {
         Weapon weapon = new FireBall(getPlayer().getBody().getPosition(), getPlayer().getDirection());
+        this.soundsManager.soundFireball();
         if (getPlayer().getWeaponType() == WeaponType.SWORD) {
             weapon = new Sword(getPlayer().getBody().getPosition(), getPlayer().getDirection());
+            this.soundsManager.soundSword();
         }
         weapon.configureBodyDef();
         weapon.createBody(getWorld());
@@ -208,6 +214,10 @@ public class Tower {
                 if (this.monsters.size() == 0) {
                     this.allEnemiesAreDead = true;
                     //Loading the stair
+                    if (!this.soundPlayed) {
+                        this.soundsManager.soundTrapdoor_opening();
+                        this.soundPlayed = true;
+                    }
                     this.stair.setLocked(false);
                 }
 
@@ -222,25 +232,26 @@ public class Tower {
                 if (this.getCollisionListener().isPlayerCollidesWithChest()) {
                     Chest c = (Chest) getElementFromBody(getCollisionListener().getChestCollided());
                     this.score += c.giveLoot();
+                    this.soundsManager.soundChest();
                     deleteElem(c);
                 }
 
                 if (this.getCollisionListener().isPlayerCollidesWithTrap()) {
                     Trap t = (Trap) getElementFromBody(getCollisionListener().getTrapCollided());
+                    this.soundsManager.soundDamage();
                     player.receiveDamage(t.getDealDamage());
                 }
 
                 if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
                     BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollidedWithWeapon());
                     this.score += bo.giveLoot();
+                    this.soundsManager.soundBarrel();
                     deleteElem(bo);
                 }
 
                 if (this.getCollisionListener().isPlayerCollidesWithMonster()) {
-                    System.out.println("GIGA PUTE" + getCollisionListener().getMonsterCollidedWithPlayer());
                     Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollidedWithPlayer());
-                    System.out.println("GIGA PUTE2" + getCollisionListener().getMonsterCollidedWithPlayer());
-
+                    this.soundsManager.soundDamage();
                     player.receiveDamage(m.getDmg());
                 }
 
@@ -284,12 +295,13 @@ public class Tower {
         // When the game is lost.
         defeat = true;
         gamePaused = true;
-
+        this.soundsManager.soundLoose();
         setScore(0);
     }
 
     public void endOfTheStageWon() {
         // When the game is won.
+        this.soundsManager.soundWin();
         victory = true;
         gamePaused = true;
     }
@@ -371,7 +383,6 @@ public class Tower {
 
     public Monster getMonsterFromBody(Body b) {
         for (Monster m : this.getMonsters()) {
-            System.out.println("TURBO PUTE" + b + " : " + m.getBody());
             if (b == m.getBody()) {
                 return m;
             }

@@ -5,5 +5,5 @@ WB            BW
 WW     P      WW
 WB            BW
 WM      G     MW
-W    MWBWM     W
+W    MWBWM    LW
 WWWWWWWWWWWWWWWW
