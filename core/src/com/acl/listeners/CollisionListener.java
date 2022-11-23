@@ -38,35 +38,35 @@ public class CollisionListener implements ContactListener {
 
         if ((A == UserData.PLAYER && B == UserData.CHEST) || (A == UserData.CHEST && B == UserData.PLAYER)) {
             this.playerCollidesWithChest = true;
-            this.chestCollided = contact.getFixtureA().getUserData() == UserData.CHEST ?
+            this.chestCollided = (A == UserData.CHEST) ?
                     contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
-        if (A == UserData.PLAYER && B == UserData.TRAP || (A == UserData.TRAP && B == UserData.PLAYER)) {
+        if ((A == UserData.PLAYER && B == UserData.TRAP) || (A == UserData.TRAP && B == UserData.PLAYER)) {
             this.playerCollidesWithTrap = true;
-            this.trapCollided = contact.getFixtureA().getUserData() == UserData.TRAP ?
+            this.trapCollided = (A == UserData.TRAP) ?
                     contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
         if ((A == UserData.WEAPON && B == UserData.BREAKABLE) || (A == UserData.BREAKABLE && B == UserData.WEAPON)) {
             this.weaponCollidesWithBreakableObject = true;
-            this.weaponCollidedWithBreakableObject = contact.getFixtureA().getUserData() == UserData.WEAPON ?
+            this.weaponCollidedWithBreakableObject = (A == UserData.WEAPON) ?
                     contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
-            this.breakableObjectCollidedWithWeapon = contact.getFixtureA().getUserData() == UserData.BREAKABLE ?
+            this.breakableObjectCollidedWithWeapon = (A == UserData.BREAKABLE) ?
                     contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
         if ((A == UserData.WEAPON && B == UserData.MONSTER) || (A == UserData.MONSTER && B == UserData.WEAPON)) {
             this.weaponCollidesWithMonster = true;
-            this.weaponCollidedWithMonster = contact.getFixtureA().getUserData() == UserData.WEAPON ?
+            this.weaponCollidedWithMonster = (A == UserData.WEAPON) ?
                     contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
-            this.monsterCollidedWithWeapon = contact.getFixtureA().getUserData() == UserData.MONSTER ?
+            this.monsterCollidedWithWeapon = (A == UserData.MONSTER) ?
                     contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 
         if ((A == UserData.PLAYER && B == UserData.MONSTER) || (A == UserData.MONSTER && B == UserData.PLAYER)) {
             this.playerCollidesWithMonster = true;
-            this.monsterCollidedWithPlayer = contact.getFixtureA().getUserData() == UserData.MONSTER ?
+            this.monsterCollidedWithPlayer = (A == UserData.MONSTER) ?
                     contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
 

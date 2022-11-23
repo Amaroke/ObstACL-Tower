@@ -39,7 +39,7 @@ public class Tower {
     private int pauseTime = 100;
 
     public Tower() {
-        createTower(2, 0);
+        createTower(1, 0);
     }
 
     public void createTower(int nbLevel, int score) {
@@ -237,7 +237,10 @@ public class Tower {
                 }
 
                 if (this.getCollisionListener().isPlayerCollidesWithMonster()) {
+                    System.out.println("GIGA PUTE" + getCollisionListener().getMonsterCollidedWithPlayer());
                     Monster m = getMonsterFromBody(getCollisionListener().getMonsterCollidedWithPlayer());
+                    System.out.println("GIGA PUTE2" + getCollisionListener().getMonsterCollidedWithPlayer());
+
                     player.receiveDamage(m.getDmg());
                 }
 
@@ -368,6 +371,7 @@ public class Tower {
 
     public Monster getMonsterFromBody(Body b) {
         for (Monster m : this.getMonsters()) {
+            System.out.println("TURBO PUTE" + b + " : " + m.getBody());
             if (b == m.getBody()) {
                 return m;
             }
