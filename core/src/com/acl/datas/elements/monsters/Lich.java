@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
+import java.util.Random;
+
+import static com.acl.enums.Constantes.*;
+
 public class Lich extends Monster {
     private final Animation<TextureRegion> animationNorth;
     private final Animation<TextureRegion> animationSouth;
@@ -16,7 +20,14 @@ public class Lich extends Monster {
 
     public Lich(Vector2 v) {
         super(v);
-        direction = Direction.EAST;
+        int random = new Random().nextInt(4) + 1;
+        switch (random) {
+            case 1 -> direction = Direction.NORTH;
+            case 2 -> direction = Direction.SOUTH;
+            case 3 -> direction = Direction.WEST;
+            case 4 -> direction = Direction.EAST;
+        }
+
         animationNorth = new Animation<>(1f, TextureRegion.split(TextureFactory.getLichTexture(), 48, 64)[0]);
         animationSouth = new Animation<>(1f, TextureRegion.split(TextureFactory.getLichTexture(), 48, 64)[2]);
         animationWest = new Animation<>(1f, TextureRegion.split(TextureFactory.getLichTexture(), 48, 64)[3]);
@@ -25,7 +36,6 @@ public class Lich extends Monster {
         setHeight(14);
         setWidth(14);
 
-        // The base monster is represented by a square for now.
         PolygonShape shape = new PolygonShape();
         Vector2[] vectors = new Vector2[4];
         vectors[0] = new Vector2(4f, 2f);
@@ -36,30 +46,24 @@ public class Lich extends Monster {
         shape.set(vectors);
         setShape(shape);
 
-        this.density = 0.5f;
-        this.restitution = 0.1f;
-        this.friction = 0.5f;
-
-        this.setHp(20);
-        this.setDmg(10);
+        this.setHp(HP_LICH);
+        this.setDmg(DMG_LICH);
 
         sensor = true;
     }
 
     @Override
     public void setSprite() {
-
     }
 
     @Override
     public void Move() {
-        // The lich monster move around the
-        float monsterMovementForce = 10f;
+        // The lich monster move around the border
         switch (this.getDirection()) {
-            case NORTH -> setMotion(new Vector2(0, monsterMovementForce));
-            case SOUTH -> setMotion(new Vector2(0, -monsterMovementForce));
-            case EAST -> setMotion(new Vector2(monsterMovementForce, 0));
-            case WEST -> setMotion(new Vector2(-monsterMovementForce, 0));
+            case NORTH -> setMotion(new Vector2(0, SPD_LICH));
+            case SOUTH -> setMotion(new Vector2(0, -SPD_LICH));
+            case EAST -> setMotion(new Vector2(SPD_LICH, 0));
+            case WEST -> setMotion(new Vector2(-SPD_LICH, 0));
         }
     }
 
@@ -95,7 +99,7 @@ public class Lich extends Monster {
 
     @Override
     public int giveLoot() {
-        return 120; // TODO Ajouter dans les constantes
+        return LOOT_LICH;
     }
 
     public void changeDirection() {

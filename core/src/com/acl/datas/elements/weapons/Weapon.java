@@ -13,6 +13,7 @@ public abstract class Weapon extends Element {
     private Direction direction;
     public float velocity;
     private final Animation<TextureRegion> animation;
+
     public Weapon(Vector2 v, Direction d, Animation<TextureRegion> animation) {
         super(v);
         this.animation = animation;

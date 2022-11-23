@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.Random;
 
+import static com.acl.enums.Constantes.*;
+
 public class Guardian extends Monster {
 
     private Direction direction;
@@ -26,6 +28,7 @@ public class Guardian extends Monster {
             case 3 -> direction = Direction.WEST;
             case 4 -> direction = Direction.EAST;
         }
+
         animationNorth = new Animation<>(1f, TextureRegion.split(TextureFactory.getGuardianTexture(), 48, 64)[0]);
         animationSouth = new Animation<>(1f, TextureRegion.split(TextureFactory.getGuardianTexture(), 48, 64)[2]);
         animationWest = new Animation<>(1f, TextureRegion.split(TextureFactory.getGuardianTexture(), 48, 64)[3]);
@@ -34,7 +37,6 @@ public class Guardian extends Monster {
         setHeight(14);
         setWidth(14);
 
-        // The base monster is represented by a square for now.
         PolygonShape shape = new PolygonShape();
         Vector2[] vectors = new Vector2[4];
         vectors[0] = new Vector2(4f, 2f);
@@ -45,12 +47,8 @@ public class Guardian extends Monster {
         shape.set(vectors);
         setShape(shape);
 
-        this.density = 0.5f;
-        this.restitution = 0.1f;
-        this.friction = 0.5f;
-
-        this.setHp(20);
-        this.setDmg(30);
+        this.setHp(HP_GUARDIAN);
+        this.setDmg(DMG_GUARDIAN);
 
         sensor = true;
     }
@@ -62,12 +60,11 @@ public class Guardian extends Monster {
     @Override
     public void Move() {
         // The guardian monster move horizontally or vertically only
-        float monsterMovementForce = 10f;
         switch (this.getDirection()) {
-            case NORTH -> setMotion(new Vector2(0, monsterMovementForce));
-            case SOUTH -> setMotion(new Vector2(0, -monsterMovementForce));
-            case EAST -> setMotion(new Vector2(monsterMovementForce, 0));
-            case WEST -> setMotion(new Vector2(-monsterMovementForce, 0));
+            case NORTH -> setMotion(new Vector2(0, SPD_GUARDIAN));
+            case SOUTH -> setMotion(new Vector2(0, -SPD_GUARDIAN));
+            case EAST -> setMotion(new Vector2(SPD_GUARDIAN, 0));
+            case WEST -> setMotion(new Vector2(-SPD_GUARDIAN, 0));
         }
     }
 
@@ -75,14 +72,13 @@ public class Guardian extends Monster {
         switch (this.getDirection()) {
             case NORTH -> this.direction = Direction.SOUTH;
             case SOUTH -> this.direction = Direction.NORTH;
-            case EAST ->  this.direction = Direction.WEST;
-            case WEST ->  this.direction = Direction.EAST;
+            case EAST -> this.direction = Direction.WEST;
+            case WEST -> this.direction = Direction.EAST;
         }
     }
 
     public int giveLoot() {
-        // The base monster gives gold coins and score
-        return 100; //TODO Ajouter aux constantes
+        return LOOT_GUARDIAN;
     }
 
     public Animation<TextureRegion> getAnimationNorth() {

@@ -19,13 +19,14 @@ public abstract class Monster extends Element {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.fixedRotation = true;
         bodyDef.position.set(getPosition());
-
         this.setBodyDef(bodyDef);
     }
 
     public void setMotion(Vector2 v) {
         this.getBody().setLinearVelocity(v);
     }
+
+    public abstract void changeDirection();
 
     public abstract void Move();
 
@@ -55,6 +56,4 @@ public abstract class Monster extends Element {
     public UserData getUserData() {
         return UserData.MONSTER;
     }
-
-    public abstract void changeDirection();
 }

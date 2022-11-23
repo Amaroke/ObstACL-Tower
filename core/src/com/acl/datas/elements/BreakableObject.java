@@ -7,26 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class BreakableObject extends Element {
-    private final int givenScore;
+import static com.acl.enums.Constantes.LOOT_BREAKABLE;
 
+public class BreakableObject extends Element {
     public BreakableObject(Vector2 v) {
         super(v);
         this.shape = new PolygonShape();
-        this.density = 1f;
-        this.restitution = 0.1f;
-        this.friction = 0.25f;
-        this.givenScore = 5;
-        Vector2[] points = {
-                new Vector2(4f, 2f),
-                new Vector2(8f, 2f),
-                new Vector2(2f, 4f),
-                new Vector2(10f, 4f),
-                new Vector2(4f, 14f),
-                new Vector2(8f, 14f),
-                new Vector2(2f, 12f),
-                new Vector2(10f, 12f),
-        };
+        Vector2[] points = {new Vector2(4f, 2f), new Vector2(8f, 2f), new Vector2(2f, 4f), new Vector2(10f, 4f), new Vector2(4f, 14f), new Vector2(8f, 14f), new Vector2(2f, 12f), new Vector2(10f, 12f),};
         this.shape.set(points);
     }
 
@@ -51,7 +38,6 @@ public class BreakableObject extends Element {
     }
 
     public int giveLoot() {
-        //TODO Soon gold & more...
-        return givenScore;
+        return LOOT_BREAKABLE;
     }
 }

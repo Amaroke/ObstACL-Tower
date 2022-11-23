@@ -9,19 +9,22 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import static com.acl.enums.Constantes.SPD_SWORD;
+
 public class Sword extends Weapon {
 
     private int count = 0;
     private boolean retour = false;
+
     public Sword(Vector2 v, Direction d) {
         super(v, d, new Animation<>(1f, TextureRegion.split(TextureFactory.getFireBallTexture(), 152, 152)[0]));
-        velocity = 100f;
+        velocity = SPD_SWORD;
         sensor = true;
     }
 
     @Override
     public void update() {
-        if(count < 20 && !retour) {
+        if (count < 20 && !retour) {
             count++;
             switch (this.getDirection()) {
                 case NORTH -> this.getBody().setLinearVelocity(0, velocity);
@@ -31,7 +34,7 @@ public class Sword extends Weapon {
             }
         } else {
             retour = true;
-            count --;
+            count--;
             switch (this.getDirection()) {
                 case NORTH -> this.getBody().setLinearVelocity(0, -velocity);
                 case SOUTH -> this.getBody().setLinearVelocity(0, +velocity);
@@ -50,8 +53,8 @@ public class Sword extends Weapon {
         switch (this.getDirection()) {
             case NORTH -> this.setDirection(Direction.SOUTH);
             case SOUTH -> this.setDirection(Direction.NORTH);
-            case EAST ->  this.setDirection(Direction.WEST);
-            case WEST ->  this.setDirection(Direction.EAST);
+            case EAST -> this.setDirection(Direction.WEST);
+            case WEST -> this.setDirection(Direction.EAST);
         }
     }
 
@@ -68,6 +71,4 @@ public class Sword extends Weapon {
     public WeaponType getType() {
         return WeaponType.SWORD;
     }
-
-
 }

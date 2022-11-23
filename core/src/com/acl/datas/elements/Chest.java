@@ -9,18 +9,18 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.Random;
 
+import static com.acl.enums.Constantes.MAX_LOOT_CHEST;
+import static com.acl.enums.Constantes.MIN_LOOT_CHEST;
+
 public class Chest extends Element {
     private final int givenScore;
 
     public Chest(Vector2 v) {
         super(v);
         this.shape = new PolygonShape();
-        this.density = 1f;
-        this.restitution = 0.1f;
-        this.friction = 0.25f;
 
         Random random = new Random();
-        this.givenScore = random.nextInt(50, 200);
+        this.givenScore = random.nextInt(MIN_LOOT_CHEST, MAX_LOOT_CHEST);
 
         Vector2[] points = {new Vector2(2, 2), new Vector2(12, 2), new Vector2(12, 12), new Vector2(2, 12), new Vector2(4, 14), new Vector2(10, 14)};
         this.shape.set(points);
@@ -48,7 +48,6 @@ public class Chest extends Element {
     }
 
     public int giveLoot() {
-        //TODO Soon gold & more...
         return givenScore;
     }
 }

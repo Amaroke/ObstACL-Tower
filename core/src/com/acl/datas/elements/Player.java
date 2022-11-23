@@ -11,8 +11,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
+import static com.acl.enums.Constantes.HP_PLAYER;
+
 public class Player extends Element {
-    // TODO Weapon can be swap
     private WeaponType weaponType = WeaponType.FIREBALL;
     private Direction direction = Direction.NORTH;
     private final Animation<TextureRegion> animationNorth;
@@ -35,7 +36,7 @@ public class Player extends Element {
         vectors[2] = new Vector2(getWidth() - 4, getHeight() - 2f);
         vectors[3] = new Vector2(4f, getHeight() - 2f);
 
-        hp = 100;
+        hp = HP_PLAYER;
 
         this.shape.set(vectors);
 

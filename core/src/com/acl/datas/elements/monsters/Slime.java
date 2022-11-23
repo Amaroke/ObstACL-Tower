@@ -7,10 +7,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.util.Random;
 
+import static com.acl.enums.Constantes.*;
+
 public class Slime extends Monster {
 
     private int nbMovBeforeChange = 0;
-    private final int givenScore;
 
     public Slime(Vector2 v) {
         super(v);
@@ -39,9 +40,8 @@ public class Slime extends Monster {
         this.restitution = 0.1f;
         this.friction = 0.5f;
 
-        this.setHp(10);
-        this.setDmg(10);
-        this.givenScore = 50;
+        this.setHp(HP_SLIME);
+        this.setDmg(DMG_SLIME);
     }
 
     @Override
@@ -54,13 +54,12 @@ public class Slime extends Monster {
         // The base monster moves randomly up, left, right or down for a period of time that is random as well.
         if (nbMovBeforeChange == 0) {
             Random random = new Random();
-            float monsterMovementForce = 10f;
 
             switch (random.nextInt(4)) {
-                case 0 -> setMotion(new Vector2(0, monsterMovementForce));
-                case 1 -> setMotion(new Vector2(-monsterMovementForce, 0));
-                case 2 -> setMotion(new Vector2(monsterMovementForce, 0));
-                case 3 -> setMotion(new Vector2(0, -monsterMovementForce));
+                case 0 -> setMotion(new Vector2(0, SPD_SLIME));
+                case 1 -> setMotion(new Vector2(-SPD_SLIME, 0));
+                case 2 -> setMotion(new Vector2(SPD_SLIME, 0));
+                case 3 -> setMotion(new Vector2(0, -SPD_SLIME));
             }
             nbMovBeforeChange = random.nextInt(50, 200);
         } else {
@@ -70,11 +69,10 @@ public class Slime extends Monster {
 
     public int giveLoot() {
         // The base monster gives gold coins and score
-        return givenScore; // TODO CONSTANTES
+        return LOOT_SLIME;
     }
 
     @Override
     public void changeDirection() {
-
     }
 }
