@@ -43,13 +43,9 @@ public class BreakableObject extends Element {
     public Item giveLoot() {
         Random random = new Random();
         Item item = null;
-        switch(random.nextInt(3)){
-            case 0 -> {
-                item = new Potion(new Vector2(this.getPosition().x + 4, this.getPosition().y + 4));
-            }
-            case 1 -> {
-                item = new GoldIngot(new Vector2(this.getPosition().x + 4, this.getPosition().y + 4));
-            }
+        switch (random.nextInt(3)) {
+            case 0 -> item = new Potion(new Vector2(this.getPosition().x + 4, this.getPosition().y + 4));
+            case 1 -> item = new GoldIngot(new Vector2(this.getPosition().x + 4, this.getPosition().y + 4));
         }
         return item;
     }

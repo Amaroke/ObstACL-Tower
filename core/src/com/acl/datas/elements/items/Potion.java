@@ -1,9 +1,12 @@
 package com.acl.datas.elements.items;
 
+import com.acl.Tower;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+
+import static com.acl.enums.Constantes.HEAL_POTION;
 
 public class Potion extends Item {
     public Potion(Vector2 v) {
@@ -27,8 +30,8 @@ public class Potion extends Item {
     }
 
     @Override
-    public int applyEffect() {
-        return 30;
+    public void applyEffect(Tower tower) {
+        tower.getPlayer().heal(HEAL_POTION);
     }
 
     @Override

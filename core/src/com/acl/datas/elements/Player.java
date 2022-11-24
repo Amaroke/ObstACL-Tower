@@ -33,7 +33,7 @@ public class Player extends Element {
 
         Vector2[] vectors = new Vector2[4];
         vectors[0] = new Vector2(4f, 1f);
-        vectors[1] = new Vector2(getWidth() - 4,1f);
+        vectors[1] = new Vector2(getWidth() - 4, 1f);
         vectors[2] = new Vector2(getWidth() - 4, getHeight() - 3f);
         vectors[3] = new Vector2(4f, getHeight() - 3f);
 
@@ -155,8 +155,17 @@ public class Player extends Element {
 
     public void heal(int hp) {
         this.hp += hp;
-        if(this.hp > 100){
+        if (this.hp > 100) {
             this.hp = 100;
         }
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    @Override
+    public boolean isPlayer() {
+        return true;
     }
 }

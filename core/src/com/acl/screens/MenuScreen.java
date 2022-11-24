@@ -31,7 +31,6 @@ public class MenuScreen extends ScreenAdapter {
         //Handling the camera change
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 260, 150);
-        //this.keyboardListener = new MenuKeyboardListener();
         Gdx.input.setInputProcessor(keyboardListener);
         this.keyboardListener = keyboardListener;
         this.gameScreen = gameScreen;
@@ -74,9 +73,9 @@ public class MenuScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         obstACLTower.getBatch().begin();
         obstACLTower.getBatch().draw(this.background, 0, 16, camera.viewportWidth, camera.viewportHeight);
-        obstACLTower.getBatch().draw(this.backButton, camera.viewportWidth/2 - 20, 16 + (camera.viewportHeight / 4) * 3, 40, 10);
-        obstACLTower.getBatch().draw(this.startButton, camera.viewportWidth/2 - 20, 16 + (camera.viewportHeight / 4) * 2, 40, 10);
-        obstACLTower.getBatch().draw(this.quitButton, camera.viewportWidth/2 - 20, 16 + (camera.viewportHeight / 4), 40, 10);
+        obstACLTower.getBatch().draw(this.backButton, camera.viewportWidth / 2 - 20, 16 + (camera.viewportHeight / 4) * 3, 40, 10);
+        obstACLTower.getBatch().draw(this.startButton, camera.viewportWidth / 2 - 20, 16 + (camera.viewportHeight / 4) * 2, 40, 10);
+        obstACLTower.getBatch().draw(this.quitButton, camera.viewportWidth / 2 - 20, 16 + (camera.viewportHeight / 4), 40, 10);
 
         //Displaying the arrow
         float y_arrow = switch (keyboardListener.getCurrentChoice()) {
@@ -85,7 +84,7 @@ public class MenuScreen extends ScreenAdapter {
             case 2 -> (camera.viewportHeight / 4);
             default -> 0f;
         };
-        obstACLTower.getBatch().draw(this.selectArrow, camera.viewportWidth/2 - 30, 16 + y_arrow, 10, 10);
+        obstACLTower.getBatch().draw(this.selectArrow, camera.viewportWidth / 2 - 30, 16 + y_arrow, 10, 10);
 
         obstACLTower.getBatch().end();
     }

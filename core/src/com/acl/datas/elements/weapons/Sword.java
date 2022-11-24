@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import static com.acl.enums.Constantes.DMG_SWORD;
 import static com.acl.enums.Constantes.SPD_SWORD;
 
 public class Sword extends Weapon {
@@ -37,9 +38,9 @@ public class Sword extends Weapon {
             count--;
             switch (this.getDirection()) {
                 case NORTH -> this.getBody().setLinearVelocity(0, -velocity);
-                case SOUTH -> this.getBody().setLinearVelocity(0, +velocity);
+                case SOUTH -> this.getBody().setLinearVelocity(0, velocity);
                 case EAST -> this.getBody().setLinearVelocity(-velocity, 0);
-                case WEST -> this.getBody().setLinearVelocity(+velocity, 0);
+                case WEST -> this.getBody().setLinearVelocity(velocity, 0);
             }
         }
     }
@@ -70,5 +71,10 @@ public class Sword extends Weapon {
     @Override
     public WeaponType getType() {
         return WeaponType.SWORD;
+    }
+
+    @Override
+    public int getDamage() {
+        return DMG_SWORD;
     }
 }

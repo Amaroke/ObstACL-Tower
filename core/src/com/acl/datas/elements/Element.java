@@ -109,4 +109,8 @@ public abstract class Element {
     public boolean isItem() {
         return false;
     }
+
+    public boolean isPlayer() {
+        return false;
+    }
 }

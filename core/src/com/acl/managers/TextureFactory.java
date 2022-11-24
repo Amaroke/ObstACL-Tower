@@ -76,6 +76,7 @@ public class TextureFactory {
     public static Texture getGuardianTexture() {
         return guardianTexture;
     }
+
     public static Texture getPlayerTexture() {
         return playerTexture;
     }
@@ -95,15 +96,19 @@ public class TextureFactory {
     public static Texture getMenuExitButton() {
         return menuQuitButton;
     }
+
     public static Texture getMenuSelectArrow() {
         return menuSelectArrow;
     }
+
     public static Texture getLichTexture() {
         return lichTexture;
     }
+
     public static Texture getPotionTexture() {
         return potionTexture;
     }
+
     public static Texture getGoldIngotTexture() {
         return goldIngotTexture;
     }

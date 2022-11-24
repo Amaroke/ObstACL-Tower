@@ -21,33 +21,46 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
 
+import static com.acl.enums.Constantes.DMG_TRAP;
+import static com.acl.enums.Constantes.WEAPON_COOLDOWN;
+
 public class Tower {
     private World world;
     private Player player;
     private float height;
+
     private ArrayList<Element> elements;
     private ArrayList<Monster> monsters;
     private ArrayList<Weapon> weapons;
+
     private boolean victory;
     private boolean defeat;
     private boolean gamePaused;
+
     private boolean allEnemiesAreDead;
+
     private int score;
+
     private Stair stair;
+
     private int nbLevel;
+
     private CollisionListener collisionListener;
+
     private final SoundsManager soundsManager = new SoundsManager();
     private boolean soundPlayed = false;
 
+    private int currentHP = 0;
 
     private int weaponCooldown = 0;
+
     private int pauseTime = 100;
 
     public Tower() {
         createTower(1, 0);
     }
 
-    public void createTower(int nbLevel, int score) {
+    public void createTower(int numLevel, int score) {
         world = new World(new Vector2(0, 0), true);
 
         this.weapons = new ArrayList<>();
@@ -64,7 +77,7 @@ public class Tower {
         this.score = score;
         this.setGamePaused(false);
 
-        this.setNbLevel(nbLevel);
+        this.setNbLevel(numLevel);
 
         FloorManager floorManager = new FloorManager("floor" + this.getNbLevel() + ".txt");
         char[][] table = floorManager.getTable();
@@ -73,6 +86,12 @@ public class Tower {
                 createElement(table[i][j], i, j);
             }
         }
+
+        if (this.currentHP != 0) {
+            this.getPlayer().setHp(currentHP);
+            this.currentHP = 0;
+        }
+
         sortElements();
 
         setCollisionListener(new CollisionListener());
@@ -91,7 +110,6 @@ public class Tower {
         weapon.setFixture();
         weapons.add(weapon);
     }
-
 
     public Player getPlayer() {
         return player;
@@ -150,6 +168,7 @@ public class Tower {
                 this.pauseTime = 100;
                 this.getWorld().dispose();
                 if (this.isVictory()) {
+                    this.currentHP = Math.max(getPlayer().getHp(), 0);
                     this.createTower(this.getNbLevel() == 6 ? 1 : this.getNbLevel() + 1, this.getScore());
                 } else {
                     this.createTower(1, 0);
@@ -163,7 +182,7 @@ public class Tower {
         if (!gamePaused) {
             if (keyboardListener.getUseWeapon()) {
                 if (weaponCooldown <= 0) {
-                    this.weaponCooldown = 30; //TODO A INCLURE DANS LES CONSTANTES
+                    this.weaponCooldown = WEAPON_COOLDOWN;
                     createWeapon();
                 }
             }
@@ -186,7 +205,6 @@ public class Tower {
                     e.setPosition(e.getBody().getPosition());
                 }
 
-
                 for (Weapon w : this.weapons) {
                     w.update();
                     w.setPosition(w.getBody().getPosition());
@@ -202,17 +220,15 @@ public class Tower {
                     Weapon w = getWeaponFromBody(getCollisionListener().getWeaponCollidedWithMonster());
                     getWeapons().remove(w);
                     deleteElem(w);
-                    // TODO Adapt to damage
-                    m.receiveDamage(5);
+                    m.receiveDamage(w.getDamage());
                     checkMonsterHealth(m);
                 }
 
-                for(Body weapon : this.getCollisionListener().getWeaponsCollideWithWall()) {
+                for (Body weapon : this.getCollisionListener().getWeaponsCollideWithWall()) {
                     Weapon w = getWeaponFromBody(weapon);
                     getWeapons().remove(w);
                     deleteElem(w);
                 }
-
 
                 if (this.monsters.size() == 0) {
                     this.allEnemiesAreDead = true;
@@ -242,24 +258,19 @@ public class Tower {
                 if (this.getCollisionListener().isPlayerCollidesWithTrap()) {
                     Trap t = (Trap) getElementFromBody(getCollisionListener().getTrapCollided());
                     this.soundsManager.soundDamage();
-                    player.receiveDamage(t.getDealDamage());
+                    player.receiveDamage(DMG_TRAP);
                 }
 
-                if(this.getCollisionListener().isPlayerCollidesWithItem()){
+                if (this.getCollisionListener().isPlayerCollidesWithItem()) {
                     Item i = (Item) getElementFromBody(getCollisionListener().getItemCollidedWithPlayer());
-                    if(i.isAPotion()){
-                        player.heal(i.applyEffect());
-                    }
-                    if(i.isAGoldIngot()){
-                        score += i.applyEffect();
-                    }
+                    i.applyEffect(this);
                     deleteElem(i);
                 }
 
                 if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
                     BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollidedWithWeapon());
                     Item item = bo.giveLoot();
-                    if(item != null){
+                    if (item != null) {
                         item.configureBodyDef();
                         item.createBody(getWorld());
                         item.setFixture();
@@ -279,10 +290,9 @@ public class Tower {
                     this.endOfTheGameLost();
                 }
 
-                for(Body monster : this.getCollisionListener().getMonstersCollideWithWall()) {
+                for (Body monster : this.getCollisionListener().getMonstersCollideWithWall()) {
                     Monster m = getMonsterFromBody(monster);
-                    if (m.isLich())
-                        handleLichCollisionWithWall(m);
+                    if (m.isLich()) handleLichCollisionWithWall(m);
                     m.changeDirection();
                 }
 
@@ -332,6 +342,7 @@ public class Tower {
         if (m.getHp() <= 0) {
             this.score += m.giveLoot();
             getMonsters().remove(m);
+            this.getCollisionListener().getMonstersCollideWithWall().remove(m.getBody());
             deleteElem(m);
         }
     }
@@ -424,9 +435,8 @@ public class Tower {
 
     public void deleteElem(Element e) {
         getElements().remove(e);
-        if(e != null) {
-            this.getWorld().destroyBody(e.getBody());
-        }
+        this.getCollisionListener().getMonstersCollideWithWall().remove(e.getBody());
+        this.getWorld().destroyBody(e.getBody());
     }
 
     public Element getElementFromBody(Body b) {
@@ -457,11 +467,9 @@ public class Tower {
     private void sortElements() {
         ArrayList<Element> notOnTop = new ArrayList<>();
         ArrayList<Element> onTop = new ArrayList<>();
-        for(Element e : elements) {
-            if (e.isAMonster())
-                notOnTop.add(e);
-            else
-                onTop.add(e);
+        for (Element e : elements) {
+            if (e.isAMonster()) notOnTop.add(e);
+            else onTop.add(e);
         }
         elements.clear();
         elements.addAll(onTop);
@@ -470,10 +478,10 @@ public class Tower {
 
     private void handleLichCollisionWithWall(Monster m) {
         switch (m.getDirection()) {
-            case EAST -> m.setRealPosition(new Vector2(m.getPosition().x -1, m.getPosition().y));
+            case EAST -> m.setRealPosition(new Vector2(m.getPosition().x - 1, m.getPosition().y));
             case WEST -> m.setRealPosition(new Vector2(m.getPosition().x + 1, m.getPosition().y));
-            case NORTH -> m.setRealPosition(new Vector2(m.getPosition().x,m.getPosition().y - 1));
-            case SOUTH -> m.setRealPosition(new Vector2(m.getPosition().x ,m.getPosition().y + 1));
+            case NORTH -> m.setRealPosition(new Vector2(m.getPosition().x, m.getPosition().y - 1));
+            case SOUTH -> m.setRealPosition(new Vector2(m.getPosition().x, m.getPosition().y + 1));
         }
     }
 }

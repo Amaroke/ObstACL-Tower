@@ -74,4 +74,6 @@ public abstract class Weapon extends Element {
     }
 
     public abstract WeaponType getType();
+
+    public abstract int getDamage();
 }

@@ -11,8 +11,8 @@ public class DesktopLauncher {
         Graphics.DisplayMode displayMode = Lwjgl3ApplicationConfiguration.getDisplayMode();
         int displayWidthBorder = displayMode.width / 10;
         int displayHeightBorder = displayMode.height / 7;
-        config.setWindowedMode(displayMode.width-displayWidthBorder, displayMode.height-displayHeightBorder);
-        config.setWindowPosition(displayWidthBorder/2,displayHeightBorder/2);
+        config.setWindowedMode(displayMode.width - displayWidthBorder, displayMode.height - displayHeightBorder);
+        config.setWindowPosition(displayWidthBorder / 2, displayHeightBorder / 2);
         config.setResizable(false);
         config.setForegroundFPS(60);
         config.setTitle("ObstACL Tower");

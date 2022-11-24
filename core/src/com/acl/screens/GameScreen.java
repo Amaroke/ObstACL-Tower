@@ -52,7 +52,6 @@ public class GameScreen extends ScreenAdapter {
             return;
         }
 
-
         boolean fullScreen = keyboardListener.isFullScreen();
         if (this.fullScreen != fullScreen) {
             this.setText();
@@ -100,10 +99,10 @@ public class GameScreen extends ScreenAdapter {
                                 t = new TextureRegion((((Lich) e).getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true)));
                     }
                     obstACLTower.batch.draw(t, e.getBody().getPosition().x, e.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);
-                } else if(e.isItem()) {
+                } else if (e.isItem()) {
                     e.setSprite();
                     obstACLTower.batch.draw(e.getSprite(), e.getBody().getPosition().x, e.getBody().getPosition().y, 0, 0, 7f, 7f, 1f, 1f, 0);
-                }else {
+                } else {
                     e.setSprite();
                     obstACLTower.batch.draw(e.getSprite(), e.getBody().getPosition().x, e.getBody().getPosition().y);
                 }

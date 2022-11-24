@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import static com.acl.enums.Constantes.DMG_FIREBALL;
 import static com.acl.enums.Constantes.SPD_FIREBALL;
 
 public class FireBall extends Weapon {
@@ -41,5 +42,10 @@ public class FireBall extends Weapon {
     @Override
     public WeaponType getType() {
         return WeaponType.FIREBALL;
+    }
+
+    @Override
+    public int getDamage() {
+        return DMG_FIREBALL;
     }
 }

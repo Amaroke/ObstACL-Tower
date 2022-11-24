@@ -13,31 +13,24 @@ public class Text {
     public final SpriteBatch textBatch;
     public BitmapFont font;
 
-
     public Text() {
         font = new BitmapFont();
 
-        //CAM
         OrthographicCamera textCamera = new OrthographicCamera();
         textCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         textBatch = new SpriteBatch();
 
-
-        //GENERATE
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("mcfont.otf"));
         FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        //PARAMS
         params.size = Gdx.graphics.getWidth() * 35 / 1024;
         params.color = new Color(255, 0, 100, 0.75f);
         params.borderColor = Color.BLACK;
         params.borderWidth = (float) (Gdx.graphics.getWidth() * 3) / 1024;
         params.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
 
-        //CAM
         textBatch.setProjectionMatrix(textCamera.combined);
         font = fontGenerator.generateFont(params);
-
     }
 
     public void displayScore(String message) {

@@ -48,10 +48,8 @@ public class KeyboardListener implements InputProcessor {
         if (keycode == Input.Keys.P) {
             fullScreen = !fullScreen;
             Graphics.DisplayMode currentMode = Gdx.graphics.getDisplayMode();
-            if (!fullScreen)
-                Gdx.graphics.setWindowedMode(currentMode.width-200, currentMode.height-200);
-            else
-                Gdx.graphics.setFullscreenMode(currentMode);
+            if (!fullScreen) Gdx.graphics.setWindowedMode(currentMode.width - 200, currentMode.height - 200);
+            else Gdx.graphics.setFullscreenMode(currentMode);
         }
         // When pressing the E key, weapon swap
         if (keycode == Input.Keys.E) {
@@ -169,6 +167,7 @@ public class KeyboardListener implements InputProcessor {
     public boolean isMenuOpen() {
         return menuOpen;
     }
+
     public int getCurrentChoice() {
         return currentChoice;
     }

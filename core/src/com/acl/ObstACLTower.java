@@ -12,14 +12,13 @@ public class ObstACLTower extends Game implements ApplicationListener {
     private Tower tower;
     public SpriteBatch batch;
     private OrthographicCamera camera;
-    private SoundsManager soundsManager;
 
     @Override
     public void create() {
         setScreen(new GameScreen(this));
         batch = new SpriteBatch();
-        this.soundsManager = new SoundsManager();
-        this.soundsManager.soundBackground();
+        SoundsManager soundsManager = new SoundsManager();
+        soundsManager.soundBackground();
     }
 
     @Override

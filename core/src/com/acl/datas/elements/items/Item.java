@@ -1,5 +1,6 @@
 package com.acl.datas.elements.items;
 
+import com.acl.Tower;
 import com.acl.datas.elements.Element;
 import com.acl.enums.UserData;
 import com.badlogic.gdx.math.Vector2;
@@ -25,7 +26,7 @@ public abstract class Item extends Element {
         return UserData.ITEM;
     }
 
-    public abstract int applyEffect();
+    public abstract void applyEffect(Tower tower);
 
     public boolean isAPotion() {
         return false;
