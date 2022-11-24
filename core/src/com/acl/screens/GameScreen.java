@@ -21,14 +21,15 @@ public class GameScreen extends ScreenAdapter {
 
     final private ObstACLTower obstACLTower;
     private final KeyboardListener keyboardListener = new KeyboardListener();
-    private final Text text;
+    private Text text;
     private int timeBetweenRender = 0;
     private final OrthographicCamera camera;
+    private boolean fullScreen = false;
 
     public GameScreen(ObstACLTower obstACLTower) {
         this.obstACLTower = obstACLTower;
         this.obstACLTower.setTower(new Tower());
-        this.text = new Text();
+        this.setText();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 16 * 16, 9 * 16);
         camera.position.y += 16;
@@ -51,6 +52,12 @@ public class GameScreen extends ScreenAdapter {
             return;
         }
 
+
+        boolean fullScreen = keyboardListener.isFullScreen();
+        if (this.fullScreen != fullScreen) {
+            this.setText();
+            this.fullScreen = fullScreen;
+        }
         // We update the game
         this.obstACLTower.getTower().update(keyboardListener);
 
@@ -137,7 +144,7 @@ public class GameScreen extends ScreenAdapter {
 
             Player p = obstACLTower.getTower().getPlayer();
             TextureRegion t;
-            if (p.isMoving()) {
+            if (p.isMoving() && !obstACLTower.getTower().isGamePaused()) {
                 t = new TextureRegion(p.getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true));
                 switch (p.getDirection()) {
                     case SOUTH ->
@@ -175,6 +182,10 @@ public class GameScreen extends ScreenAdapter {
                 text.displayDie("You lose \n Your score = " + obstACLTower.getTower().getScore());
             }
         }
+    }
+
+    public void setText() {
+        this.text = new Text();
     }
 }
 

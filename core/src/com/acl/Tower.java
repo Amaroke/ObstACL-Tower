@@ -403,7 +403,9 @@ public class Tower {
 
     public void deleteElem(Element e) {
         getElements().remove(e);
-        this.getWorld().destroyBody(e.getBody());
+        if(e != null) {
+            this.getWorld().destroyBody(e.getBody());
+        }
     }
 
     public Element getElementFromBody(Body b) {

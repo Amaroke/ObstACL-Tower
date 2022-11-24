@@ -192,4 +192,8 @@ public class KeyboardListener implements InputProcessor {
     public boolean isPlayerMoving() {
         return playerMoving;
     }
+
+    public boolean isFullScreen() {
+        return fullScreen;
+    }
 }
