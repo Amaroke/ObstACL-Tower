@@ -24,6 +24,9 @@ public class CollisionListener implements ContactListener {
     private boolean playerCollidesWithMonster = false;
     private Body monsterCollidedWithPlayer = null;
 
+    private boolean playerCollidesWithItem = false;
+    private Body itemCollidedWithPlayer = null;
+
     private ArrayList<Body> weaponsCollideWithWall = new ArrayList<>();
     private ArrayList<Body> monstersCollideWithWall = new ArrayList<>();
 
@@ -76,6 +79,12 @@ public class CollisionListener implements ContactListener {
 
         if ((A == UserData.MONSTER && B == UserData.WALL) || (A == UserData.WALL && B == UserData.MONSTER)) {
             this.monstersCollideWithWall.add((A == UserData.MONSTER) ? contact.getFixtureA().getBody() : contact.getFixtureB().getBody());
+        }
+
+        if ((A == UserData.PLAYER && B == UserData.ITEM) || (A == UserData.ITEM && B == UserData.PLAYER)) {
+            this.playerCollidesWithItem = true;
+            this.itemCollidedWithPlayer = (A == UserData.ITEM) ?
+                    contact.getFixtureA().getBody() : contact.getFixtureB().getBody();
         }
     }
 
@@ -169,5 +178,15 @@ public class CollisionListener implements ContactListener {
     public void resetCollideWithWall() {
         weaponsCollideWithWall = new ArrayList<>();
         monstersCollideWithWall = new ArrayList<>();
+    }
+
+    public boolean isPlayerCollidesWithItem() {
+        boolean value = playerCollidesWithItem;
+        playerCollidesWithItem = false;
+        return value;
+    }
+
+    public Body getItemCollidedWithPlayer() {
+        return itemCollidedWithPlayer;
     }
 }

@@ -152,4 +152,11 @@ public class Player extends Element {
     public boolean isMoving() {
         return isMoving;
     }
+
+    public void heal(int hp) {
+        this.hp += hp;
+        if(this.hp > 100){
+            this.hp = 100;
+        }
+    }
 }

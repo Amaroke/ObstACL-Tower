@@ -1,6 +1,7 @@
 package com.acl;
 
 import com.acl.datas.elements.*;
+import com.acl.datas.elements.items.Item;
 import com.acl.datas.elements.monsters.Guardian;
 import com.acl.datas.elements.monsters.Lich;
 import com.acl.datas.elements.monsters.Monster;
@@ -43,7 +44,7 @@ public class Tower {
     private int pauseTime = 100;
 
     public Tower() {
-        createTower(3, 0);
+        createTower(1, 0);
     }
 
     public void createTower(int nbLevel, int score) {
@@ -244,9 +245,27 @@ public class Tower {
                     player.receiveDamage(t.getDealDamage());
                 }
 
+                if(this.getCollisionListener().isPlayerCollidesWithItem()){
+                    Item i = (Item) getElementFromBody(getCollisionListener().getItemCollidedWithPlayer());
+                    if(i.isAPotion()){
+                        player.heal(i.applyEffect());
+                    }
+                    if(i.isAGoldIngot()){
+                        score += i.applyEffect();
+                    }
+                    deleteElem(i);
+                }
+
                 if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
                     BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollidedWithWeapon());
-                    this.score += bo.giveLoot();
+                    System.out.println(bo.getPosition());
+                    Item item = bo.giveLoot();
+                    if(item != null){
+                        item.configureBodyDef();
+                        item.createBody(getWorld());
+                        item.setFixture();
+                        elements.add(item);
+                    }
                     this.soundsManager.soundBarrel();
                     deleteElem(bo);
                 }
@@ -312,6 +331,7 @@ public class Tower {
 
     private void checkMonsterHealth(Monster m) {
         if (m.getHp() <= 0) {
+            this.score += m.giveLoot();
             getMonsters().remove(m);
             deleteElem(m);
         }

@@ -5,17 +5,17 @@ public class Constantes {
     public static final int HP_GUARDIAN = 20;
     public static final int DMG_GUARDIAN = 30;
     public static final float SPD_GUARDIAN = 10f;
-    public static final int LOOT_GUARDIAN = 100;
+    public static final int LOOT_GUARDIAN = 50;
 
     public static final int HP_LICH = 5;
     public static final int DMG_LICH = 50;
     public static final float SPD_LICH = 20f;
-    public static final int LOOT_LICH = 100;
+    public static final int LOOT_LICH = 75;
 
     public static final int HP_SLIME = 10;
     public static final int DMG_SLIME = 10;
     public static final float SPD_SLIME = 10f;
-    public static final int LOOT_SLIME = 50;
+    public static final int LOOT_SLIME = 15;
 
     public static final float SPD_FIREBALL = 50f;
 
