@@ -107,6 +107,7 @@ public class Guardian extends Monster {
         return false;
     }
 
+    @Override
     public Direction getDirection() {
         return direction;
     }

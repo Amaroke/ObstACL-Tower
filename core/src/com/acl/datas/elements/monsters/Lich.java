@@ -67,6 +67,7 @@ public class Lich extends Monster {
         }
     }
 
+    @Override
     public Direction getDirection() {
         return direction;
     }
@@ -110,5 +111,4 @@ public class Lich extends Monster {
             case WEST -> this.direction = Direction.NORTH;
         }
     }
-
 }

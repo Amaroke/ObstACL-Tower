@@ -43,7 +43,7 @@ public class Tower {
     private int pauseTime = 100;
 
     public Tower() {
-        createTower(1, 0);
+        createTower(3, 0);
     }
 
     public void createTower(int nbLevel, int score) {
@@ -263,6 +263,8 @@ public class Tower {
 
                 for(Body monster : this.getCollisionListener().getMonstersCollideWithWall()) {
                     Monster m = getMonsterFromBody(monster);
+                    if (m.isLich())
+                        handleLichCollisionWithWall(m);
                     m.changeDirection();
                 }
 
@@ -443,6 +445,15 @@ public class Tower {
         elements.clear();
         elements.addAll(onTop);
         elements.addAll(notOnTop);
+    }
+
+    private void handleLichCollisionWithWall(Monster m) {
+        switch (m.getDirection()) {
+            case EAST -> m.setRealPosition(new Vector2(m.getPosition().x -1, m.getPosition().y));
+            case WEST -> m.setRealPosition(new Vector2(m.getPosition().x + 1, m.getPosition().y));
+            case NORTH -> m.setRealPosition(new Vector2(m.getPosition().x,m.getPosition().y - 1));
+            case SOUTH -> m.setRealPosition(new Vector2(m.getPosition().x ,m.getPosition().y + 1));
+        }
     }
 }
 
