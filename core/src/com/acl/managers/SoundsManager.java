@@ -65,6 +65,7 @@ public class SoundsManager {
     public void soundBackground() {
         background_sound.setLooping(true);
         background_sound.play();
+        background_sound.setVolume(0.20f);
     }
 
 

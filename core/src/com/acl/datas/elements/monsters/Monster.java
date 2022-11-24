@@ -1,6 +1,7 @@
 package com.acl.datas.elements.monsters;
 
 import com.acl.datas.elements.Element;
+import com.acl.enums.Direction;
 import com.acl.enums.UserData;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -60,5 +61,12 @@ public abstract class Monster extends Element {
     @Override
     public boolean isAMonster() {
         return true;
+    }
+
+    public abstract Direction getDirection();
+
+    public void setRealPosition(Vector2 v) {
+        this.setPosition(v);
+        this.getBody().setTransform(v, 0f);
     }
 }

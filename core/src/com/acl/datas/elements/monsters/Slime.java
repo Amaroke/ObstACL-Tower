@@ -1,5 +1,6 @@
 package com.acl.datas.elements.monsters;
 
+import com.acl.enums.Direction;
 import com.acl.managers.TextureFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -74,5 +75,10 @@ public class Slime extends Monster {
 
     @Override
     public void changeDirection() {
+    }
+
+    @Override
+    public Direction getDirection() {
+        return null;
     }
 }
