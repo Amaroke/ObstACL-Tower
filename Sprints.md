@@ -246,7 +246,7 @@ Comme pour chaque sprint, nous avons débuté les tâches que nous avions d'assi
 | IOPETI Hugo            | Ajout de niveaux.<br><br>Implémentation des items.                                                           | 1h30<br><br>3h30                 | 1h30<br><br>3h30                      |
 | MATHIEU STEINBACH Hugo | Animation de déplacement.<br><br>Réparation de l'UI.<br><br>Changement d'arme.<br><br>Harmonisation du code. | 1h<br><br>1h<br><br>1h<br><br>2h | 1h<br><br>1h<br><br>30min<br><br>2h30 |
 | YVOZ Ludovic           | Gestion de la hauteur d'affichage.<br><br>Changement déplacement de la liche.<br><br>Ajouts des items.       | 1h<br><br>1h30<br><br>3h         | 1h30<br><br>1h30<br><br>2h30          |
-| ZIMOL Guillaume        | Ajout d'une musique.<br><br>Ajout de sons.                                                                   | 2h<br><br>3h                     |                                       |
+| ZIMOL Guillaume        | Ajout d'une musique.<br><br>Ajout de sons.                                                                   | 2h<br><br>3h                     | 2h<br><br>3h                          |
 
 ### <a id="diagramme3"></a>Diagramme UML
 
@@ -257,4 +257,41 @@ Comme pour chaque sprint, nous avons débuté les tâches que nous avions d'assi
 
 ### <a id="review3"></a>Review
 
+La mise en place de niveaux ne fût pas très compliquée.<br>
+Par contre, de nombreux tests, ont été nécessaire afin d'avoir un niveau à la fois intéressant pour le joueur (avoir la meilleur expérience utilisateur possible) et fonctionnel.<br>
+La mise en place des items fût plus contraignante, malgré le fait que nous étions efficace lors de son implémentation, pour cause, la façon dont nous avons développé notre architecture nous à permis de finaliser cette fonctionnalité plutôt rapidement.<br>
+C'est grâce à cette fonctionnalité que nous avons compris que la méthodologie appliquée eu un grand impact sur le projet et sur l'efficacité de notre travail.<br>
+Par ailleurs, de nombreux tests fûrent nécessaire pour s'assurer du bon fonctionnement de cette fonctionnalité.<br>
+La mise en place de l'animation du joueur a été assez simple, le plus dur étant de trouver les sprites puisque le fonctionnement de l'animation est le même que pour celle des monstres.<br>
+Il a cependant fallut gérer un détail supplémentaire, lorsque le joueur ne se déplace pas.<br>
+Le problème de l'UI qui changeait de taille à également été résolu assez simplement. Tout comme pour le changement d'arme.<br>
+La revue des déplacements de la liche a été finalement assez simple mais à révélé quelques bugs relatifs aux hitboxs de nos monstres. Ces bugs ont finalement été résolus assez rapidement.<br>
+La mise en place d'un système de "profondeur" d'affichage a été quant-à-elle plus fastidieuse car, la librairie LibGdx n'inclue pas de système de profondeur ou bien de plans nativement.<br>
+Nous avons finalement réussi sans utiliser de nouvelles bibliothèques.<br>
+Une fois toutes les fonctionnalités implémentées, une relecture totale du code, changement de noms de variables et amélioration de la structure a été effectué.<br>
+Comme à la fin de chaque sprint, pour permettre au code d'être le plus facilement lisible et compréhensible pour quelqu'un qui arriverait dans le projet en cours de route.<br>
+L'ajout des sons à lui aussi été effectué sans trop de problème, il a cependant été nécessaire de distinguer music et sound, et la documentation LibGDX à ce sujet été peu intuitive.<br>
+
 ### <a id="retrospective3"></a>Restrospective
+
+Comme au début du travail de groupe et jusqu'à maintenant, l'ambiance de groupe était parfaite. Tous les membres s'entendent bien et l'effort collectif est de mise.<br>
+Notre organisation nous permet de finir les tâches en avance et, de cette façon, prendre les retours des autres membres, ainsi que d'effectuer de nombreux tests, ceux-ci étant nécessaire au bon déroulement du projet.<br>
+L'ambiance dans l'équipe reste toujours très amicale et nous sommes devenus encore plus rapides et efficaces pour effectuer les prises de décisions importantes.<br>
+Comme pour le sprint précédent, il n'y a eu aucun problème quant à la charge de travail, nous avons réussi à finir notre travail rapidement grâce à notre organisation très efficace.
+Au final, ce projet, c'est très bien passé pour tous les membres du groupe, nous sommes fiers de notre travail et du déroulement de ce projet.
+
+## Précisions supplémentaires vis-à-vis des tests
+
+Les tests automatiques et unitaires étant majoritairement impossible à mettre en place lors de la réalisation d'un jeu vidéo
+(rafraichissement/seconde trop élevé, données entrantes/sortantes inconnues ou trop dense, moteur graphique,...),
+l'essentiel de nos tests ont été effectués, à la manière des testeurs de jeux vidéo, sur des niveaux de test
+(que nous avons push pour ce dernier sprint) que nous lancions "à la main".<br>
+En effet utilisant LibGDX, beaucoup de tests sont strictement impossible ou alors ont déjà été effectués.
+Il est également très difficile d'applique le principe Right-BICEP comme vu en cours/TP, car les tests unitaires
+sont en général impossible à mettre en place (à cause de LibGDX), les seuls tests possibles étant ceux de nos fonctions,
+qui sont pour la plupart "too small to fail", ou alors qui nécessite la structure complète d'une ObstacleTower et donc
+le lancement d'une fenêtre graphique.<br>
+Mais bien entendu tous les tests type collisions, interactions entre différents éléments du jeu ont été testés
+de beaucoup de manière différentes et dans les cas les plus avancés, de manière à couvrir le plus de cas possibles de bugs potentiels.
+Par ailleurs un grand nombre de bugs ont pu être résolus grâce à ces tests.
+Le tout sur toutes nos machines, ainsi que celle de la fac, et donc sous différents systèmes d'exploitations.

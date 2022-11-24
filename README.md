@@ -16,7 +16,7 @@ Pour tout ce qui concerne notre organisation des sprints, tout est détaillé da
 
 ## Vision du jeu final
 
-Notre jeu sera un rogue-lite basé sur un système de tour à gravir. Un héros pourra monter d’étages en étages, chaque
+Notre jeu sera un rogue lite basé sur un système de tour à gravir. Un héros pourra monter d’étages en étages, chaque
 étage est un labyrinthe contenant des monstres et éventuellement des pièges. Certains étages auront des défis plus rares
 ou compliqués sous forme d’événements spéciaux ou bien de boss. Au cours de son aventure, le héros va accumuler des
 ressources qu’il pourra utiliser pour faciliter son exploration. Une fois mort, certaines ressources sont gardées même
@@ -52,6 +52,7 @@ Pour ce faire il faut tuer tous les monstres de l'étage, ce qui aura pour effet
 Attention cependant le contact avec les monstres vous inflige des dégâts.
 Des éléments comme des tonneaux et des trésors sont également dispersés à travers les étages et permettent d'augmenter le score, 
 lors de leur destruction par le joueur.
+Le but en l'état actuel du jeu est uniquement de faire le plus gros score possible.
 
 ### Les monstres
 
@@ -65,6 +66,7 @@ Espace d'utiliser l'arme.<br>
 WASD/ZQSD ou les flèches directionnelles pour se déplacer.<br>
 Shift_Left pour le mode de Debug.<br>
 P Pour le passage en plein écran.<br>
+E pour changer d'arme.<br>
 
 
 

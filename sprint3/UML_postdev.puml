@@ -1,0 +1,528 @@
+@startuml
+class com.acl.datas.elements.weapons.Sword {
+- int count
+- boolean retour
++ void update()
++ void setSprite()
++ void changeDirection()
++ UserData getUserData()
++ boolean toDestroy()
++ WeaponType getType()
++ int getDamage()
+}
+enum com.acl.enums.Direction {
++  NORTH
++  SOUTH
++  EAST
++  WEST
+}
+abstract class com.acl.datas.elements.items.Item {
++ void configureBodyDef()
++ UserData getUserData()
++ {abstract}void applyEffect(Tower)
++ boolean isAPotion()
++ boolean isAGoldIngot()
++ boolean isItem()
+}
+class com.acl.datas.elements.Trap {
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
+}
+enum com.acl.enums.WeaponType {
++  FIREBALL
++  SWORD
+}
+class com.acl.listeners.KeyboardListener {
+- Vector2 motion
+- Boolean useWeapon
+- Boolean swapWeapon
+- Direction direction
+- boolean debug
+- boolean fullScreen
+- boolean menuOpen
+- boolean confirmed
+- int currentChoice
+- {static} int topChoice
+- {static} int bottomChoice
+- boolean playerMoving
++ Vector2 getMotion()
++ Direction getDirection()
++ Boolean getUseWeapon()
++ Boolean getSwapWeapon()
++ boolean keyDown(int)
++ boolean keyUp(int)
++ boolean keyTyped(char)
++ boolean touchDown(int,int,int,int)
++ boolean touchUp(int,int,int,int)
++ boolean touchDragged(int,int,int)
++ boolean mouseMoved(int,int)
++ boolean scrolled(float,float)
++ boolean isDebug()
++ boolean isMenuOpen()
++ int getCurrentChoice()
++ boolean isConfirmed()
++ void setMenuOpen(boolean)
++ void setConfirmed(boolean)
++ void setCurrentChoice(int)
++ boolean isPlayerMoving()
++ boolean isFullScreen()
+}
+class com.acl.screens.MenuScreen {
+- Texture background
+- Texture backButton
+- Texture startButton
+- Texture quitButton
+- Texture selectArrow
+- OrthographicCamera camera
++ void show()
++ void render(float)
+}
+enum com.acl.enums.UserData {
++  BREAKABLE
++  CHEST
++  PLAYER
++  STAIR
++  TRAP
++  WALL
++  MONSTER
++  WEAPON
++  ITEM
+}
+class com.acl.datas.elements.Stair {
+- boolean locked
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
++ void setLocked(boolean)
+}
+abstract class com.acl.datas.elements.monsters.Monster {
+- int hp
+- int dmg
++ void configureBodyDef()
++ void setMotion(Vector2)
++ {abstract}void changeDirection()
++ {abstract}void Move()
++ {abstract}int giveLoot()
++ int getHp()
++ void setHp(int)
++ int getDmg()
++ void setDmg(int)
++ void receiveDamage(int)
++ UserData getUserData()
++ boolean isAMonster()
++ {abstract}Direction getDirection()
++ void setRealPosition(Vector2)
+}
+class com.acl.Tower {
+- World world
+- float height
+- boolean victory
+- boolean defeat
+- boolean gamePaused
+- boolean allEnemiesAreDead
+- int score
+- int nbLevel
+- boolean soundPlayed
+- int currentHP
+- int weaponCooldown
+- int pauseTime
++ void createTower(int,int)
++ void createWeapon()
++ Player getPlayer()
++ World getWorld()
+- void createElement(char,int,int)
++ void update(KeyboardListener)
++ ArrayList<Weapon> getWeapons()
++ void endOfTheGameLost()
++ void endOfTheStageWon()
+- void checkMonsterHealth(Monster)
+- void addElement(Element)
++ void setWorld(World)
++ void setPlayer(Player)
++ void setHeight(float)
++ ArrayList<Element> getElements()
++ void setElements(ArrayList<Element>)
++ ArrayList<Monster> getMonsters()
++ void addMonster(Monster)
+- float getHeight()
++ boolean isVictory()
++ void setVictory(boolean)
++ boolean isDefeat()
++ void setDefeat(boolean)
++ int getScore()
++ CollisionListener getCollisionListener()
++ void setCollisionListener(CollisionListener)
++ void setScore(int)
++ Monster getMonsterFromBody(Body)
++ Weapon getWeaponFromBody(Body)
++ void deleteElem(Element)
++ Element getElementFromBody(Body)
++ boolean isGamePaused()
++ void setGamePaused(boolean)
++ int getNbLevel()
++ void setNbLevel(int)
+- void sortElements()
+- void handleLichCollisionWithWall(Monster)
+}
+abstract class com.acl.datas.elements.weapons.Weapon {
+- Direction direction
++ float velocity
+- Animation<TextureRegion> animation
++ void configureBodyDef()
++ {abstract}void setSprite()
++ {abstract}void update()
++ Direction getDirection()
++ Animation<TextureRegion> getAnimation()
++ void setDirection(Direction)
++ boolean toDestroy()
++ {abstract}WeaponType getType()
++ {abstract}int getDamage()
+}
+class com.acl.enums.Constantes {
++ {static} int LOOT_GOLD_INGOT
++ {static} int HEAL_POTION
++ {static} int HP_GUARDIAN
++ {static} int DMG_GUARDIAN
++ {static} float SPD_GUARDIAN
++ {static} int LOOT_GUARDIAN
++ {static} int HP_LICH
++ {static} int DMG_LICH
++ {static} float SPD_LICH
++ {static} int LOOT_LICH
++ {static} int HP_SLIME
++ {static} int DMG_SLIME
++ {static} float SPD_SLIME
++ {static} int LOOT_SLIME
++ {static} float SPD_FIREBALL
++ {static} int DMG_FIREBALL
++ {static} float SPD_SWORD
++ {static} int DMG_SWORD
++ {static} int MIN_LOOT_CHEST
++ {static} int MAX_LOOT_CHEST
++ {static} int HP_PLAYER
++ {static} int DMG_TRAP
++ {static} int WEAPON_COOLDOWN
+}
+class com.acl.listeners.CollisionListener {
+- boolean playerCollidesWithStairs
+- boolean playerCollidesWithChest
+- Body chestCollided
+- boolean playerCollidesWithTrap
+- Body trapCollided
+- boolean weaponCollidesWithBreakableObject
+- Body weaponCollidedWithBreakableObject
+- Body breakableObjectCollidedWithWeapon
+- boolean weaponCollidesWithMonster
+- Body weaponCollidedWithMonster
+- Body monsterCollidedWithWeapon
+- boolean playerCollidesWithMonster
+- Body monsterCollidedWithPlayer
+- boolean playerCollidesWithItem
+- Body itemCollidedWithPlayer
+- ArrayList<Body> weaponsCollideWithWall
+- ArrayList<Body> monstersCollideWithWall
++ void beginContact(Contact)
++ void endContact(Contact)
++ void preSolve(Contact,Manifold)
++ void postSolve(Contact,ContactImpulse)
++ boolean isPlayerCollidesWithStairs()
++ boolean isPlayerCollidesWithChest()
++ Body getChestCollided()
++ boolean isPlayerCollidesWithTrap()
++ Body getTrapCollided()
++ boolean isWeaponCollidesWithBreakableObject()
++ Body getWeaponCollidedWithBreakableObject()
++ Body getBreakableObjectCollidedWithWeapon()
++ boolean isWeaponCollidesWithMonster()
++ Body getWeaponCollidedWithMonster()
++ Body getMonsterCollidedWithWeapon()
++ boolean isPlayerCollidesWithMonster()
++ Body getMonsterCollidedWithPlayer()
++ ArrayList<Body> getWeaponsCollideWithWall()
++ ArrayList<Body> getMonstersCollideWithWall()
++ void resetCollideWithWall()
++ boolean isPlayerCollidesWithItem()
++ Body getItemCollidedWithPlayer()
+}
+class com.acl.managers.TextureFactory {
+- {static} TextureFactory instance
+- {static} Texture backTexture
+- {static} Texture playerTexture
+- {static} Texture chestTexture
+- {static} Texture breakableTexture
+- {static} Texture wallTexture
+- {static} Texture stairTexture
+- {static} Texture trapTexture
+- {static} Texture fireBallTexture
+- {static} Texture swordTexture
+- {static} Texture slimeTexture
+- {static} Texture guardianTexture
+- {static} Texture menuBackgroundTexture
+- {static} Texture menuBackButton
+- {static} Texture menuStartButton
+- {static} Texture menuQuitButton
+- {static} Texture menuSelectArrow
+- {static} Texture lichTexture
+- {static} Texture doorTexture
+- {static} Texture potionTexture
+- {static} Texture goldIngotTexture
++ {static} TextureFactory getInstance()
++ {static} Texture getBackTexture()
++ {static} Texture getBreakableTexture()
++ {static} Texture getChestTexture()
++ {static} Texture getWallTexture()
++ {static} Texture getTrapTexture()
++ {static} Texture getStairTexture()
++ {static} Texture getFireBallTexture()
++ {static} Texture getSwordTexture()
++ {static} Texture getSlimeTexture()
++ {static} Texture getGuardianTexture()
++ {static} Texture getPlayerTexture()
++ {static} Texture getMenuBackgroundTexture()
++ {static} Texture getMenuBackButton()
++ {static} Texture getMenuStartButton()
++ {static} Texture getMenuExitButton()
++ {static} Texture getMenuSelectArrow()
++ {static} Texture getLichTexture()
++ {static} Texture getPotionTexture()
++ {static} Texture getGoldIngotTexture()
++ {static} Texture getDoorTexture()
+}
+class com.acl.managers.FloorManager {
+- char[][] table
+- int width
+- int height
+- String floor
++ void createLevel()
++ void saveLevel()
++ char[][] getTable()
+}
+class com.acl.datas.elements.Player {
+- WeaponType weaponType
+- Direction direction
+- Animation<TextureRegion> animationNorth
+- Animation<TextureRegion> animationSouth
+- Animation<TextureRegion> animationWest
+- Animation<TextureRegion> animationEast
+- int hp
+- boolean isMoving
++ void changeDirection()
++ void configureBodyDef()
++ void setFixture()
++ void setSprite()
++ void setMotion(Vector2)
++ void setDirection(Direction)
++ WeaponType getWeaponType()
++ UserData getUserData()
++ int getHp()
++ void receiveDamage(int)
++ Direction getDirection()
++ void swapWeapon()
++ Animation<TextureRegion> getAnimationNorth()
++ Animation<TextureRegion> getAnimationSouth()
++ Animation<TextureRegion> getAnimationWest()
++ Animation<TextureRegion> getAnimationEast()
++ void setMoving(boolean)
++ boolean isMoving()
++ void heal(int)
++ void setHp(int)
++ boolean isPlayer()
+}
+class com.acl.ObstACLTower {
++ SpriteBatch batch
+- OrthographicCamera camera
++ void create()
++ void dispose()
++ Tower getTower()
++ void setTower(Tower)
++ SpriteBatch getBatch()
++ void setBatch(SpriteBatch)
++ OrthographicCamera getCamera()
++ void setCamera(OrthographicCamera)
+}
+class com.acl.datas.elements.monsters.Slime {
+- int nbMovBeforeChange
++ void setSprite()
++ void Move()
++ int giveLoot()
++ void changeDirection()
++ Direction getDirection()
+}
+class com.acl.datas.elements.BreakableObject {
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
++ Item giveLoot()
+}
+class com.acl.managers.Text {
++ SpriteBatch textBatch
++ BitmapFont font
++ void displayScore(String)
++ void displayHP(String)
++ void displayDie(String)
++ void displayStageClear(String)
+}
+class com.acl.datas.elements.monsters.Lich {
+- Animation<TextureRegion> animationNorth
+- Animation<TextureRegion> animationSouth
+- Animation<TextureRegion> animationWest
+- Animation<TextureRegion> animationEast
+- Direction direction
++ void setSprite()
++ void Move()
++ Direction getDirection()
++ Animation<TextureRegion> getAnimationNorth()
++ Animation<TextureRegion> getAnimationSouth()
++ Animation<TextureRegion> getAnimationWest()
++ Animation<TextureRegion> getAnimationEast()
++ boolean isLich()
++ int giveLoot()
++ void changeDirection()
+}
+class com.acl.datas.elements.weapons.FireBall {
++ void setSprite()
++ void update()
++ UserData getUserData()
++ WeaponType getType()
++ int getDamage()
+}
+class com.acl.datas.elements.items.Potion {
++ void setSprite()
++ void applyEffect(Tower)
++ boolean isAPotion()
+}
+class com.acl.screens.GameScreen {
+- int timeBetweenRender
+- OrthographicCamera camera
+- boolean fullScreen
++ void show()
++ void render(float)
++ void setText()
+}
+class com.acl.managers.SoundsManager {
+- {static} Music background_sound
+- Sound chest
+- Sound damage
+- Sound fireball
+- Sound trapdoor_opening
+- Sound sword
+- Sound loose
+- Sound win
+- Sound barrel
++ void soundTrapdoor_opening()
++ void soundChest()
++ void soundSword()
++ void soundFireball()
++ void soundLoose()
++ void soundDamage()
++ void soundWin()
++ void soundBarrel()
++ void soundBackground()
+}
+class com.acl.datas.elements.monsters.Guardian {
+- Direction direction
+- Animation<TextureRegion> animationNorth
+- Animation<TextureRegion> animationSouth
+- Animation<TextureRegion> animationWest
+- Animation<TextureRegion> animationEast
++ void setSprite()
++ void Move()
++ void changeDirection()
++ int giveLoot()
++ Animation<TextureRegion> getAnimationNorth()
++ Animation<TextureRegion> getAnimationSouth()
++ Animation<TextureRegion> getAnimationWest()
++ Animation<TextureRegion> getAnimationEast()
++ boolean isGuardian()
++ Direction getDirection()
+}
+abstract class com.acl.datas.elements.Element {
+- Vector2 position
+- Body body
+# Sprite sprite
+- BodyDef bodyDef
+- float height
+- float width
+# PolygonShape shape
+# float density
+# float restitution
+# float friction
+# boolean sensor
++ {abstract}void configureBodyDef()
++ void setFixture()
++ void createBody(World)
++ float getHeight()
++ void setHeight(float)
++ float getWidth()
++ void setWidth(float)
++ Vector2 getPosition()
++ void setPosition(Vector2)
++ Body getBody()
++ BodyDef getBodyDef()
++ void setBodyDef(BodyDef)
++ Sprite getSprite()
++ {abstract}void setSprite()
++ void draw(SpriteBatch)
++ {abstract}UserData getUserData()
++ void setShape(PolygonShape)
++ boolean isGuardian()
++ boolean isLich()
++ boolean isAMonster()
++ boolean isItem()
++ boolean isPlayer()
+}
+class com.acl.datas.elements.Wall {
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
+}
+class com.acl.datas.elements.Chest {
+- int givenScore
++ void configureBodyDef()
++ void setSprite()
++ UserData getUserData()
++ int giveLoot()
+}
+class com.acl.datas.elements.items.GoldIngot {
++ void setSprite()
++ void applyEffect(Tower)
++ boolean isAGoldIngot()
+}
+
+
+com.acl.datas.elements.weapons.Weapon <|-- com.acl.datas.elements.weapons.Sword
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.items.Item
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Trap
+com.badlogic.gdx.InputProcessor <|.. com.acl.listeners.KeyboardListener
+com.badlogic.gdx.ScreenAdapter <|-- com.acl.screens.MenuScreen
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Stair
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.monsters.Monster
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.weapons.Weapon
+com.acl.listeners.ContactListener <|.. com.acl.listeners.CollisionListener
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Player
+com.badlogic.gdx.ApplicationListener <|.. com.acl.ObstACLTower
+com.badlogic.gdx.Game <|-- com.acl.ObstACLTower
+com.acl.datas.elements.monsters.Monster <|-- com.acl.datas.elements.monsters.Slime
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.BreakableObject
+com.acl.datas.elements.monsters.Monster <|-- com.acl.datas.elements.monsters.Lich
+com.acl.datas.elements.weapons.Weapon <|-- com.acl.datas.elements.weapons.FireBall
+com.acl.datas.elements.items.Item <|-- com.acl.datas.elements.items.Potion
+com.badlogic.gdx.ScreenAdapter <|-- com.acl.screens.GameScreen
+com.acl.datas.elements.monsters.Monster <|-- com.acl.datas.elements.monsters.Guardian
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Wall
+com.acl.datas.elements.Element <|-- com.acl.datas.elements.Chest
+com.acl.datas.elements.items.Item <|-- com.acl.datas.elements.items.GoldIngot
+com.acl.Tower -- "*" com.acl.datas.elements.Element
+com.acl.Tower -- "*" com.acl.datas.elements.monsters.Monster
+com.acl.Tower -- "*" com.acl.datas.elements.weapons.Weapon
+com.acl.Tower -- "1" com.acl.datas.elements.Player
+com.acl.screens.GameScreen -- "1" com.acl.ObstACLTower
+com.acl.screens.MenuScreen -- "1" com.acl.ObstACLTower
+com.acl.Tower -- "1" com.acl.managers.SoundsManager
+com.acl.screens.GameScreen -- "1" com.acl.listeners.KeyboardListener
+com.acl.screens.GameScreen -- "1" com.acl.managers.Text
+com.acl.screens.MenuScreen -- "1" com.acl.listeners.KeyboardListener
+com.acl.screens.MenuScreen -- "1" com.acl.managers.Text
+com.acl.ObstACLTower -- "1" com.acl.Tower
+@enduml
