@@ -16,6 +16,7 @@ public class Stair extends Element {
         Vector2[] points = {new Vector2(0, 0), new Vector2(0, 16), new Vector2(16, 16), new Vector2(16, 0)};
         this.shape.set(points);
         this.setSprite();
+        this.sensor = true;
     }
 
     @Override

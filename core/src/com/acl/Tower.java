@@ -150,7 +150,7 @@ public class Tower {
                 this.pauseTime = 100;
                 this.getWorld().dispose();
                 if (this.isVictory()) {
-                    this.createTower(this.getNbLevel() == 3 ? 1 : this.getNbLevel() + 1, this.getScore());
+                    this.createTower(this.getNbLevel() == 6 ? 1 : this.getNbLevel() + 1, this.getScore());
                 } else {
                     this.createTower(1, 0);
                 }

@@ -39,8 +39,8 @@ public class Guardian extends Monster {
 
         PolygonShape shape = new PolygonShape();
         Vector2[] vectors = new Vector2[4];
-        vectors[0] = new Vector2(4f, 0f);
-        vectors[1] = new Vector2(getWidth() - 4,0f);
+        vectors[0] = new Vector2(4f, 1f);
+        vectors[1] = new Vector2(getWidth() - 4,1f);
         vectors[2] = new Vector2(getWidth() - 4, getHeight() - 3f);
         vectors[3] = new Vector2(4f, getHeight() - 3f);
 
