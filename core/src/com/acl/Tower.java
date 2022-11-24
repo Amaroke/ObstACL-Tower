@@ -72,6 +72,7 @@ public class Tower {
                 createElement(table[i][j], i, j);
             }
         }
+        sortElements();
 
         setCollisionListener(new CollisionListener());
         this.getWorld().setContactListener(this.getCollisionListener());
@@ -427,6 +428,20 @@ public class Tower {
 
     public void setNbLevel(int nbLevel) {
         this.nbLevel = nbLevel;
+    }
+
+    private void sortElements() {
+        ArrayList<Element> notOnTop = new ArrayList<>();
+        ArrayList<Element> onTop = new ArrayList<>();
+        for(Element e : elements) {
+            if (e.isAMonster())
+                notOnTop.add(e);
+            else
+                onTop.add(e);
+        }
+        elements.clear();
+        elements.addAll(onTop);
+        elements.addAll(notOnTop);
     }
 }
 

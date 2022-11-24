@@ -56,4 +56,9 @@ public abstract class Monster extends Element {
     public UserData getUserData() {
         return UserData.MONSTER;
     }
+
+    @Override
+    public boolean isAMonster() {
+        return true;
+    }
 }

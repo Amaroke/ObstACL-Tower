@@ -102,4 +102,7 @@ public abstract class Element {
         return false;
     }
 
+    public boolean isAMonster() {
+        return false;
+    }
 }
