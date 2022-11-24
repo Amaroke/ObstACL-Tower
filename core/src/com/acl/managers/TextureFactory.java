@@ -34,6 +34,8 @@ public class TextureFactory {
     private final static Texture menuSelectArrow = new Texture((Gdx.files.internal("select_arrow.png")));
     private final static Texture lichTexture = new Texture((Gdx.files.internal("lich.png")));
     private final static Texture doorTexture = new Texture((Gdx.files.internal("door.png")));
+    private final static Texture potionTexture = new Texture((Gdx.files.internal("potion.png")));
+    private final static Texture goldIngotTexture = new Texture((Gdx.files.internal("gold_ingot.png")));
 
     public static Texture getBackTexture() {
         return backTexture;
@@ -98,6 +100,12 @@ public class TextureFactory {
     }
     public static Texture getLichTexture() {
         return lichTexture;
+    }
+    public static Texture getPotionTexture() {
+        return potionTexture;
+    }
+    public static Texture getGoldIngotTexture() {
+        return goldIngotTexture;
     }
 
     public static Texture getDoorTexture() {

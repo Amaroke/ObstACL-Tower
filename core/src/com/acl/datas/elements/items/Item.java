@@ -34,4 +34,9 @@ public abstract class Item extends Element {
     public boolean isAGoldIngot() {
         return false;
     }
+
+    @Override
+    public boolean isItem() {
+        return true;
+    }
 }

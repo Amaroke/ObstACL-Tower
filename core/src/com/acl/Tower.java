@@ -258,7 +258,6 @@ public class Tower {
 
                 if (this.getCollisionListener().isWeaponCollidesWithBreakableObject()) {
                     BreakableObject bo = (BreakableObject) getElementFromBody(getCollisionListener().getBreakableObjectCollidedWithWeapon());
-                    System.out.println(bo.getPosition());
                     Item item = bo.giveLoot();
                     if(item != null){
                         item.configureBodyDef();

@@ -8,14 +8,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public class Potion extends Item {
     public Potion(Vector2 v) {
         super(v);
-        setHeight(14);
-        setWidth(14);
+        setHeight(7);
+        setWidth(7);
         PolygonShape shape = new PolygonShape();
         Vector2[] vectors = new Vector2[4];
-        vectors[0] = new Vector2(4f, 2f);
-        vectors[1] = new Vector2(getWidth() - 4, 2f);
-        vectors[2] = new Vector2(getWidth() - 4, getHeight() - 2f);
-        vectors[3] = new Vector2(4f, getHeight() - 2f);
+        vectors[0] = new Vector2(0f, 0f);
+        vectors[1] = new Vector2(getWidth(), 0f);
+        vectors[2] = new Vector2(getWidth(), getHeight());
+        vectors[3] = new Vector2(0f, getHeight());
 
         shape.set(vectors);
         setShape(shape);
@@ -23,7 +23,7 @@ public class Potion extends Item {
 
     @Override
     public void setSprite() {
-        this.sprite = new Sprite(TextureFactory.getFireBallTexture());
+        this.sprite = new Sprite(TextureFactory.getPotionTexture());
     }
 
     @Override

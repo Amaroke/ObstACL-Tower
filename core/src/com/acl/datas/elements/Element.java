@@ -105,4 +105,8 @@ public abstract class Element {
     public boolean isAMonster() {
         return false;
     }
+
+    public boolean isItem() {
+        return false;
+    }
 }
