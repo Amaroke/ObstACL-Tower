@@ -173,6 +173,7 @@ public class Tower {
 
             // We move player
             getPlayer().setMotion(keyboardListener.getMotion());
+            getPlayer().setMoving(keyboardListener.isPlayerMoving());
             getPlayer().setDirection(keyboardListener.getDirection() != null ? keyboardListener.getDirection() : Direction.NORTH);
         }
 

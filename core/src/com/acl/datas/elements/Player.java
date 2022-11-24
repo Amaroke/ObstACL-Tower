@@ -21,6 +21,7 @@ public class Player extends Element {
     private final Animation<TextureRegion> animationWest;
     private final Animation<TextureRegion> animationEast;
     private int hp;
+    private boolean isMoving = false;
 
     public Player(Vector2 v) {
         super(v);
@@ -56,8 +57,8 @@ public class Player extends Element {
         switch (this.getDirection()) {
             case NORTH -> this.direction = Direction.SOUTH;
             case SOUTH -> this.direction = Direction.NORTH;
-            case EAST ->  this.direction = Direction.WEST;
-            case WEST ->  this.direction = Direction.EAST;
+            case EAST -> this.direction = Direction.WEST;
+            case WEST -> this.direction = Direction.EAST;
         }
     }
 
@@ -121,7 +122,7 @@ public class Player extends Element {
     }
 
     public void swapWeapon() {
-        if(weaponType == WeaponType.FIREBALL) {
+        if (weaponType == WeaponType.FIREBALL) {
             weaponType = WeaponType.SWORD;
         } else {
             weaponType = WeaponType.FIREBALL;
@@ -142,5 +143,13 @@ public class Player extends Element {
 
     public Animation<TextureRegion> getAnimationEast() {
         return animationEast;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
+    }
+
+    public boolean isMoving() {
+        return isMoving;
     }
 }

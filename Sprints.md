@@ -244,7 +244,7 @@ Comme pour chaque sprint, nous avons débuté les tâches que nous avions d'assi
 | Responsable            | Tâches                                                                                                       | Temps estimé                     | Temps réel                       |
 |------------------------|--------------------------------------------------------------------------------------------------------------|----------------------------------|----------------------------------|
 | IOPETI Hugo            | Ajout de niveaux.<br><br>Implémentation des items.                                                           | 1h30<br><br>3h30                 |                                  |
-| MATHIEU STEINBACH Hugo | Animation de déplacement.<br><br>Réparation de l'UI.<br><br>Changement d'arme.<br><br>Harmonisation du code. | 1h<br><br>1h<br><br>1h<br><br>2h | Xh<br><br>Xh<br><br>1h<br><br>2h |
+| MATHIEU STEINBACH Hugo | Animation de déplacement.<br><br>Réparation de l'UI.<br><br>Changement d'arme.<br><br>Harmonisation du code. | 1h<br><br>1h<br><br>1h<br><br>2h | 1h<br><br>Xh<br><br>1h<br><br>2h |
 | YVOZ Ludovic           | Gestion de la hauteur d'affichage.<br><br>Changement déplacement de la liche.<br><br>Ajouts des items.       | 1h<br><br>1h30<br><br>3h         |                                  |
 | ZIMOL Guillaume        | Ajout d'une musique.<br><br>Ajout de sons.                                                                   | 2h<br><br>3h                     |                                  |
 

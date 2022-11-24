@@ -19,6 +19,7 @@ public class KeyboardListener implements InputProcessor {
     private int currentChoice = 0;
     private static final int topChoice = 0;
     private static final int bottomChoice = 2;
+    private boolean playerMoving = false;
 
     public Vector2 getMotion() {
         return motion;
@@ -68,6 +69,7 @@ public class KeyboardListener implements InputProcessor {
             } else {
                 motion.y = playerMovementForce;
                 direction = Direction.NORTH;
+                playerMoving = true;
             }
             return true;
         }
@@ -75,12 +77,14 @@ public class KeyboardListener implements InputProcessor {
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.Q || keycode == Input.Keys.A) {
             motion.x = -playerMovementForce;
             direction = Direction.WEST;
+            playerMoving = true;
             return true;
         }
         // When pressing the RIGHT or D keys, the character goes right.
         if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             motion.x = playerMovementForce;
             direction = Direction.EAST;
+            playerMoving = true;
             return true;
         }
         // When pressing the DOWN or S keys, the character goes down.
@@ -90,6 +94,8 @@ public class KeyboardListener implements InputProcessor {
             } else {
                 motion.y = -playerMovementForce;
                 direction = Direction.SOUTH;
+                playerMoving = true;
+
             }
             return true;
         }
@@ -114,11 +120,13 @@ public class KeyboardListener implements InputProcessor {
         // When releasing the UP, Z, W, DOWN or S keys, the character stops moving vertically.
         if (keycode == Input.Keys.UP || keycode == Input.Keys.Z || keycode == Input.Keys.W || keycode == Input.Keys.DOWN || keycode == Input.Keys.S) {
             motion.y = 0f;
+            playerMoving = false;
             return true;
         }
         // When pressing the LEFT, Q, A, RIGHT or D keys, the character stops moving horizontally.
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.Q || keycode == Input.Keys.A || keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             motion.x = 0f;
+            playerMoving = false;
             return true;
         }
         return false;
@@ -179,5 +187,9 @@ public class KeyboardListener implements InputProcessor {
 
     public void setCurrentChoice(int currentChoice) {
         this.currentChoice = currentChoice;
+    }
+
+    public boolean isPlayerMoving() {
+        return playerMoving;
     }
 }

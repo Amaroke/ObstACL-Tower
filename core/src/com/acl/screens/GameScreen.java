@@ -136,14 +136,23 @@ public class GameScreen extends ScreenAdapter {
             }
 
             Player p = obstACLTower.getTower().getPlayer();
-            TextureRegion t = new TextureRegion(p.getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true));
-            switch (p.getDirection()) {
-                case SOUTH ->
-                        t = new TextureRegion(p.getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true));
-                case EAST ->
-                        t = new TextureRegion(p.getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true));
-                case WEST ->
-                        t = new TextureRegion(p.getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true));
+            TextureRegion t;
+            if (p.isMoving()) {
+                t = new TextureRegion(p.getAnimationNorth().getKeyFrame(timeBetweenRender / 10f, true));
+                switch (p.getDirection()) {
+                    case SOUTH ->
+                            t = new TextureRegion(p.getAnimationSouth().getKeyFrame(timeBetweenRender / 10f, true));
+                    case EAST -> t = new TextureRegion(p.getAnimationEast().getKeyFrame(timeBetweenRender / 10f, true));
+                    case WEST -> t = new TextureRegion(p.getAnimationWest().getKeyFrame(timeBetweenRender / 10f, true));
+                }
+            } else {
+                t = new TextureRegion(p.getAnimationNorth().getKeyFrame(1));
+                switch (p.getDirection()) {
+                    case SOUTH -> t = new TextureRegion(p.getAnimationSouth().getKeyFrame(1));
+                    case EAST -> t = new TextureRegion(p.getAnimationEast().getKeyFrame(1));
+                    case WEST -> t = new TextureRegion(p.getAnimationWest().getKeyFrame(1));
+                }
+
             }
             obstACLTower.batch.draw(t, p.getBody().getPosition().x, p.getBody().getPosition().y, 0, 0, 14f, 14f, 1f, 1f, 0);
         }
