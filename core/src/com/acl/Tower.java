@@ -71,7 +71,7 @@ public class Tower {
         this.allEnemiesAreDead = false;
         this.victory = false;
         this.defeat = false;
-
+        this.soundPlayed = false;
         this.height = 9 * 16;
 
         this.score = score;
